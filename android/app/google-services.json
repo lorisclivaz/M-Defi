@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "62760226789",
+    "firebase_url": "https://bachelor-d3bb5.firebaseio.com",
+    "project_id": "bachelor-d3bb5",
+    "storage_bucket": "bachelor-d3bb5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62760226789:android:edc2ae3631e0a0986e690c",
+        "android_client_info": {
+          "package_name": "com.example.mdefi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "62760226789-4p47ph85ef6vqcar3mcem43drkmv59c3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs6uoaSFetIWfyco6a98WTrqWNZpSnWRQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62760226789-4p47ph85ef6vqcar3mcem43drkmv59c3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
