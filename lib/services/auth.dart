@@ -34,6 +34,14 @@ class AuthService {
     }
   }
 
+
+  //Reset password
+  @override
+  Future<void> resetPassword(String email) async {
+    await _auth..sendPasswordResetEmail(email: email);
+  }
+
+
   //sign in with email and password
   Future signInWithEmailAndpassword(String email, String password) async {
     try{
