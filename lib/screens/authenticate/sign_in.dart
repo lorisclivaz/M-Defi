@@ -93,12 +93,14 @@ class _SignInState extends State<SignIn> {
                       'sign in',
                       style: TextStyle(color: Colors.white),
                     ),
+
                     onPressed: () async {
 
                       if(_formKey.currentState.validate()) {
 
                         setState (() => loading = true);
                         dynamic result = await _auth.signInWithEmailAndpassword(email, password);
+                        print(email + password);
                         if (result == null) {
 
                           setState(() {
@@ -108,7 +110,8 @@ class _SignInState extends State<SignIn> {
 
                         }
                       }
-                    }
+                    },
+                  
                 ),
                 SizedBox(height: 12.0),
                 Text(

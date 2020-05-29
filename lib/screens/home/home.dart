@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:mdefi/screens/home/homeApp.dart';
+import 'package:mdefi/screens/home/mainDrawer.dart';
 import 'package:mdefi/services/auth.dart';
+import 'package:mdefi/services/database.dart';
 
 
-//Homepage
+//HomeUser
 class Home extends StatelessWidget {
 
   final AuthService _auth = AuthService();
+  final Database database = Database();
+
+
+
+  TextEditingController nom = new TextEditingController();
+  TextEditingController prenom = new TextEditingController();
+  TextEditingController filiere = new TextEditingController();
+  TextEditingController ecole = new TextEditingController();
+  TextEditingController annee = new TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.brown[50],
       appBar: AppBar(
-        title: Text("M-Défi"),
+        title: Text("User information"),
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
         actions: <Widget>[
@@ -24,6 +37,115 @@ class Home extends StatelessWidget {
             },
           )
         ],
+      ),
+      body: Container(
+        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+        child: Form(
+          child: Column(
+            children: <Widget>[
+
+              SizedBox(height: 20.0),
+              TextFormField(
+                controller: nom,
+                decoration: InputDecoration(
+
+                    hintText: 'Nom',
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2.0)
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2.0)
+                    )
+                ),
+
+              ),
+              SizedBox(height: 20.0),
+              TextFormField(
+                controller: prenom,
+                decoration: InputDecoration(
+                    hintText: 'Prénom',
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2.0)
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2.0)
+                    )
+                ),
+              ),
+              SizedBox(height: 20.0),
+              TextFormField(
+                controller: filiere,
+                decoration: InputDecoration(
+                    hintText: 'Filière',
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2.0)
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2.0)
+                    )
+                ),
+              ),
+              SizedBox(height: 20.0),
+              TextFormField(
+                controller: ecole,
+                decoration: InputDecoration(
+                    hintText: 'Ecole',
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2.0)
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2.0)
+                    )
+                ),
+              ),
+              SizedBox(height: 20.0),
+              TextFormField(
+                controller: annee,
+                decoration: InputDecoration(
+                    hintText: 'Année',
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2.0)
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2.0)
+                    )
+                ),
+              ),
+              SizedBox(height: 20.0),
+              RaisedButton(
+                color: Colors.pink[400],
+                child: Text(
+                  'valider',
+                  style: TextStyle(color: Colors.white),
+                ),
+
+                onPressed: () async {
+
+                 dynamic email = await _auth.getCurrentEmail();
+                 dynamic uid = await _auth.getCurrentUID();
+
+                 database.createUser(nom.text, prenom.text, filiere.text, ecole.text, annee.text, email,uid);
+
+                Navigator.push(context, new MaterialPageRoute(builder: (context) => new HomeApp()));
+
+
+
+                },
+
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

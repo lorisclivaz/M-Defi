@@ -9,7 +9,7 @@ class AuthService {
   User _userFromFirebaseUser(FirebaseUser user)
   {
 
-    return user != null ? User(uid: user.uid) : null;
+    return user != null ? User(uid: user.uid, email: user.email) : null;
   }
 
   //auth change user stream (current user in the application)
@@ -18,7 +18,16 @@ class AuthService {
     .map(_userFromFirebaseUser);
   }
 
+  //Get email
+//Get UID
+  Future<String> getCurrentEmail() async {
+    return (await _auth.currentUser()).email;
+  }
 
+  //Get UID
+  Future<String> getCurrentUID() async {
+    return (await _auth.currentUser()).uid;
+  }
 
 
   //sign in anonymous
