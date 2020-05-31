@@ -13,7 +13,7 @@ class MainDrawer extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: EdgeInsets.all(20),
-            color: Theme.of(context).primaryColor,
+            color: Colors.brown[400],
             child: Center(
               child: Column(
                 children: <Widget>[
