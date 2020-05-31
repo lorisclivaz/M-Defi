@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mdefi/screens/authenticate/register.dart';
 import 'package:mdefi/screens/authenticate/sign_in.dart';
 
-class Authenticate extends StatefulWidget {
+class  Authenticate extends StatefulWidget {
   @override
   _AuthenticateState createState() => _AuthenticateState();
 }
