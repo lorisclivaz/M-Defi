@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mdefi/screens/DrawerScreens/profil.dart';
 import 'package:mdefi/services/auth.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -10,10 +11,11 @@ class MainDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: <Widget>[
+
           Container(
             width: double.infinity,
             padding: EdgeInsets.all(20),
-            color: Colors.brown[400],
+            color: Colors.blueGrey[400],
             child: Center(
               child: Column(
                 children: <Widget>[
@@ -33,13 +35,7 @@ class MainDrawer extends StatelessWidget {
                       )
                     ),
                   ),
-                  Text(
-                    'Loris Clivaz',
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                    ),
-                  ),
+
               Text(
               'loris.clivaz@students.hevs.ch',
               style: TextStyle(
@@ -54,12 +50,16 @@ class MainDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.person),
             title: Text(
-              'Profile',
+              'Mon profil',
               style: TextStyle(
                 fontSize: 18,
               ),
             ),
-            onTap: null,
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ProfileScreen(),
+              ));
+            },
           ),
           ListTile(
             leading: Icon(Icons.settings),
@@ -86,5 +86,12 @@ class MainDrawer extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String getEmail()
+  {
+    dynamic result =  _auth.getCurrentEmail();
+
+    return result;
   }
 }

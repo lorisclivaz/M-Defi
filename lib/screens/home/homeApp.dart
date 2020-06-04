@@ -1,23 +1,27 @@
 import 'package:mdefi/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/screens/home/home.dart';
-import 'package:mdefi/screens/home/mainDrawer.dart';
+import 'package:mdefi/utils/mainDrawer.dart';
+import 'package:mdefi/utils/dialogs.dart';
 
 
 
 //HomeApp
 class HomeApp extends StatelessWidget {
   final AuthService _auth = AuthService();
+  final dialog = new Dialogs();
 
 
   @override
   Widget build(BuildContext context) {
+    //Trouver une meilleure solution pour l'inscription de l'utilisateur
+  //Future.delayed(Duration.zero, () => showAlertDialog(context));
     return Scaffold(
+      backgroundColor: Colors.blueGrey[50],
       drawer: MainDrawer(),
-        backgroundColor: Colors.brown[50],
         appBar: AppBar(
           title: Text("Home"),
-          backgroundColor: Colors.brown[400],
+          backgroundColor: Colors.blueGrey[400],
           elevation: 0.0,
           actions: <Widget>[
             FlatButton.icon(
@@ -27,34 +31,14 @@ class HomeApp extends StatelessWidget {
                 await _auth.signOut();
               },
             ),
-
           ],
         ),
-      body: Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-          child: Form(
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 20.0),
-                RaisedButton(
-                  color: Colors.pink[400],
-                  child: Text(
-                    'Incription',
-                    style: TextStyle(color: Colors.white),
-                  ),
-
-                  onPressed: () async {
-                    Navigator.push(context, new MaterialPageRoute(builder: (context) => new Home()));
-
-                  },
-
-                ),
-                SizedBox(height: 12.0),
-
-              ],
-            ),
-          )
-      ),
     );
+
+  }
+
+  void showAlertDialog(BuildContext context) {
+
+    dialog.information(context, 'Inscription', 'Veuillez vous inscrire avant de poursuivre');
   }
 }

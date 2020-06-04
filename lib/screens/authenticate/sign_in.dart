@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:mdefi/shared/loading.dart';
+import 'package:nice_button/nice_button.dart';
+
 
 class SignIn extends StatefulWidget {
 
@@ -27,9 +29,9 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
 
-      backgroundColor: Colors.brown[100],
+      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.blueGrey[400],
         elevation: 0.0,
         title: Text('Sign in to M-Défi'),
         actions: <Widget>[
@@ -87,31 +89,29 @@ class _SignInState extends State<SignIn> {
                   },
                 ),
                 SizedBox(height: 20.0),
-                RaisedButton(
-                    color: Colors.pink[400],
-                    child: Text(
-                      'sign in',
-                      style: TextStyle(color: Colors.white),
-                    ),
 
-                    onPressed: () async {
 
-                      if(_formKey.currentState.validate()) {
+                NiceButton(
+                  // width: 515,
+                  elevation: 8.0,
+                  radius: 52.0,
+                  text: "Login",
+                  background: Colors.blue,
+                  onPressed: () async {
+                    if(_formKey.currentState.validate()) {
 
-                        setState (() => loading = true);
-                        dynamic result = await _auth.signInWithEmailAndpassword(email, password);
-                        print(email + password);
-                        if (result == null) {
+                      setState (() => loading = true);
+                      dynamic result = await _auth.signInWithEmailAndpassword(email, password);
+                      print(email + password);
+                      if (result == null) {
 
-                          setState(() {
-                            loading = false;
-                            error = 'Could not sign in with those credentials';
-                          });
+                        setState(() {
+                          loading = false;
+                          error = 'Could not sign in with those credentials';
+                        });
 
-                        }
                       }
-                    },
-                  
+                    }                  },
                 ),
                 SizedBox(height: 12.0),
                 Text(

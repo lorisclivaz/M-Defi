@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:mdefi/services/database.dart';
+import 'package:nice_button/nice_button.dart';
 
 
 //HomeUser
@@ -22,10 +23,10 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[50],
+      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
         title: Text("User information"),
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.blueGrey[400],
         elevation: 0.0,
         actions: <Widget>[
           FlatButton.icon(
@@ -141,6 +142,21 @@ class Home extends StatelessWidget {
 
                 },
 
+              ),
+              NiceButton(
+                // width: 515,
+                elevation: 8.0,
+                radius: 52.0,
+                text: "Login",
+                background: Colors.blue,
+                onPressed: () async {
+                  dynamic email = await _auth.getCurrentEmail();
+                  dynamic uid = await _auth.getCurrentUID();
+
+                  database.createUser(nom.text, prenom.text, filiere.text, ecole.text, annee.text, email,uid);
+
+                  Navigator.push(context, new MaterialPageRoute(builder: (context) => new HomeApp()));
+                  },
               ),
             ],
           ),

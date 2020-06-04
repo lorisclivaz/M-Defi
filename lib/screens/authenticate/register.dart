@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
+import 'package:nice_button/nice_button.dart';
+
+
 
 class Register extends StatefulWidget {
 
@@ -27,9 +30,9 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
 
-      backgroundColor: Colors.brown[100],
+      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.blueGrey[400],
         elevation: 0.0,
         title: Text('Register to M-Défi'),
           actions: <Widget>[
@@ -86,36 +89,36 @@ class _RegisterState extends State<Register> {
                   },
                 ),
                 SizedBox(height: 20.0),
-                RaisedButton(
-                  color: Colors.pink[400],
-                  child: Text(
-                    'Register',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                NiceButton(
+                  // width: 515,
+                  elevation: 5.0,
+                  radius: 40.0,
+                  text: "Register",
+                  background: Colors.blue,
                   onPressed: () async {
+                    if(_formKey.currentState.validate()) {
 
-                   if(_formKey.currentState.validate()) {
+                      setState(() {
+                        loading = true;
+                      });
 
-                     setState(() {
-                       loading = true;
-                     });
-
-                     dynamic result = await _auth.registerWithEmailAndpassword(
-                         email, password);
-
+                      dynamic result = await _auth.registerWithEmailAndpassword(
+                          email, password);
 
 
-                     if (result == null) {
 
-                       setState(() {
-                         loading = false;
-                         error = 'please supply a valid email';
-                       });
+                      if (result == null) {
 
-                     }
-                   }
+                        setState(() {
+                          loading = false;
+                          error = 'please supply a valid email';
+                        });
+
+                      }
+                    }
                   },
                 ),
+
                 SizedBox(height: 12.0),
                 Text(
                   error,
