@@ -3,14 +3,12 @@ import 'package:mdefi/models/userInfoSupp.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/utils/mainDrawer.dart';
-import 'package:mdefi/utils/dialogs.dart';
 
 
 
 //HomeApp
 class HomeApp extends StatelessWidget {
   final AuthService _auth = AuthService();
-  final dialog = new Dialogs();
   final DBRef = FirebaseDatabase.instance.reference();
 
   static String email ;
@@ -58,8 +56,5 @@ class HomeApp extends StatelessWidget {
 
   }
 
-  void showAlertDialog(BuildContext context) {
 
-    dialog.information(context, 'Inscription', 'Veuillez vous inscrire avant de poursuivre');
-  }
 }

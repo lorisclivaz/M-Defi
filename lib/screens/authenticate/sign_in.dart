@@ -50,7 +50,7 @@ class _SignInState extends State<SignIn> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                Image.asset('assets/M-Défi.png',height: 200,width: 200,),
+                Image.asset('assets/M-Défi.png',height: 200,width: 200, package: 'mdefi',),
                 SizedBox(height: 20.0),
                 TextFormField(
                   decoration: InputDecoration(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mdefi/screens/authenticate/ForgotScreen.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
+import 'package:nice_button/NiceButton.dart';
 
 
 class ProfileScreen extends StatelessWidget {
@@ -57,7 +59,7 @@ class ProfileScreen extends StatelessWidget {
       return Positioned(
         top: 350,
         child: Container(margin: EdgeInsets.all(20),
-          height: 200,
+          height: 260,
           width: MediaQuery.of(context).size.width * 0.9 ,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -80,7 +82,20 @@ class ProfileScreen extends StatelessWidget {
                 Text("Filière : "+ HomeApp.user.filiere),
                 SizedBox(height: 20,),
                 Text("Année : "+ HomeApp.user.annee),
-
+                Text(''),
+                Text(''),
+                NiceButton(
+                  // width: 515,
+                  elevation: 30.0,
+                  radius: 52.0,
+                  text: "Change password",
+                  background: Colors.blue,
+                  onPressed: () async {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ForgotScreen(),
+                    ));
+                                     },
+                ),
               ],
             ),
           ),
