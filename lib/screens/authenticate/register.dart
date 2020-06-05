@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:mdefi/shared/loading.dart';
-import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:nice_button/nice_button.dart';
 
 
@@ -34,22 +33,24 @@ class _RegisterState extends State<Register> {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey[400],
         elevation: 0.0,
-        title: Text('Register to M-Défi'),
+        title: Text('Enregistrement'),
           actions: <Widget>[
       FlatButton.icon(
       icon: Icon(Icons.person),
-      label: Text('Sign In'),
+      label: Text('Connexion'),
       onPressed: () {
         widget.toggleView();
       })
         ],
       ),
-      body: Container(
+      body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+
           child: Form(
             key: _formKey,
             child: Column(
               children: <Widget>[
+                Image.asset('assets/M-Défi.png',height: 200,width: 200,),
                 SizedBox(height: 20.0),
                 TextFormField(
                   decoration: InputDecoration(
@@ -63,7 +64,7 @@ class _RegisterState extends State<Register> {
                   borderSide: BorderSide(color: Colors.black, width: 2.0)
                 )
                   ),
-                  validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                  validator: (val) => val.isEmpty ? 'Enter un mail' : null,
                   onChanged: (val){
                     setState (()=> email = val);
 
@@ -83,7 +84,7 @@ class _RegisterState extends State<Register> {
                       )
                   ),
                   obscureText: true,
-                  validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
+                  validator: (val) => val.length < 6 ? 'Enter un mot de passe d''au moins 6 charactères' : null,
                   onChanged: (val){
                     setState (()=> password = val);
                   },
@@ -93,7 +94,7 @@ class _RegisterState extends State<Register> {
                   // width: 515,
                   elevation: 5.0,
                   radius: 40.0,
-                  text: "Register",
+                  text: "Enregistrer",
                   background: Colors.blue,
                   onPressed: () async {
                     if(_formKey.currentState.validate()) {
@@ -111,7 +112,7 @@ class _RegisterState extends State<Register> {
 
                         setState(() {
                           loading = false;
-                          error = 'please supply a valid email';
+                          error = 'Enter un mail valide';
                         });
 
                       }

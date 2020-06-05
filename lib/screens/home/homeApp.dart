@@ -1,6 +1,7 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:mdefi/models/userInfoSupp.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mdefi/screens/home/home.dart';
 import 'package:mdefi/utils/mainDrawer.dart';
 import 'package:mdefi/utils/dialogs.dart';
 
@@ -10,10 +11,30 @@ import 'package:mdefi/utils/dialogs.dart';
 class HomeApp extends StatelessWidget {
   final AuthService _auth = AuthService();
   final dialog = new Dialogs();
+  final DBRef = FirebaseDatabase.instance.reference();
+
+  static String email ;
+  static String uid ;
+  static UserInfoSupp user;
 
 
   @override
   Widget build(BuildContext context) {
+
+    _auth.getCurrentEmail().then((String result){
+      email = result;
+    });
+
+    _auth.getCurrentUID().then((String value){
+      uid = value;
+    });
+
+    DBRef.child('users').orderByChild('Uid').equalTo(uid).onChildAdded.listen((data){
+      user = UserInfoSupp.fromSnapshot(data.snapshot);
+
+    });
+
+
     //Trouver une meilleure solution pour l'inscription de l'utilisateur
   //Future.delayed(Duration.zero, () => showAlertDialog(context));
     return Scaffold(

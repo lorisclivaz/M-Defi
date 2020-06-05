@@ -22,7 +22,9 @@ class AuthService {
 //Get UID
   Future<String> getCurrentEmail() async {
     return (await _auth.currentUser()).email;
+
   }
+
 
   //Get UID
   Future<String> getCurrentUID() async {

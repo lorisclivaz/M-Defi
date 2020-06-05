@@ -33,23 +33,24 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey[400],
         elevation: 0.0,
-        title: Text('Sign in to M-Défi'),
+        title: Text('Connexion'),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),
-            label: Text('Register'),
+            label: Text('Enregistrement'),
             onPressed: () {
               widget.toggleView();
             },
           )
         ],
       ),
-      body: Container(
+      body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
           child: Form(
             key: _formKey,
             child: Column(
               children: <Widget>[
+                Image.asset('assets/M-Défi.png',height: 200,width: 200,),
                 SizedBox(height: 20.0),
                 TextFormField(
                   decoration: InputDecoration(
@@ -63,7 +64,7 @@ class _SignInState extends State<SignIn> {
                           borderSide: BorderSide(color: Colors.black, width: 2.0)
                       )
                   ),
-                  validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                  validator: (val) => val.isEmpty ? 'Entrer un email' : null,
                   onChanged: (val){
                     setState (()=> email = val);
 
@@ -83,7 +84,7 @@ class _SignInState extends State<SignIn> {
                       )
                   ),
                   obscureText: true,
-                  validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
+                  validator: (val) => val.length < 6 ? 'Enter un mot de passe d''au moins 6 charactères' : null,
                   onChanged: (val){
                     setState (()=> password = val);
                   },
@@ -95,7 +96,7 @@ class _SignInState extends State<SignIn> {
                   // width: 515,
                   elevation: 8.0,
                   radius: 52.0,
-                  text: "Login",
+                  text: "Connexion",
                   background: Colors.blue,
                   onPressed: () async {
                     if(_formKey.currentState.validate()) {
@@ -107,7 +108,7 @@ class _SignInState extends State<SignIn> {
 
                         setState(() {
                           loading = false;
-                          error = 'Could not sign in with those credentials';
+                          error = 'Email ou mot de passe incorrect';
                         });
 
                       }

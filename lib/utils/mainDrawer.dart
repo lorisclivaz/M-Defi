@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mdefi/screens/DrawerScreens/profil.dart';
-import 'package:mdefi/services/auth.dart';
+import 'package:mdefi/screens/home/homeApp.dart';
 
 class MainDrawer extends StatelessWidget {
 
-  final AuthService _auth = AuthService();
+
 
   @override
   Widget build(BuildContext context) {
+
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -29,7 +30,7 @@ class MainDrawer extends StatelessWidget {
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         image: NetworkImage(
-                          'https://www.pngmart.com/files/4/Monsters-University-PNG-Transparent-Image.png'
+                          'https://www.shareicon.net/data/256x256/2016/09/15/829459_man_512x512.png'
                         ),
                         fit: BoxFit.fill
                       )
@@ -37,12 +38,18 @@ class MainDrawer extends StatelessWidget {
                   ),
 
               Text(
-              'loris.clivaz@students.hevs.ch',
+                HomeApp.email,
               style: TextStyle(
                 fontSize: 15,
                 color: Colors.white,
               ),
-              ),
+              ),Text(
+                    HomeApp.uid,
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -88,10 +95,6 @@ class MainDrawer extends StatelessWidget {
     );
   }
 
-  String getEmail()
-  {
-    dynamic result =  _auth.getCurrentEmail();
 
-    return result;
-  }
+
 }

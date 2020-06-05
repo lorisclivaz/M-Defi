@@ -1,5 +1,6 @@
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:mdefi/models/userInfoSupp.dart';
 
 class Database {
 

@@ -1,34 +1,34 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:mdefi/services/auth.dart';
-import 'package:mdefi/models/userInfoSupp.dart';
-
+import 'package:mdefi/screens/home/homeApp.dart';
 
 
 class ProfileScreen extends StatelessWidget {
-
-  final AuthService _auth = AuthService();
-
 
   @override
   Widget build(BuildContext context) {
 
     //Create user info
     Widget _userInfo(){
+
       return Positioned(
-        top: 100,
+        top: 50,
         child: Container(
           margin: const EdgeInsets.all(20),
-          height: 260,
+          height: 280,
           width: MediaQuery.of(context).size.width*0.9,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.black),
+
           ),
           child: Container(
             margin: EdgeInsets.all(20),
             child: Column(children: <Widget>[
-              Text("User information", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              Text("Mes informations", style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+              decoration: TextDecoration.underline),
               ),
               SizedBox(height: 20,),
               Row(
@@ -36,16 +36,16 @@ class ProfileScreen extends StatelessWidget {
                 children: <Widget>[
                   CircleAvatar(radius: 60,),
                   SizedBox(width: 20,),
-                  Text("Firstname"),
+                  Text(HomeApp.user.prenom),
                   SizedBox(width: 20,),
-                  Text("LastName"),
+                  Text(HomeApp.user.nom),
 
                 ],
               ),
               SizedBox(
                 height: 20,
               ),
-              Text("Email: ",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+              Text( HomeApp.email,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
             ],),
           ),
         ),
@@ -55,12 +55,13 @@ class ProfileScreen extends StatelessWidget {
     Widget _userInfo2()
     {
       return Positioned(
-        top: 400,
+        top: 350,
         child: Container(margin: EdgeInsets.all(20),
           height: 200,
           width: MediaQuery.of(context).size.width * 0.9 ,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.black),
             color: Colors.white,
           ),
           child: Container(
@@ -68,14 +69,18 @@ class ProfileScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("user info 2", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)
+                Text("Information supplémentaires", style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    decoration: TextDecoration.underline)
                 ),
                 SizedBox(height: 20,),
-                Text("Ecole : "+ "asdfadsf"),
+                Text("Ecole : "+ HomeApp.user.ecole),
                 SizedBox(height: 20,),
-                Text("Ecole : "+ "asdfadsf"),
+                Text("Filière : "+ HomeApp.user.filiere),
                 SizedBox(height: 20,),
-                Text("Ecole : "+ "asdfadsf")
+                Text("Année : "+ HomeApp.user.annee),
+
               ],
             ),
           ),
@@ -115,6 +120,5 @@ class ProfileScreen extends StatelessWidget {
     );
 
   }
-
 
 }
