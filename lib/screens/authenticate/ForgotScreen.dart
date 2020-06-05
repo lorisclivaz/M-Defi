@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:nice_button/NiceButton.dart';
+import 'package:mdefi/services/database.dart';
 
 
 class ForgotScreen extends StatefulWidget {
@@ -13,6 +14,8 @@ class ForgotScreen extends StatefulWidget {
 }
 
 class _ForgotScreenState extends State<ForgotScreen> {
+
+  final Database database = Database();
 
   final myController = TextEditingController();
   bool loading = false;
@@ -68,6 +71,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                 text: "Envoyer",
                 background: Colors.blue,
                 onPressed: () async {
+
                   if(myController.text == HomeApp.email)
                     {
                       setState (() => loading = true);
@@ -78,6 +82,8 @@ class _ForgotScreenState extends State<ForgotScreen> {
                     }else{
                     print('not valid mail');
                   }
+
+
 
                   },
               ),

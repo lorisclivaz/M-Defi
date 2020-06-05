@@ -1,6 +1,5 @@
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:mdefi/models/userInfoSupp.dart';
 
 class Database {
 
@@ -29,7 +28,23 @@ class Database {
 
   }
 
+  //Insertion des différents themes dans la base de données
+  Future<String> insertTheme() async{
 
+     var themes = <String, dynamic>{
+       'Id':'2007',
+       'Name' : 'Informatique',
+       'ImageUrl': 'A remplir',
+
+     };
+
+     DatabaseReference reference = FirebaseDatabase.instance
+         .reference()
+         .child("themes").push();
+
+
+     reference.set(themes);
+}
 
 
 
