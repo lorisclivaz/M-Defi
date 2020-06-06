@@ -9,11 +9,17 @@ class ThemesList extends StatefulWidget {
 }
 
 class _ThemesListState extends State<ThemesList> {
+
   final AuthService _auth = AuthService();
   final fb = FirebaseDatabase.instance.reference().child("themes");
 
+  //List ou il y aura les données dedans
   List<Themes> list = List();
-  
+
+  //Text de la db
+  Text txt ;
+
+  //Methode dînitialisation qui au moment du loading de la page, les données se mettent dans la liste
   @override
   void initState(){
     super.initState();
@@ -34,91 +40,83 @@ class _ThemesListState extends State<ThemesList> {
   @override
   Widget build(BuildContext context) {
 
-    Widget UI(String key, String name, String ImageUrl, String id){
-      return Container(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+        image: AssetImage("assets/BackGroundImage.jpg"),fit: BoxFit.cover)),
+           child: Scaffold(
+                 backgroundColor: Colors.transparent,
+               appBar: AppBar(
+                 leading: BackButton(
+                   color: Colors.black,
+                   onPressed:() => Navigator.of(context).pop() ,
+                 ),
+                title: Text("Themes"),
+                  backgroundColor: Colors.blueGrey[400],
+                   elevation: 0.0,
 
-          height: 200,
-          child:GestureDetector(
+               ),
+                           body:new ListView.builder(
+                                               itemCount: list.length,
+                                               itemBuilder: (context,index){
 
-            onLongPress: (){
-              print("j'appui longtemps");
-            },
-            onTap: (){
-              print("salut");
-            },
+                               return new SizedBox(
+                                 width: 100.0,
+                                  height: 320.0,
+                                  child: Container(
+                                  padding: EdgeInsets.only(bottom:30.0,left: 20,right: 20,top: 25),
+                                  child: ui(index),
+                                  ),
+                                  );
+                                  },
+                                  ),
+                                  ),
 
-            child: Card(
 
-              child: Column(
+                                )
+    );
+                              }
+
+  Widget ui(int index){
+   return GestureDetector(
+      onTap: (){
+        print(list[index].name);
+      },
+
+      child: new Card(
+        elevation: 10.0,
+        shape: new RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(16.0),
+        ),
+        child: new Column(
+          children: <Widget>[
+            new ClipRRect(
+                child: new Image.network(list[index].imageUrl),
+                borderRadius: BorderRadius.only(
+                  topLeft: new Radius.circular(16.0),
+                  topRight: new Radius.circular(16.0),
+                )
+            ),
+            new Padding(
+              padding: new EdgeInsets.all(16.0),
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
 
-                  Text(
-                    name,
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontStyle: FontStyle.italic,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                   new Text(
+                    list[index].name.toUpperCase(),
+                    style: Theme.of(context).textTheme.title,
                   ),
-                  Text(
-                    ImageUrl,
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontStyle: FontStyle.italic,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    id,
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontStyle: FontStyle.italic,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
                 ],
               ),
             ),
-
-          )
-
-      );
-    }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Thèmes"),
-        backgroundColor: Colors.blueGrey[400],
-        elevation: 0.0,
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('logout'),
-            onPressed: () async{
-              await _auth.signOut();
-            },
-          ),
-        ],
-      ),
-
-      body: new Container(
-        child: list.length == 0 ? Text("Il n'y a aucune données"): ListView.builder(
-          itemCount: list.length,
-            itemBuilder: (_,index){
-            return UI(list[index].key, list[index].name, list[index].imageUrl, list[index].id);
-            }
+          ],
         ),
       ),
     );
   }
 
-  Widget container(){
-    return Material(
-      child: ClipRRect(
-        borderRadius: new BorderRadius.circular(24.0),
-      ),
-    );
-  }
 }

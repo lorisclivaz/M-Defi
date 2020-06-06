@@ -1,12 +1,17 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:mdefi/models/userInfoSupp.dart';
 import 'package:mdefi/screens/authenticate/ForgotScreen.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
+import 'package:mdefi/services/auth.dart';
 import 'package:nice_button/NiceButton.dart';
 
 
 class ProfileScreen extends StatelessWidget {
 
-  @override
+  final AuthService _auth = AuthService();
+
+    @override
   Widget build(BuildContext context) {
 
     //Create user info
@@ -47,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Text( HomeApp.email,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+              Text( HomeApp.user.email,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
             ],),
           ),
         ),
@@ -57,9 +62,9 @@ class ProfileScreen extends StatelessWidget {
     Widget _userInfo2()
     {
       return Positioned(
-        top: 350,
+        top: 370,
         child: Container(margin: EdgeInsets.all(20),
-          height: 260,
+          height: 280,
           width: MediaQuery.of(context).size.width * 0.9 ,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -135,5 +140,6 @@ class ProfileScreen extends StatelessWidget {
     );
 
   }
+
 
 }

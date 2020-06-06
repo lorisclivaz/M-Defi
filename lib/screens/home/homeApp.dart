@@ -38,39 +38,47 @@ class HomeApp extends StatelessWidget {
 
     });
 
-    return Scaffold(
-      backgroundColor: Colors.blueGrey[50],
-      drawer: MainDrawer(),
-        appBar: AppBar(
-          title: Text("Home"),
-          backgroundColor: Colors.blueGrey[400],
-          elevation: 0.0,
-          actions: <Widget>[
-            FlatButton.icon(
-              icon: Icon(Icons.person),
-              label: Text('logout'),
-              onPressed: () async{
-                await _auth.signOut();
-              },
-            ),
-          ],
-        ),
-      body: Container(
-        child:  NiceButton(
-          // width: 515,
-          elevation: 5.0,
-          radius: 40.0,
-          text: "Quizz themes",
-          background: Colors.blue,
-          onPressed: () async {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/BackGroundImage.jpg"),fit: BoxFit.cover)),
+        child: Scaffold(
+          drawer: MainDrawer(),
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
 
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ThemesList(),
-            ));
-          },
+            title: Text("Home"),
+            backgroundColor: Colors.blueGrey[400],
+            elevation: 0.0,
+            actions: <Widget>[
+              FlatButton.icon(
+                icon: Icon(Icons.person),
+                label: Text('logout'),
+                onPressed: () async{
+                  await _auth.signOut();
+                },
+              ),
+            ],
+          ),
+          body: Container(
+            child:  NiceButton(
+              // width: 515,
+              elevation: 5.0,
+              radius: 40.0,
+              text: "Themes",
+              background: Colors.blue,
+              onPressed: () async {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ThemesList(),
+                ));              },
+            ),
+          ),
         ),
       ),
     );
+
 
   }
 

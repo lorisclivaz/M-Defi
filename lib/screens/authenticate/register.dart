@@ -50,7 +50,8 @@ class _RegisterState extends State<Register> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                Image.asset('assets/M-Défi.png',height: 200,width: 200,),
+                Image.asset('assets/mdefi.png',height: 200,width: 200,),
+
                 SizedBox(height: 20.0),
                 TextFormField(
                   decoration: InputDecoration(
