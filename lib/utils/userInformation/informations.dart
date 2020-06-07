@@ -1,21 +1,23 @@
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/userInfoSupp.dart';
 import 'package:mdefi/services/auth.dart';
 
-class UserInfo extends StatefulWidget {
+class Information extends StatefulWidget {
   @override
-  _UserInfoState createState() => _UserInfoState();
+  _InformationState createState() => _InformationState();
 }
 
-class _UserInfoState extends State<UserInfo> {
+class _InformationState extends State<Information> {
 
   final AuthService _auth = AuthService();
   final fb = FirebaseDatabase.instance.reference().child("users");
 
   String currentUid;
-  UserInfoSupp user;
+  UserInfoSupp user = new UserInfoSupp('','', '', '', '', '',
+      '', '');
+  UserInfoSupp dataFields = new UserInfoSupp('','', '', '', '', '',
+      '', '');
   List<UserInfoSupp> list = List();
 
   @override
@@ -37,8 +39,9 @@ class _UserInfoState extends State<UserInfo> {
         list.add(user);
       });
 
-      setState(() {
+      dataFields = list.singleWhere((tempSB) => tempSB.uid==currentUid);
 
+      setState(() {
       });
     });
 
@@ -48,15 +51,6 @@ class _UserInfoState extends State<UserInfo> {
 
   @override
   Widget build(BuildContext context) {
-
-    UserInfoSupp dataFields ;
-
-    dataFields = list.singleWhere((tempSB) => tempSB.uid==currentUid);
-
-    print(dataFields.nom);
-    print(dataFields.prenom);
-
-
 
     return Scaffold(
 
@@ -185,7 +179,5 @@ class _UserInfoState extends State<UserInfo> {
 
 
   }
-}
-
-
+  }
 

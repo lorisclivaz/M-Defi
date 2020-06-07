@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/services/auth.dart';
-import 'package:mdefi/utils/userInformation/userinfo.dart';
+import 'package:mdefi/utils/userInformation/informations.dart';
 
 
 class MainDrawer extends StatelessWidget {
@@ -67,7 +67,7 @@ class MainDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => UserInfo(),
+                builder: (context) => Information(),
               ));
 
             },
