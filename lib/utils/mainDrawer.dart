@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mdefi/screens/DrawerScreens/profil.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
+import 'package:mdefi/services/auth.dart';
+import 'package:mdefi/utils/userInformation/userinfo.dart';
+
 
 class MainDrawer extends StatelessWidget {
+
+  final AuthService _auth = AuthService();
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +67,9 @@ class MainDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ProfileScreen(),
+                builder: (context) => UserInfo(),
               ));
+
             },
           ),
           ListTile(

@@ -12,7 +12,7 @@ class UserInfoSupp {
    String prenom;
    String key;
 
-   UserInfoSupp(this.uid, this.email, this.annee, this.ecole, this.filiere,
+   UserInfoSupp(key,this.uid, this.email, this.annee, this.ecole, this.filiere,
        this.nom, this.prenom);
 
 

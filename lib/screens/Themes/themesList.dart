@@ -26,6 +26,7 @@ class _ThemesListState extends State<ThemesList> {
     fb.once().then((DataSnapshot snap){
       var data = snap.value;
       list.clear();
+
       data.forEach((key,value){
         Themes themes = new Themes(key, value['Name'], value['ImageUrl'], value['Id']);
         list.add(themes);
@@ -40,6 +41,7 @@ class _ThemesListState extends State<ThemesList> {
   @override
   Widget build(BuildContext context) {
 
+    print(list.length);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
