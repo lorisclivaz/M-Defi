@@ -18,18 +18,27 @@ class _ForgotScreenState extends State<ForgotScreen> {
   final Database database = Database();
 
   final myController = TextEditingController();
-  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return loading ? Loading() :Scaffold(
-      backgroundColor: Colors.brown[50],
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey[400],
-        elevation: 0.0,
-        title: Text('Mot de passe '),
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+        image: AssetImage("assets/BackGroundImage.jpg"),fit: BoxFit.cover)),
+    child: Scaffold(
+    backgroundColor: Colors.transparent,
+    appBar: AppBar(
+    leading: BackButton(
+    color: Colors.black,
+    onPressed:() => Navigator.of(context).pop() ,
+    ),
+    title: Text("Mot de passe"),
+    backgroundColor: Colors.blueGrey[400],
+    elevation: 0.0,
 
-      ),
+    ),
       body: SingleChildScrollView(
         child: Padding(padding: EdgeInsets.only(top: 50, left: 20, right: 20),
 
@@ -53,8 +62,11 @@ class _ForgotScreenState extends State<ForgotScreen> {
 
                   style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Email',
+                      fillColor: Colors.white30,
+                      filled: true,
+                      border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide(color: Colors.black,width: 1)
                     )
@@ -63,7 +75,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
               ),
               Text(''),
               Text(''),
-              Text(''),
+
               NiceButton(
                 // width: 515,
                 elevation: 8.0,
@@ -74,7 +86,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
 
                   if(myController.text == HomeApp.email)
                     {
-                      setState (() => loading = true);
+
                       FirebaseAuth.instance.sendPasswordResetEmail(email: myController.text).then((value)=> print("Veuillez vérifier vos emails"));
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => HomeApp(),
@@ -95,6 +107,8 @@ class _ForgotScreenState extends State<ForgotScreen> {
 
       ),
 
+    ),
+    ),
     );
   }
 }

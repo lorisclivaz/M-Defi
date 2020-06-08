@@ -3,6 +3,7 @@ import 'package:mdefi/models/userInfoSupp.dart';
 import 'package:mdefi/screens/Themes/themesList.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mdefi/services/database.dart';
 import 'package:mdefi/utils/mainDrawer.dart';
 import 'package:nice_button/NiceButton.dart';
 
@@ -18,6 +19,7 @@ class HomeApp extends StatelessWidget {
   static String email ;
   static String uid ;
   static UserInfoSupp user;
+  Database database = new Database();
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +74,11 @@ class HomeApp extends StatelessWidget {
               text: "Themes",
               background: Colors.blue,
               onPressed: () async {
-                Navigator.of(context).push(MaterialPageRoute(
+
+               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ThemesList(),
-                ));              },
+                ));
+               },
             ),
           ),
         ),

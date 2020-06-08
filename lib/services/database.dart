@@ -63,7 +63,23 @@ class Database {
      reference.set(themes);
 }
 
+//Insertion des différents themes dans la base de données
+  Future<String> insertQuiz() async{
 
+    var themes = <String, dynamic>{
+      'Id':'203',
+      'Name' : 'Droit (semestre 2)',
+      'IdTheme': '2000',
+
+    };
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("quiz").push();
+
+
+    reference.set(themes);
+  }
 
 
 

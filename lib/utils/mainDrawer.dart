@@ -19,7 +19,7 @@ class MainDrawer extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: EdgeInsets.all(20),
-            color: Colors.blueGrey[400],
+            color: Colors.blueAccent[100],
             child: Center(
               child: Column(
                 children: <Widget>[
@@ -32,8 +32,8 @@ class MainDrawer extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: NetworkImage(
-                          'https://www.shareicon.net/data/256x256/2016/09/15/829459_man_512x512.png'
+                        image: AssetImage(
+                          'assets/logo.jpg'
                         ),
                         fit: BoxFit.fill
                       )
@@ -46,13 +46,7 @@ class MainDrawer extends StatelessWidget {
                 fontSize: 15,
                 color: Colors.white,
               ),
-              ),Text(
-                    HomeApp.uid,
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                    ),
-                  ),
+              ),
                 ],
               ),
             ),
@@ -83,7 +77,7 @@ class MainDrawer extends StatelessWidget {
             onTap: null,
           ),
           ListTile(
-            leading: Icon(Icons.android),
+            leading: Icon(Icons.apps),
             title: Text(
               'About',
               style: TextStyle(

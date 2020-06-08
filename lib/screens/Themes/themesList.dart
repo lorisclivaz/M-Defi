@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/themes.dart';
+import 'package:mdefi/screens/quiz/listquiz.dart';
 import 'package:mdefi/services/auth.dart';
 
 class ThemesList extends StatefulWidget {
@@ -41,7 +42,6 @@ class _ThemesListState extends State<ThemesList> {
   @override
   Widget build(BuildContext context) {
 
-    print(list.length);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -84,7 +84,10 @@ class _ThemesListState extends State<ThemesList> {
   Widget ui(int index){
    return GestureDetector(
       onTap: (){
-        print(list[index].id);
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => QuizList(list[index].id),
+        ));
+
       },
 
       child: new Card(

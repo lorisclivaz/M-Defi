@@ -99,11 +99,13 @@ class _InformationState extends State<Information> {
 
                 SizedBox(height: 20.0),
                 TextFormField(
+                autofocus: true,
                   controller: nom,
                   decoration: InputDecoration(
+                    labelStyle: TextStyle(color: Colors.black),
                     labelText: 'Nom : '+dataFields.nom,
                       hintText: dataFields.nom,
-                      fillColor: Colors.white,
+                      fillColor: Colors.white30,
                       filled: true,
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white, width: 2.0)
@@ -118,9 +120,10 @@ class _InformationState extends State<Information> {
                 TextFormField(
                   controller: prenom,
                   decoration: InputDecoration(
-                    labelText: 'Prénom : '+dataFields.prenom,
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Prénom : '+dataFields.prenom,
                       hintText: dataFields.prenom,
-                      fillColor: Colors.white,
+                      fillColor: Colors.white30,
                       filled: true,
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white, width: 2.0)
@@ -136,9 +139,10 @@ class _InformationState extends State<Information> {
                 TextFormField(
                   enabled: false,
                   decoration: InputDecoration(
-                    labelText: 'Email : '+dataFields.email,
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Email : '+dataFields.email,
                       hintText: dataFields.email,
-                      fillColor: Colors.white,
+                      fillColor: Colors.white30,
                       filled: true,
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white, width: 2.0)
@@ -155,9 +159,10 @@ class _InformationState extends State<Information> {
                 TextFormField(
                   controller: ecole,
                   decoration: InputDecoration(
-                    labelText: 'Ecole : '+dataFields.ecole,
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Ecole : '+dataFields.ecole,
                       hintText: dataFields.ecole,
-                      fillColor: Colors.white,
+                      fillColor: Colors.white30,
                       filled: true,
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white, width: 2.0)
@@ -174,9 +179,10 @@ class _InformationState extends State<Information> {
                 TextFormField(
                   controller: filiere,
                   decoration: InputDecoration(
-                    labelText: 'Filière : '+dataFields.filiere,
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Filière : '+dataFields.filiere,
                       hintText: dataFields.filiere,
-                      fillColor: Colors.white,
+                      fillColor: Colors.white30,
                       filled: true,
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white, width: 2.0)
@@ -192,9 +198,10 @@ class _InformationState extends State<Information> {
                 TextFormField(
                   controller: annee,
                   decoration: InputDecoration(
-                    labelText: 'Année : '+dataFields.annee,
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Année : '+dataFields.annee,
                       hintText: dataFields.annee,
-                      fillColor: Colors.white,
+                      fillColor: Colors.white30,
 
                       filled: true,
                       enabledBorder: OutlineInputBorder(
@@ -207,17 +214,23 @@ class _InformationState extends State<Information> {
 
                 ),
                 SizedBox(height: 12.0),
-                NiceButton(
-                  // width: 515,
-                  elevation: 5.0,
-                  radius: 40.0,
-                  text: "mot de passe",
-                  background: Colors.blue,
-                  onPressed: () async {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ForgotScreen(),
-                    ));              },
+                SizedBox(
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child:NiceButton(
+                      // width: 515,
+                      elevation: 5.0,
+                      radius: 40.0,
+                      text: "mot de passe",
+                      background: Colors.blue,
+                      onPressed: () async {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ForgotScreen(),
+                        ));              },
+                    ) ,
+                  ),
                 ),
+
                 SizedBox(height: 12.0),
 
                 NiceButton(
