@@ -84,7 +84,7 @@ class _ThemesListState extends State<ThemesList> {
   Widget ui(int index){
    return GestureDetector(
       onTap: (){
-        print(list[index].name);
+        print(list[index].id);
       },
 
       child: new Card(

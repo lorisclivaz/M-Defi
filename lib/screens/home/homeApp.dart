@@ -8,6 +8,7 @@ import 'package:nice_button/NiceButton.dart';
 
 
 
+
 //HomeApp
 class HomeApp extends StatelessWidget {
 
@@ -18,9 +19,10 @@ class HomeApp extends StatelessWidget {
   static String uid ;
   static UserInfoSupp user;
 
-
   @override
   Widget build(BuildContext context) {
+
+
 
     //Chargement du mail de l'utilisateur
     _auth.getCurrentEmail().then((String result){

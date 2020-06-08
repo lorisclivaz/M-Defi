@@ -55,7 +55,9 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - assets/BackGroundImage.jpg
-    - assets/mdefi.png
+    - assets/logo.jpg
+    - assets/user.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

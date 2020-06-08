@@ -28,6 +28,23 @@ class Database {
 
   }
 
+  void updateUser(String key,String nom, String prenom, String ecole, String filiere, String annee){
+
+    final DBRef = FirebaseDatabase.instance.reference().child('users');
+
+
+    DBRef.child(key).update({
+      'Nom':nom,
+      'Prenom':prenom,
+      'Ecole':ecole,
+      'Filiere':filiere,
+      'Annee':annee
+    });
+
+    print("Update successfull");
+
+  }
+
   //Insertion des différents themes dans la base de données
   Future<String> insertTheme() async{
 
