@@ -79,7 +79,7 @@ class HomeApp extends StatelessWidget {
                       elevation: 10.0,
                       radius: 52.0,
                       width: MediaQuery.of(context).size.width*0.80,
-                      text: "Bienvenue sur M-Learning",
+                      text: "Hes-so M-Learning",
                       background: Colors.blue.withOpacity(0.2)
                   )
                   ),
@@ -87,8 +87,8 @@ class HomeApp extends StatelessWidget {
                   padding: EdgeInsets.all(18.0),
                   child: Center(
                     child: Wrap(
-                      spacing: 15.0,
-                      runSpacing: 10.0,
+                      spacing: MediaQuery.of(context).size.width*0.10,
+                      runSpacing: MediaQuery.of(context).size.height*0.10,
                       children: <Widget>[
                         SizedBox(
                           width: MediaQuery.of(context).size.width*0.30,
@@ -190,7 +190,7 @@ class HomeApp extends StatelessWidget {
                                     Image.asset('assets/Calendrier.png', width: 64.0,),
                                     Text(''),
                                     Text(
-                                      'Calendrier',
+                                      'Agenda',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
