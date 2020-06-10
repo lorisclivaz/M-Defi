@@ -78,7 +78,7 @@ class HomeApp extends StatelessWidget {
                   child: NiceButton(
                       elevation: 10.0,
                       radius: 52.0,
-                      width: 600,
+                      width: MediaQuery.of(context).size.width*0.80,
                       text: "Bienvenue sur M-Learning",
                       background: Colors.blue.withOpacity(0.2)
                   )
@@ -87,12 +87,12 @@ class HomeApp extends StatelessWidget {
                   padding: EdgeInsets.all(18.0),
                   child: Center(
                     child: Wrap(
-                      spacing: 20.0,
-                      runSpacing: 20.0,
+                      spacing: 15.0,
+                      runSpacing: 10.0,
                       children: <Widget>[
                         SizedBox(
-                          width: 160.0,
-                          height: 150.0,
+                          width: MediaQuery.of(context).size.width*0.30,
+                          height: MediaQuery.of(context).size.height*0.23,
                           child: GestureDetector(
                             onTap: ()=> Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => ThemesList(),
@@ -133,8 +133,8 @@ class HomeApp extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          width: 160.0,
-                          height: 150.0,
+                          width: MediaQuery.of(context).size.width*0.30,
+                          height: MediaQuery.of(context).size.height*0.23,
                           child: GestureDetector(
                             onTap: ()=> Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => LanguesList(),
@@ -175,8 +175,8 @@ class HomeApp extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          width: 160.0,
-                          height: 150.0,
+                          width: MediaQuery.of(context).size.width*0.30,
+                          height: MediaQuery.of(context).size.height*0.23,
                           child: GestureDetector(
                             onTap: ()=> print("Salut"),
                             child: Card(
@@ -215,8 +215,8 @@ class HomeApp extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          width: 160.0,
-                          height: 150.0,
+                          width: MediaQuery.of(context).size.width*0.30,
+                          height: MediaQuery.of(context).size.height*0.23,
                           child: GestureDetector(
                             onTap: ()=> Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => About(),
@@ -243,7 +243,7 @@ class HomeApp extends StatelessWidget {
                                       height: 5.0,
                                     ),
                                     Text(
-                                      "Information app ",
+                                      "Informations",
                                       style: TextStyle(
 
                                         color: Colors.white,
@@ -256,27 +256,7 @@ class HomeApp extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 70,
-                        ),
-                        SizedBox(
-                          width: 150,
-                          height: 140,
-                          child: Container(
-                            margin: EdgeInsets.only(
-                              top: 30,
-                            ),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/logo.jpg'
-                                    ),
-                                    fit: BoxFit.fill
-                                )
-                            ),
-                          ),
-                        ),
+
 
                       ],
                     ),
