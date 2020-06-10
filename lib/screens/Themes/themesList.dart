@@ -41,7 +41,7 @@ class _ThemesListState extends State<ThemesList> {
 
   @override
   Widget build(BuildContext context) {
-
+print(list.length);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -92,6 +92,7 @@ class _ThemesListState extends State<ThemesList> {
 
       child: new Card(
         elevation: 10.0,
+        color: Colors.blue.withOpacity(0.2),
         shape: new RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(16.0),
         ),
@@ -113,7 +114,12 @@ class _ThemesListState extends State<ThemesList> {
 
                    new Text(
                     list[index].name.toUpperCase(),
-                    style: Theme.of(context).textTheme.title,
+                       style: TextStyle(
+                           color: Colors.white,
+                           fontWeight: FontWeight.bold,
+                           fontSize: 18.0
+                       )
+
                   ),
                 ],
               ),

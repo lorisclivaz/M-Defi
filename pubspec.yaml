@@ -57,6 +57,13 @@ flutter:
     - assets/BackGroundImage.jpg
     - assets/logo.jpg
     - assets/user.png
+    - assets/theme.png
+    - assets/Information.png
+    - assets/Calendrier.png
+    - assets/Langue.png
+    - assets/France.jpg
+    - assets/Anglais.jpg
+    - assets/Allemand.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,9 +1,12 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mdefi/models/userInfoSupp.dart';
+import 'package:mdefi/screens/Themes/langueList.dart';
 import 'package:mdefi/screens/Themes/themesList.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/services/database.dart';
+import 'package:mdefi/utils/about/about.dart';
 import 'package:mdefi/utils/mainDrawer.dart';
 import 'package:nice_button/NiceButton.dart';
 
@@ -66,23 +69,232 @@ class HomeApp extends StatelessWidget {
               ),
             ],
           ),
-          body: Container(
-            child:  NiceButton(
-              // width: 515,
-              elevation: 5.0,
-              radius: 40.0,
-              text: "Themes",
-              background: Colors.blue,
-              onPressed: () async {
+          body: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 36.0),
+                  child: NiceButton(
+                      elevation: 10.0,
+                      radius: 52.0,
+                      width: 600,
+                      text: "Bienvenue sur M-Learning",
+                      background: Colors.blue.withOpacity(0.2)
+                  )
+                  ),
+                Padding(
+                  padding: EdgeInsets.all(18.0),
+                  child: Center(
+                    child: Wrap(
+                      spacing: 20.0,
+                      runSpacing: 20.0,
+                      children: <Widget>[
+                        SizedBox(
+                          width: 160.0,
+                          height: 150.0,
+                          child: GestureDetector(
+                            onTap: ()=> Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ThemesList(),
+                            )),
+                            child: Card(
+                              color: Colors.blue.withOpacity(0.1),
 
-               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ThemesList(),
-                ));
-               },
+                              borderOnForeground: true,
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Image.asset('assets/theme.png', width: 64.0,),
+                                    Text(''),
+                                    Text(
+                                      'Themes',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "Quiz thèmes ",
+                                      style: TextStyle(
+
+                                          color: Colors.white,
+
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 160.0,
+                          height: 150.0,
+                          child: GestureDetector(
+                            onTap: ()=> Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => LanguesList(),
+                            )),
+                            child: Card(
+                              color: Colors.blue.withOpacity(0.1),
+
+                              borderOnForeground: true,
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Image.asset('assets/Langue.png', width: 64.0,),
+                                    Text(''),
+                                    Text(
+                                      'Langues',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "Quiz langues ",
+                                      style: TextStyle(
+
+                                        color: Colors.white,
+
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 160.0,
+                          height: 150.0,
+                          child: GestureDetector(
+                            onTap: ()=> print("Salut"),
+                            child: Card(
+                              color: Colors.blue.withOpacity(0.1),
+
+                              borderOnForeground: true,
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Image.asset('assets/Calendrier.png', width: 64.0,),
+                                    Text(''),
+                                    Text(
+                                      'Calendrier',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "Calendrier quiz",
+                                      style: TextStyle(
+
+                                        color: Colors.white,
+
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 160.0,
+                          height: 150.0,
+                          child: GestureDetector(
+                            onTap: ()=> Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => About(),
+                            )),
+                            child: Card(
+                              color: Colors.blue.withOpacity(0.1),
+
+                              borderOnForeground: true,
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Image.asset('assets/Information.png', width: 64.0,),
+                                    Text(''),
+                                    Text(
+                                      'A propos',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "Information app ",
+                                      style: TextStyle(
+
+                                        color: Colors.white,
+
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 70,
+                        ),
+                        SizedBox(
+                          width: 150,
+                          height: 140,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              top: 30,
+                            ),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/logo.jpg'
+                                    ),
+                                    fit: BoxFit.fill
+                                )
+                            ),
+                          ),
+                        ),
+
+                      ],
+                    ),
+
+
+                  ),
+
+                )
+
+              ],
+
             ),
           ),
+
+
         ),
       ),
+
     );
 
 

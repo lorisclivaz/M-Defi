@@ -19,7 +19,7 @@ class MainDrawer extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: EdgeInsets.all(20),
-            color: Colors.blueAccent[100],
+            color:Colors.blueGrey[400],
             child: Center(
               child: Column(
                 children: <Widget>[
@@ -76,18 +76,7 @@ class MainDrawer extends StatelessWidget {
             ),
             onTap: null,
           ),
-          ListTile(
-            leading: Icon(Icons.apps),
-            title: Text(
-              'About',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            onTap: null,
 
-
-          )
         ],
       ),
     );

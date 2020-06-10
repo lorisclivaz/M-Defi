@@ -100,6 +100,7 @@ class _SignInState extends State<SignIn> {
                   text: "Connexion",
                   background: Colors.blue,
                   onPressed: () async {
+
                     if(_formKey.currentState.validate()) {
 
                       setState (() => loading = true);

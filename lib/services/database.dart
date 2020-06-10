@@ -81,6 +81,22 @@ class Database {
     reference.set(themes);
   }
 
+  Future<String> insertLangues() async{
+
+    var themes = <String, dynamic>{
+      'Id':'5003',
+      'Name' : 'Allemand',
+      'ImageUrl': 'A remplir',
+
+    };
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("langues").push();
+
+
+    reference.set(themes);
+  }
 
 
 }
