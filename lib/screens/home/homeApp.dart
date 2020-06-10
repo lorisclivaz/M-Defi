@@ -201,7 +201,7 @@ class HomeApp extends StatelessWidget {
                                       height: 5.0,
                                     ),
                                     Text(
-                                      "Calendrier quiz",
+                                      "Rappel",
                                       style: TextStyle(
 
                                         color: Colors.white,

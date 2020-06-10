@@ -46,7 +46,7 @@ class _AboutListState extends State<About> {
                       child: NiceButton(
                           elevation: 10.0,
                           radius: 52.0,
-                          width: 600,
+                          width: MediaQuery.of(context).size.width*0.80,
                           text: "Bienvenue sur M-Learning",
                           background: Colors.blue.withOpacity(0.2)
                       )
