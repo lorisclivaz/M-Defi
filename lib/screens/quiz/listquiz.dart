@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/quiz.dart';
+import 'package:mdefi/screens/QuestionPage/questionPage.dart';
 import 'package:mdefi/services/auth.dart';
 
 class QuizList extends StatefulWidget {
@@ -95,7 +96,10 @@ class _listQuizState extends State<QuizList> {
     return GestureDetector(
       onTap: (){
         print(list[index].id);
-
+        print(list[index].name);
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => QuestionPage(list[index].id, list[index].name),
+        ));
 
       },
 

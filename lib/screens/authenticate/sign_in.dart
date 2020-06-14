@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mdefi/screens/authenticate/ForgotScreen.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:nice_button/nice_button.dart';
@@ -120,7 +121,15 @@ class _SignInState extends State<SignIn> {
                 Text(
                   error,
                   style: TextStyle(color: Colors.red, fontSize: 14.0),
-                )
+                ),
+                SizedBox(
+                  child: InkWell(
+                    onTap: ()=> Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ForgotScreen(),
+                    )),
+                    child: Text('Mot de passe oublié'),
+                  ),
+                ),
               ],
             ),
           )

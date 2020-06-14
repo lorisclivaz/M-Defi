@@ -98,5 +98,45 @@ class Database {
     reference.set(themes);
   }
 
+  //Insertion des différentes questions dans la base de données
+  Future<String> insertQuestion() async{
+
+    var question = <String, dynamic>{
+      'Id':'1569',
+      'Name' : "Vrai ou faux : l'instruction sur l'image ci-dessous permet de définir une variable fcode de type sy-ucomm en créant une autre variable que ok_code pour éviter d'utiliser directement fcode.",
+      'Image': '',
+      'Level':'2',
+      'IdQuiz':'158',
+      'PageType':'1'
+
+    };
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("question").push();
+
+
+    reference.set(question);
+  }
+
+//Insertion des différentes questions dans la base de données
+  Future<String> insertResponse() async{
+
+    var response = <String, dynamic>{
+      'Id':'2646',
+      'Name' : 'Vrai',
+      'Image': '',
+      'Answer':'0',
+      'IdQuestion':'871',
+
+    };
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("response").push();
+
+
+    reference.set(response);
+  }
 
 }
