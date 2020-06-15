@@ -24,7 +24,7 @@ class _QuestionPage extends State<QuestionPage> {
   final fb = FirebaseDatabase.instance.reference().child("question");
 
   //Variable paramètre des questions
-  String level;
+  String level = '';
 
   //Pour chaque question correct +2 incorrect -1
   int score = 0;

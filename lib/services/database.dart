@@ -123,17 +123,37 @@ class Database {
   Future<String> insertResponse() async{
 
     var response = <String, dynamic>{
-      'Id':'2646',
+      'Id':'4609',
       'Name' : 'Vrai',
       'Image': '',
       'Answer':'0',
-      'IdQuestion':'871',
+      'IdQuestion':'1569',
 
     };
 
     DatabaseReference reference = FirebaseDatabase.instance
         .reference()
         .child("response").push();
+
+
+    reference.set(response);
+  }
+
+  //Insertion des différentes solution dans la base de données
+  Future<String> insertSolutions() async{
+
+
+    var response = <String, dynamic>{
+      'Id':'1242',
+      'Titel' : 'fcode',
+      'Text': "Faux : cette instruction permet de définir une variable fcode de type sy-ucomm en créant une autre variable que ok_code pour éviter d'utiliser directement ok_code, et non pas fcode vu que c'est celle-ci qu'on va utiliser.",
+      'IdQuestion':'1569',
+
+    };
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("solutions").push();
 
 
     reference.set(response);

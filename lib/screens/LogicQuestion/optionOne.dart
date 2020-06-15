@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/questions.dart';
 import 'package:mdefi/models/reponse.dart';
+import 'package:mdefi/models/solutions.dart';
 import 'package:mdefi/screens/quiz/quizEnd.dart';
 import 'package:mdefi/utils/Draggable/dragBox.dart';
 import 'package:nice_button/NiceButton.dart';
@@ -22,18 +23,25 @@ class optionOne extends StatefulWidget {
 }
 
 class _optionOneState extends State<optionOne> {
-String value = 'Drag here';
+
+  //Widget
+  Widget _CorrectReponse;
+
   //List ou il y aura les données dedans
   List<Question> list = List();
   List<ReponseQuestion> listReponse = List();
   List<ReponseQuestion> listReponseFinal = List();
+  List<Solution> listSolutions = List();
+  List<Solution> listSolutionsFinal = List();
 
   final fb = FirebaseDatabase.instance.reference().child("question");
   final fb2 = FirebaseDatabase.instance.reference().child("response");
+  final fb3 = FirebaseDatabase.instance.reference().child("solutions");
 
 
 
-  //Valeur aléatoire
+
+//Valeur aléatoire
   Random rnd = new Random();
   int max;
   int min;
@@ -51,8 +59,19 @@ String value = 'Drag here';
   String reponse1 = '';
   String reponse2 = '';
 
+  //Variable show solution
+  bool _isVisible = false;
+  String solution1 = 'Réponse Correcte';
+  String solution2 = 'Réponse incorrecte';
+  String solutionFinal = '';
+  Solution objet = null;
+  String titel = '';
+  String text = '';
+
   //Draggable
+  String value = 'Drag here';
   bool drag = false;
+
 
 
 
@@ -90,6 +109,23 @@ String value = 'Drag here';
 
         listReponse.add(reponses);
 
+      });
+      setState(() {
+
+      });
+
+    });
+
+    //Récupération les solutions
+    fb3.once().then((DataSnapshot snap){
+      var data = snap.value;
+      listSolutions.clear();
+
+      data.forEach((key,value){
+        Solution solutions = new Solution(key, value['Id'], value['IdQuestion'], value['Text'], value['Titel']);
+
+        listSolutions.add(solutions);
+
 
 
       });
@@ -98,8 +134,6 @@ String value = 'Drag here';
       });
 
     });
-
-
 
 
   }
@@ -116,21 +150,25 @@ String value = 'Drag here';
         level = widget.level;
         drag = true;
 
-        print("IdQuestion");
-        print("871");
-        idQuestion = '871';
+
+        idQuestion = list[a].id;
         listReponseFinal = reponseSet(listReponse,idQuestion);
-        reponse1 = listReponseFinal[0].name;
-        reponse2 = listReponseFinal[1].name;
-        print("Reponse correct : ");
-        print(reponseCorrect);
+
+        if(listReponseFinal.length > 0)
+        {
+          reponse1 = listReponseFinal[0].name;
+          reponse2 = listReponseFinal[1].name;
+        }
+
+        objet = solutionsSet(listSolutions, idQuestion);
+
+        text = objet.text;
+        titel = objet.titel;
+
 
 
 
       }
-
-
-
 
 
     return MaterialApp(
@@ -158,7 +196,7 @@ String value = 'Drag here';
               children: <Widget>[
                 Container(
                   alignment: Alignment.center,
-                  height: 400,
+                  height: MediaQuery.of(context).size.width*1.25,
                   child:  Card(
                     color: Colors.blue.withOpacity(0.2),
                     elevation: 10.0,
@@ -203,7 +241,7 @@ String value = 'Drag here';
                         ),
 
                         Container(
-                          height: 200,
+                          height: MediaQuery.of(context).size.height*0.40,
                           child: Column(
                             children: <Widget>[
                               Container(
@@ -220,43 +258,6 @@ String value = 'Drag here';
                   ),
 
                 ),
-                Text(''),
-                Text(''),
-                Text(''),
-                Text(''),
-                Text(''),
-                Text(''),
-                Text(''),
-                Text(''),
-                Text(''),
-                Text(''),
-                Text(''),
-                Text(''),
-                Text(''),
-                NiceButton(
-                  elevation: 10.0,
-                  radius: 52.0,
-                  width: MediaQuery.of(context).size.width*0.80,
-                  text: 'Question suivante',
-                  background: Colors.white70,
-                  fontSize: 20,
-                  onPressed:(){
-                    if(nbrPage < 6)
-                      {
-
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => optionOne(score, nbrPage, widget.idQuiz, level),
-                        ));
-                      }else
-                        {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => QuizEnd(score, nbrPage),
-                          ));
-
-                        }
-                  },
-
-                )
               ],
             ),
           )
@@ -293,10 +294,81 @@ Widget draggable(BuildContext context)
 
                 if(value == reponseCorrect)
                   {
+                    solutionFinal = solution1;
+
                     print("Bien joué mec");
                   }else{
+                  solutionFinal = solution2;
+
                   print("Tu es nul mec");
                 }
+
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+
+                        backgroundColor: Colors.white30,
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                            BorderRadius.circular(20.0)), //this right here
+                        child: Container(
+                          height: 200,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(solutionFinal,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 19.0,
+                                      decoration:  TextDecoration.underline,
+                                    )),
+                                Text(''),
+                                Text(
+                                 text,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14.0,
+                                    )
+                                ),
+                                Text(''),
+
+                                SizedBox(
+                                  width: 320.0,
+                                  child: NiceButton(
+                                      background: Colors.blue.withOpacity(0.5),
+                                    elevation: 10.0,
+                                    radius: 52.0,
+                                    text: "Suivant",
+
+                                    onPressed: () {
+                                      if(nbrPage < 6)
+                                      {
+
+                                        Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (context) => optionOne(score, nbrPage, widget.idQuiz, level),
+                                        ));
+                                      }else
+                                      {
+                                        Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (context) => QuizEnd(score, nbrPage),
+                                        ));
+
+                                      }
+                                    },
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    });
               },
               builder: (
               BuildContext context,
@@ -304,8 +376,8 @@ Widget draggable(BuildContext context)
                   List<dynamic> rejected,
               ){
                 return Container(
-                  width: 100.0,
-                  height: 100.0,
+                  width: MediaQuery.of(context).size.width*0.3,
+                  height: MediaQuery.of(context).size.height*0.15,
                   decoration: BoxDecoration(
                     color: Colors.white30,
                   ),
@@ -321,6 +393,27 @@ Widget draggable(BuildContext context)
     }
 
 }
+  Solution solutionsSet(List<Solution> list, String idQuestion)
+  {
+    Solution fake = new Solution('', '', '', '', '');
+
+
+    for ( var i in listSolutions )
+    {
+      print(idQuestion);
+      print(i.idQuestion);
+      if(i.idQuestion == idQuestion)
+      {
+        fake = new Solution(i.key, i.id, i.idQuestion, i.text,i.titel);
+
+      }
+
+
+    }
+
+    return fake;
+
+  }
 
   List<ReponseQuestion> reponseSet(List<ReponseQuestion> list, String idQuestion)
   {
@@ -343,6 +436,71 @@ Widget draggable(BuildContext context)
     }
     return setReponse;
 
+  }
+
+Widget solution(BuildContext context)
+{
+  return Visibility(
+    visible: _isVisible,
+    child: Container(
+      alignment: Alignment.center,
+
+      child:  Card(
+
+        color: Colors.blue.withOpacity(0.2),
+        elevation: 10.0,
+        shape: new RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(16.0),
+        ),
+        child: new Column(
+          children: <Widget>[
+            new ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: new Radius.circular(16.0),
+                  topRight: new Radius.circular(16.0),
+                )
+            ),
+            new Padding(
+              padding: new EdgeInsets.all(16.0),
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Text(
+                      solutionFinal
+                      ,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30.0,
+                        decoration:  TextDecoration.underline,
+                      )
+                  ),
+
+                  new Text(
+                      titel + ' : '+ text ,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0
+                      )
+                  ),
+                ],
+              ),
+            ),
+
+
+          ],
+        ),
+      ),
+
+    ),
+  );
+}
+  void _toggle(){
+    setState(() {
+      _isVisible = !_isVisible;
+    });
   }
 }
 /*
