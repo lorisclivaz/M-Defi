@@ -1,4 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+/*
+ * Author : Loris Clivaz
+ * Date creation : 08 juin 2020
+ */
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/userInfoSupp.dart';
@@ -8,6 +12,13 @@ import 'package:mdefi/services/auth.dart';
 import 'package:mdefi/services/database.dart';
 import 'package:nice_button/NiceButton.dart';
 
+/*
+ * Classe qui va gérer le profil de l'utilisateur
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
+
 class Information extends StatefulWidget {
   @override
   _InformationState createState() => _InformationState();
@@ -15,8 +26,13 @@ class Information extends StatefulWidget {
 
 class _InformationState extends State<Information> {
 
+  //Variable current user
   final AuthService _auth = AuthService();
+
+  //Variable de la base de données
   final fb = FirebaseDatabase.instance.reference().child("users");
+
+  //Variable utilisateur
   Database updateUser = Database();
   String currentUid;
   UserInfoSupp user = new UserInfoSupp('','', '', '', '', '',
@@ -25,7 +41,7 @@ class _InformationState extends State<Information> {
       '', '');
   List<UserInfoSupp> list = List();
 
-
+  //Variable de controle des saisies
   TextEditingController nom = new TextEditingController();
   TextEditingController prenom = new TextEditingController();
   TextEditingController ecole = new TextEditingController();
@@ -33,18 +49,18 @@ class _InformationState extends State<Information> {
   TextEditingController annee = new TextEditingController();
 
 
+  //Méthode de chargement des données
   @override
   void initState (){
     super.initState();
 
 
-
-    //Chargement de l'uid de l'utilisateur
+    //Méthode de chargement de l'uid de l'utilisateur
     _auth.getCurrentUID().then((String value){
       currentUid = value;
     });
 
-
+    //Méthode de chargement de l'utilisateur dans la base de données
     fb.once().then((DataSnapshot snap){
       var data = snap.value;
       list.clear();
@@ -53,26 +69,17 @@ class _InformationState extends State<Information> {
         list.add(user);
       });
 
+      //Ajout d'informations dans la list avec condition
       dataFields = list.singleWhere((tempSB) => tempSB.uid==currentUid);
-
-
       setState(() {
       });
     });
-
-
-
   }
 
-  Widget ui(){
-
-  }
-
+  //Design de la page
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
-
       debugShowCheckedModeBanner: false,
       home: Container(
           decoration: BoxDecoration(
@@ -96,7 +103,6 @@ class _InformationState extends State<Information> {
             child: Column(
               children: <Widget>[
                 Image.asset('assets/user.png',height: 150,width: 150,),
-
                 SizedBox(height: 20.0),
                 TextFormField(
                 autofocus: true,
@@ -114,7 +120,6 @@ class _InformationState extends State<Information> {
                           borderSide: BorderSide(color: Colors.black, width: 2.0)
                       )
                   ),
-
                 ),
                 SizedBox(height: 20.0),
                 TextFormField(
@@ -132,8 +137,6 @@ class _InformationState extends State<Information> {
                           borderSide: BorderSide(color: Colors.black, width: 2.0)
                       )
                   ),
-
-
                 ),
                 SizedBox(height: 20.0),
                 TextFormField(
@@ -151,11 +154,8 @@ class _InformationState extends State<Information> {
                           borderSide: BorderSide(color: Colors.black, width: 2.0)
                       )
                   ),
-
-
                 ),
                 SizedBox(height: 20.0),
-
                 TextFormField(
                   controller: ecole,
                   decoration: InputDecoration(
@@ -171,11 +171,8 @@ class _InformationState extends State<Information> {
                           borderSide: BorderSide(color: Colors.black, width: 2.0)
                       )
                   ),
-
-
                 ),
                 SizedBox(height: 20.0),
-
                 TextFormField(
                   controller: filiere,
                   decoration: InputDecoration(
@@ -191,8 +188,6 @@ class _InformationState extends State<Information> {
                           borderSide: BorderSide(color: Colors.black, width: 2.0)
                       )
                   ),
-
-
                 ),
                 SizedBox(height: 20.0),
                 TextFormField(
@@ -202,7 +197,6 @@ class _InformationState extends State<Information> {
                       labelText: 'Année : '+dataFields.annee,
                       hintText: dataFields.annee,
                       fillColor: Colors.white30,
-
                       filled: true,
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white, width: 2.0)
@@ -211,7 +205,6 @@ class _InformationState extends State<Information> {
                           borderSide: BorderSide(color: Colors.black, width: 2.0)
                       )
                   ),
-
                 ),
                 SizedBox(height: 12.0),
                 SizedBox(
@@ -222,25 +215,23 @@ class _InformationState extends State<Information> {
                       elevation: 5.0,
                       radius: 40.0,
                       text: "mot de passe",
-                      background: Colors.blue,
+                      background: Colors.white30,
                       onPressed: () async {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ForgotScreen(),
-                        ));              },
+                        ));
+                        },
                     ) ,
                   ),
                 ),
-
                 SizedBox(height: 12.0),
-
                 NiceButton(
                   // width: 515,
                   elevation: 5.0,
                   radius: 40.0,
                   text: "Modifier",
-                  background: Colors.blue,
+                  background: Colors.white30,
                   onPressed: () async {
-
                     //Condition si la valeur est null
                     if(nom.text == "")
                       {
@@ -265,9 +256,10 @@ class _InformationState extends State<Information> {
 
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => HomeApp(),
-                    ));              },
-                )
+                    ));
 
+                    },
+                )
               ],
             ),
           )
@@ -275,8 +267,6 @@ class _InformationState extends State<Information> {
     )
     )
     );
-
-
   }
   }
 

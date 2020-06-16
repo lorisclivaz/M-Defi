@@ -1,15 +1,27 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 09 juin 2020
+ */
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/quiz.dart';
 import 'package:mdefi/screens/QuestionPage/questionPage.dart';
-import 'package:mdefi/services/auth.dart';
+import 'package:mdefi/shared/loading.dart';
 
+/*
+ * Classe qui va gérer la list de quiz par thème
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 class QuizList extends StatefulWidget {
 
+  //Variable du thème
   final String idTheme;
 
+  //Constructeur
   const QuizList(this.idTheme);
-
 
   @override
   _listQuizState createState() => _listQuizState();
@@ -17,21 +29,26 @@ class QuizList extends StatefulWidget {
 
 class _listQuizState extends State<QuizList> {
 
-  final AuthService _auth = AuthService();
+  //Variable de la base de données
   final fb = FirebaseDatabase.instance.reference().child("quiz");
 
 
-  //List ou il y aura les données dedans
+  //Variable de la liste ou il y aura les données des différents quiz
   List<Quiz> list = List();
+
+  //Variable du loading
+  bool loading = false;
 
   //Methode dînitialisation qui au moment du loading de la page, les données se mettent dans la liste
   @override
   void initState(){
     super.initState();
+    loading = true;
+
+    //Méthode qui permet d'ajouter tous les quiz par rapport au thème dans la liste
     fb.once().then((DataSnapshot snap){
       var data = snap.value;
       list.clear();
-
       data.forEach((key,value){
         Quiz quizs = new Quiz(key, value['Id'], value['Name'], value['IdTheme']);
         if(quizs.idTheme == widget.idTheme)
@@ -40,20 +57,15 @@ class _listQuizState extends State<QuizList> {
           }
       });
       setState(() {
-
+        loading = false;
       });
-
     });
   }
 
+  //Design de la page
   @override
   Widget build(BuildContext context) {
-
-   print(list.length);
-
-
-
-    return  MaterialApp(
+    return  loading ? Loading() :MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Container(
           decoration: BoxDecoration(
@@ -69,12 +81,10 @@ class _listQuizState extends State<QuizList> {
               title: Text("Quiz"),
               backgroundColor: Colors.blueGrey[400],
               elevation: 0.0,
-
             ),
             body:new ListView.builder(
               itemCount: list.length,
               itemBuilder: (context,index){
-
                 return new SizedBox(
                   width: 100.0,
                   height: 120.0,
@@ -86,12 +96,11 @@ class _listQuizState extends State<QuizList> {
               },
             ),
           ),
-
-
         )
     );
   }
 
+  //Méthode qui retourne le design des boxy avec les informations à l'intérieur
   Widget ui(int index){
     return GestureDetector(
       onTap: (){
@@ -100,9 +109,7 @@ class _listQuizState extends State<QuizList> {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => QuestionPage(list[index].id, list[index].name),
         ));
-
       },
-
       child: new Card(
         elevation: 10.0,
         color: Colors.white30,
@@ -124,7 +131,6 @@ class _listQuizState extends State<QuizList> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-
                   new Text(
                     list[index].name.toUpperCase(),
                     style: Theme.of(context).textTheme.body2,

@@ -1,3 +1,8 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 07 juin 2020
+ */
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mdefi/models/userInfoSupp.dart';
@@ -10,24 +15,29 @@ import 'package:mdefi/utils/about/about.dart';
 import 'package:mdefi/utils/mainDrawer.dart';
 import 'package:nice_button/NiceButton.dart';
 
-
-
-
-//HomeApp
+/*
+ * Classe qui va gérer la navigation entre les différentes fonctions de l'application
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 class HomeApp extends StatelessWidget {
 
-  //Variables de la classe HomeApp
+  //Variables d'authentification
   final AuthService _auth = AuthService();
+
+  //Variable de la base de données
   final DBRef = FirebaseDatabase.instance.reference();
+  Database database = new Database();
+
+  //Variable de l'utilisateur
   static String email ;
   static String uid ;
   static UserInfoSupp user;
-  Database database = new Database();
 
+  //Design de la page
   @override
   Widget build(BuildContext context) {
-
-
 
     //Chargement du mail de l'utilisateur
     _auth.getCurrentEmail().then((String result){
@@ -44,7 +54,6 @@ class HomeApp extends StatelessWidget {
       user = UserInfoSupp.fromSnapshot(data.snapshot);
 
     });
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -55,7 +64,6 @@ class HomeApp extends StatelessWidget {
           drawer: MainDrawer(),
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-
             title: Text("Home"),
             backgroundColor: Colors.blueGrey[400],
             elevation: 0.0,
@@ -99,7 +107,6 @@ class HomeApp extends StatelessWidget {
                             )),
                             child: Card(
                               color: Colors.blue.withOpacity(0.1),
-
                               borderOnForeground: true,
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
@@ -121,9 +128,7 @@ class HomeApp extends StatelessWidget {
                                     Text(
                                       "Quiz thèmes ",
                                       style: TextStyle(
-
                                           color: Colors.white,
-
                                       ),
                                     ),
                                   ],
@@ -141,7 +146,6 @@ class HomeApp extends StatelessWidget {
                             )),
                             child: Card(
                               color: Colors.blue.withOpacity(0.1),
-
                               borderOnForeground: true,
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
@@ -163,9 +167,7 @@ class HomeApp extends StatelessWidget {
                                     Text(
                                       "Quiz langues ",
                                       style: TextStyle(
-
                                         color: Colors.white,
-
                                       ),
                                     ),
                                   ],
@@ -181,7 +183,6 @@ class HomeApp extends StatelessWidget {
                             onTap: ()=> print("Salut"),
                             child: Card(
                               color: Colors.blue.withOpacity(0.1),
-
                               borderOnForeground: true,
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
@@ -203,9 +204,7 @@ class HomeApp extends StatelessWidget {
                                     Text(
                                       "Rappel",
                                       style: TextStyle(
-
                                         color: Colors.white,
-
                                       ),
                                     ),
                                   ],
@@ -223,7 +222,6 @@ class HomeApp extends StatelessWidget {
                             )),
                             child: Card(
                               color: Colors.blue.withOpacity(0.1),
-
                               borderOnForeground: true,
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
@@ -245,9 +243,7 @@ class HomeApp extends StatelessWidget {
                                     Text(
                                       "Informations",
                                       style: TextStyle(
-
                                         color: Colors.white,
-
                                       ),
                                     ),
                                   ],
@@ -256,28 +252,16 @@ class HomeApp extends StatelessWidget {
                             ),
                           ),
                         ),
-
-
                       ],
                     ),
-
-
                   ),
-
                 )
-
               ],
-
             ),
           ),
-
-
         ),
       ),
-
     );
-
-
   }
 
 

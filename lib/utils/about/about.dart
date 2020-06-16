@@ -1,9 +1,18 @@
-import 'package:firebase_database/firebase_database.dart';
+/*
+ * Author : Loris Clivaz
+ * Date creation : 09 juin 2020
+ */
+
 import 'package:flutter/material.dart';
-import 'package:mdefi/models/themes.dart';
-import 'package:mdefi/screens/quiz/listquiz.dart';
-import 'package:mdefi/services/auth.dart';
 import 'package:nice_button/NiceButton.dart';
+
+
+/*
+ * Classe qui va donner les informations de l'application M-Learning
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 
 class About extends StatefulWidget {
   @override
@@ -12,12 +21,9 @@ class About extends StatefulWidget {
 
 class _AboutListState extends State<About> {
 
-
-  //Methode dînitialisation qui au moment du loading de la page, les données se mettent dans la liste
-
+  //Design de la page
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Container(
@@ -34,9 +40,7 @@ class _AboutListState extends State<About> {
               title: Text("Information"),
               backgroundColor: Colors.blueGrey[400],
               elevation: 0.0,
-
             ),
-
             body: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,9 +57,7 @@ class _AboutListState extends State<About> {
                   ),
                   Padding(
                     padding: EdgeInsets.all(18.0),
-
                     child: Center(
-
                       child: Container(
                         child: SizedBox(
                           width: 400.0,
@@ -72,23 +74,16 @@ class _AboutListState extends State<About> {
                                   fontSize: 18.0
                               ),
                             ),
-
                           ),
                         ),
                       ),
                     ),
                   ),
                 ],
-
               ),
-
             ),
-
           ),
-
-
         ),
     );
   }
-
 }

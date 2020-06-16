@@ -1,10 +1,21 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 04 juin 2020
+ */
 
 import 'package:firebase_database/firebase_database.dart';
 
+/*
+ * Classe qui va gérer les requêtes à la base de données
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
+
 class Database {
 
+  //Méthode permettant de créer l'utilisateur dans la base de données
    Future<String> createUser(String nom, String prenom, String filiere, String ecole, String annee, String email, String uid) async {
-
 
     var user = <String, dynamic>{
       'Nom':nom,
@@ -23,15 +34,12 @@ class Database {
 
 
     reference.set(user);
-
-
-
   }
 
+  //Méthode permettant de modifier l'utilisateur dans la base de données
   void updateUser(String key,String nom, String prenom, String ecole, String filiere, String annee){
 
     final DBRef = FirebaseDatabase.instance.reference().child('users');
-
 
     DBRef.child(key).update({
       'Nom':nom,
@@ -45,7 +53,7 @@ class Database {
 
   }
 
-  //Insertion des différents themes dans la base de données
+  //Méthode permettant d'insérer un thème dans la base de données
   Future<String> insertTheme() async{
 
      var themes = <String, dynamic>{
@@ -63,7 +71,7 @@ class Database {
      reference.set(themes);
 }
 
-//Insertion des différents themes dans la base de données
+  //Méthode permettant d'insérer un quiz dans la base de données
   Future<String> insertQuiz() async{
 
     var themes = <String, dynamic>{
@@ -81,6 +89,7 @@ class Database {
     reference.set(themes);
   }
 
+  //Méthode permettant d'insérer une langue dans la base de données
   Future<String> insertLangues() async{
 
     var themes = <String, dynamic>{
@@ -98,7 +107,7 @@ class Database {
     reference.set(themes);
   }
 
-  //Insertion des différentes questions dans la base de données
+  //Méthode permettant d'insérer une question dans la base de données
   Future<String> insertQuestion() async{
 
     var question = <String, dynamic>{
@@ -119,7 +128,7 @@ class Database {
     reference.set(question);
   }
 
-//Insertion des différentes questions dans la base de données
+  //Méthode permettant d'insérer une réponse dans la base de données
   Future<String> insertResponse() async{
 
     var response = <String, dynamic>{
@@ -139,9 +148,8 @@ class Database {
     reference.set(response);
   }
 
-  //Insertion des différentes solution dans la base de données
+  //Méthode permettant d'insérer une solution dans la base de donnnées
   Future<String> insertSolutions() async{
-
 
     var response = <String, dynamic>{
       'Id':'1242',
@@ -158,5 +166,4 @@ class Database {
 
     reference.set(response);
   }
-
 }

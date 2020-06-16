@@ -1,11 +1,24 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 14 juin 2020
+ */
+
 import 'package:flutter/material.dart';
+
+/*
+ * Classe qui va gérer le score à la fin du quiz
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 
 class QuizEnd extends StatefulWidget {
 
+  //Variable du score et du nombre de pages
   int score;
   int nbrPage;
 
-
+  //Constructeur
   QuizEnd(this.score, this.nbrPage);
 
   @override
@@ -13,9 +26,10 @@ class QuizEnd extends StatefulWidget {
 }
 
 class _QuizEndState extends State<QuizEnd> {
+
+  //Design de la page
   @override
   Widget build(BuildContext context) {
-
     print(widget.score);
     return MaterialApp(
         debugShowCheckedModeBanner: false,

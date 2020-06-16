@@ -1,15 +1,22 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 04 juin 2020
+ */
 
-//Variables that the user have
+/*
+ * Classe de modèle utilisateur
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 
 class User {
 
-  //Authentification
+  //Variables user
   final String uid;
   final String email;
 
-
-
-
+  //Constructeur
   User({this.uid,this.email});
 
 

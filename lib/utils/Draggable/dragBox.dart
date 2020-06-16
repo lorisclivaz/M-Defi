@@ -1,11 +1,25 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 14 juin 2020
+ */
+
 import 'package:flutter/material.dart';
+
+/*
+ * Classe qui va gérer le drag and drop de l'application pour les quiz vrai ou faux
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 
 class DragBox extends StatefulWidget {
 
+  //Variable drag and drop
   final Offset initPos;
   final String label;
   final Color itemColor;
 
+  //Constructeur
   DragBox(this.initPos, this.label, this.itemColor);
 
   @override
@@ -14,8 +28,10 @@ class DragBox extends StatefulWidget {
 
 class _DragBoxState extends State<DragBox> {
 
+  //Variable de position
   Offset position = Offset(0.0, 0.0);
 
+  //Méthode d'initialisation des valeurs de position
   @override
   void initState()
   {
@@ -23,7 +39,7 @@ class _DragBoxState extends State<DragBox> {
     position = widget.initPos;
   }
 
-
+  //Design du drag and drop
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -52,7 +68,6 @@ class _DragBoxState extends State<DragBox> {
           });
         },
         feedback: Container(
-
           width: 120.0,
           height: 60.0,
           color: widget.itemColor.withOpacity(0.5),

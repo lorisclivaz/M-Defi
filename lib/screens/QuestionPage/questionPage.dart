@@ -1,16 +1,28 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 14 juin 2020
+ */
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:mdefi/models/quiz.dart';
 import 'package:mdefi/screens/LogicQuestion/optionOne.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:nice_button/NiceButton.dart';
 
+/*
+ * Classe qui va gérer les paramètres du quiz
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
+
 class QuestionPage extends StatefulWidget {
 
+  //Variables quiz
   final String idQuiz;
   final String nameQuiz;
 
+  //Constructeur
   const QuestionPage(this.idQuiz, this.nameQuiz);
 
 
@@ -20,35 +32,34 @@ class QuestionPage extends StatefulWidget {
 
 class _QuestionPage extends State<QuestionPage> {
 
-  final AuthService _auth = AuthService();
+  //Variable de la base de données
   final fb = FirebaseDatabase.instance.reference().child("question");
 
   //Variable paramètre des questions
   String level = '';
 
-  //Pour chaque question correct +2 incorrect -1
+  //Variable question correct +2 incorrect -1
   int score = 0;
+
+  //Variable nombre de question du quiz
   int nbrPage = 0;
 
-
+  //Variable liste des difficultés du quiz
   List<String> difficulte = ['Facile','Moyen','Difficile'];
+
+  //Variable de la selection de la drop down list
   var selected = null;
 
-
-  //Methode dînitialisation qui au moment du loading de la page, les données se mettent dans la liste
+  //Méthode d'initialisation
   @override
   void initState(){
     super.initState();
-    fb.once().then((DataSnapshot snap){
 
-    });
   }
 
+  //Design de la page
   @override
   Widget build(BuildContext context) {
-
-
-
     return  MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Container(
@@ -65,10 +76,8 @@ class _QuestionPage extends State<QuestionPage> {
               title: Text("Configuration du quiz"),
               backgroundColor: Colors.blueGrey[400],
               elevation: 0.0,
-
             ),
             body: SingleChildScrollView(
-
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -77,14 +86,12 @@ class _QuestionPage extends State<QuestionPage> {
                     child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 36.0),
                         child: NiceButton(
-
                           elevation: 10.0,
                           radius: 52.0,
                           width: MediaQuery.of(context).size.width*0.80,
                           text: 'Paramétrage du quiz',
                           background: Colors.blue.withOpacity(0.2),
                           fontSize: 20,
-
                         )
                     ),
                   ),
@@ -92,10 +99,7 @@ class _QuestionPage extends State<QuestionPage> {
                   Text(''),
                   Text(''),
                   Text(''),
-
                   Container(
-
-
                     padding:
                     EdgeInsets.symmetric(horizontal: 50, vertical: 5),
                     decoration: BoxDecoration(
@@ -104,12 +108,10 @@ class _QuestionPage extends State<QuestionPage> {
                     child: new Theme(
                       data: Theme.of(context).copyWith(
                         canvasColor: Colors.white30,
-
                       ),
                     // dropdown below..
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-
                       children: <Widget>[
                         DropdownButton<String>(
                           hint: Text("Difficulté :"),
@@ -137,7 +139,6 @@ class _QuestionPage extends State<QuestionPage> {
                   Text(''),
                   Text(''),
                   Text(''),
-
                   Card(
                     color: Colors.blue.withOpacity(0.2),
                     elevation: 10.0,
@@ -181,7 +182,6 @@ class _QuestionPage extends State<QuestionPage> {
                                   )
                               ),
                             ],
-
                           ),
                         ),
                       ],
@@ -194,7 +194,6 @@ class _QuestionPage extends State<QuestionPage> {
                   Align(
                     alignment: Alignment.center,
                     child: NiceButton(
-
                       elevation: 10.0,
                       radius: 52.0,
                       width: MediaQuery.of(context).size.width*0.80,
@@ -211,26 +210,18 @@ class _QuestionPage extends State<QuestionPage> {
                             }else if(selected == 'Difficile')
                               {
                                 level = '2';
-
                               }
-
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => optionOne(score, nbrPage, widget.idQuiz, level),
                         ));
-
                       },
-
                     )
                   )
-
                 ],
-
               ),
             ),
           ),
         )
     );
   }
-
-
 }

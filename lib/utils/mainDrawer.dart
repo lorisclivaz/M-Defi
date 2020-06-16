@@ -1,21 +1,28 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 07 juin 2020
+ */
+
 import 'package:flutter/material.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
-import 'package:mdefi/services/auth.dart';
 import 'package:mdefi/utils/userInformation/informations.dart';
 
+/*
+ * Classe qui va gérer la navigation sur la gauche de l'application
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 
 class MainDrawer extends StatelessWidget {
 
-  final AuthService _auth = AuthService();
 
-
+  //Design de la page
   @override
   Widget build(BuildContext context) {
-
     return Drawer(
       child: Column(
         children: <Widget>[
-
           Container(
             width: double.infinity,
             padding: EdgeInsets.all(20),
@@ -39,7 +46,6 @@ class MainDrawer extends StatelessWidget {
                       )
                     ),
                   ),
-
               Text(
                 HomeApp.email,
               style: TextStyle(
@@ -63,7 +69,6 @@ class MainDrawer extends StatelessWidget {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => Information(),
               ));
-
             },
           ),
           ListTile(
@@ -80,7 +85,4 @@ class MainDrawer extends StatelessWidget {
       ),
     );
   }
-
-
-
 }
