@@ -40,9 +40,12 @@ class _QuestionPage extends State<QuestionPage> {
 
   //Variable question correct +2 incorrect -1
   int score = 0;
+  int pointPositif = 0;
+  int pointNegatif = 0;
 
   //Variable nombre de question du quiz
   int nbrPage = 0;
+  String nomquiz = '';
 
   //Variable liste des difficultés du quiz
   List<String> difficulte = ['Facile','Moyen','Difficile'];
@@ -55,6 +58,7 @@ class _QuestionPage extends State<QuestionPage> {
   void initState(){
     super.initState();
 
+    nomquiz = widget.nameQuiz;
   }
 
   //Design de la page
@@ -212,7 +216,7 @@ class _QuestionPage extends State<QuestionPage> {
                                 level = '2';
                               }
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => optionOne(score, nbrPage, widget.idQuiz, level),
+                          builder: (context) => optionOne(nomquiz,score, pointPositif,pointNegatif, nbrPage, widget.idQuiz, level),
                         ));
                       },
                     )

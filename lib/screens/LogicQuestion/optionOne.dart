@@ -28,9 +28,12 @@ class optionOne extends StatefulWidget {
   final int nbrPage;
   final int score;
   final String idQuiz;
+  final int pointPositif;
+  final int pointNegatif;
+  final String nomQuiz;
 
   //Constructeur
-  const optionOne(this.score, this.nbrPage, this.idQuiz, this.level);
+  const optionOne(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage, this.idQuiz, this.level);
 
   @override
   _optionOneState createState() => _optionOneState();
@@ -61,7 +64,10 @@ class _optionOneState extends State<optionOne> {
   String name = '';
   int nbrPage = 0;
   int score = 0;
+  int pointPositif = 0;
+  int pointNegatif = 0;
   String level;
+
 
   //Variable réponse
   String idQuestion;
@@ -78,6 +84,9 @@ class _optionOneState extends State<optionOne> {
   String titel = '';
   String text = '';
 
+  //Variable quiz
+  String nomQuiz = '';
+
   //Draggable
   String value = 'Drag here';
   bool drag = false;
@@ -89,6 +98,7 @@ class _optionOneState extends State<optionOne> {
   void initState() {
     super.initState();
     loading = true;
+    nomQuiz = widget.nomQuiz;
 
     //Récupération des questions
     fb.once().then((DataSnapshot snap) {
@@ -148,6 +158,8 @@ class _optionOneState extends State<optionOne> {
   Widget build(BuildContext context) {
     //Condition quand la liste est rempli on set la variable aléatoire ainsi que le nom de la question
     if (list.length > 0) {
+      pointPositif = widget.pointPositif;
+      pointNegatif = widget.pointNegatif;
       a = randomValue(list);
       name = list[a].name;
       nbrPage = widget.nbrPage + 1;
@@ -295,8 +307,10 @@ class _optionOneState extends State<optionOne> {
                   value = data;
                   if (value == reponseCorrect) {
                     solutionFinal = solution1;
+                    pointPositif = pointPositif +2;
                   } else {
                     solutionFinal = solution2;
+                    pointNegatif = pointNegatif -2;
                   }
 
                   //Génère un dialog box qui informe l'utilisateur si la réponse est correct ou pas
@@ -346,14 +360,14 @@ class _optionOneState extends State<optionOne> {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    optionOne(score, nbrPage,
+                                                    optionOne(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
                                                         widget.idQuiz, level),
                                               ));
                                         } else {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    QuizEnd(score, nbrPage),
+                                                    QuizEnd(nomQuiz,score, pointPositif,pointNegatif, nbrPage),
                                               ));
                                         }
                                       },
@@ -398,8 +412,7 @@ class _optionOneState extends State<optionOne> {
     Solution fake = new Solution('', '', '', '', '');
 
     for (var i in listSolutions) {
-      print(idQuestion);
-      print(i.idQuestion);
+
       if (i.idQuestion == idQuestion) {
         fake = new Solution(i.key, i.id, i.idQuestion, i.text, i.titel);
       }

@@ -157,8 +157,6 @@ class _SignInState extends State<SignIn> {
             style: TextStyle(color: Colors.red, fontSize: 14.0),
             ),
             Text(''),
-              Text(''),
-              Text(''),
               NiceButton(
                 // width: 515,
                 elevation: 8.0,
