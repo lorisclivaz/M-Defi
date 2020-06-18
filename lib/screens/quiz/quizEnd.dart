@@ -42,6 +42,7 @@ class _QuizEndState extends State<QuizEnd> {
   int pointNegatif = 0;
   int nbrPage = 0;
   String nomQuiz = '';
+  String petitePhrase = '';
 
   //Méthode de récupération des valeurs finales du quiz
   @override
@@ -58,6 +59,14 @@ class _QuizEndState extends State<QuizEnd> {
         nbrPage = widget.nbrPage;
         loading = false;
         score = widget.pointPositif + widget.pointNegatif;
+
+        if(score > 6)
+          {
+            petitePhrase = 'Bonne performance !!!!';
+          }else
+            {
+              petitePhrase = 'Mauvaise performance !!!!';
+            }
       }
 
   }
@@ -160,6 +169,15 @@ class _QuizEndState extends State<QuizEnd> {
                         builder: (context) => HomeApp(),
                       ));
                     },
+                  ),
+                  Text(''),
+                  NiceButton(
+                    elevation: 10.0,
+                    radius: 52.0,
+                    width: MediaQuery.of(context).size.width*0.80,
+                    text: "$petitePhrase",
+                    background: Colors.white30,
+                    fontSize: 20,
                   )
                 ],
               ),

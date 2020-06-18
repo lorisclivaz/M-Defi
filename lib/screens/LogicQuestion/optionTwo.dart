@@ -1,6 +1,6 @@
 /*
  * Author : Loris Clivaz
- * Date creation : 14 juin 2020
+ * Date creation : 16 juin 2020
  */
 
 import 'dart:math';
@@ -15,13 +15,13 @@ import 'package:mdefi/utils/Draggable/dragBox.dart';
 import 'package:nice_button/NiceButton.dart';
 
 /*
- * Classe qui va gérer la logic du quiz vrai ou faux avec les différentes question
+ * Classe qui va gérer la logic du quiz réponse aléatoire
  * @author Loris_Clivaz
  *
  * @link https://github.com/lorisclivaz/M-Defi.git
  */
 
-class optionOne extends StatefulWidget {
+class optionTwo extends StatefulWidget {
 
   //Variable du quiz
   final String level;
@@ -33,20 +33,19 @@ class optionOne extends StatefulWidget {
   final String nomQuiz;
 
   //Constructeur
-  const optionOne(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage, this.idQuiz, this.level);
+  const optionTwo(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage, this.idQuiz, this.level);
 
   @override
-  _optionOneState createState() => _optionOneState();
+  _optionTwoState createState() => _optionTwoState();
 }
 
-class _optionOneState extends State<optionOne> {
+class _optionTwoState extends State<optionTwo> {
 
   //Listes où il y aura les données dedans
   List<Question> list = List();
   List<ReponseQuestion> listReponse = List();
   List<ReponseQuestion> listReponseFinal = List();
   List<Solution> listSolutions = List();
-  List<Solution> listSolutionsFinal = List();
 
   //Variables de la base de données
   final fb = FirebaseDatabase.instance.reference().child("question");
@@ -81,8 +80,7 @@ class _optionOneState extends State<optionOne> {
   String solution2 = 'Réponse incorrecte';
   String solutionFinal = '';
   Solution objet = null;
-  String titel = '';
-  String text = '';
+
 
   //Variable quiz
   String nomQuiz = '';
@@ -114,7 +112,7 @@ class _optionOneState extends State<optionOne> {
             value['Level'],
             value['Name'],
             value['PageType']);
-        if (questions.idQuiz == widget.idQuiz && questions.pageType == '1' &&
+        if (questions.idQuiz == widget.idQuiz && questions.pageType == '2' &&
             questions.level == widget.level) {
           list.add(questions);
         }
@@ -166,20 +164,12 @@ class _optionOneState extends State<optionOne> {
       level = widget.level;
       drag = true;
       idQuestion = list[a].id;
-      listReponseFinal = reponseSet(listReponse, idQuestion);
 
       //Si la liste contient des données, on ajoute les valeurs dans les variables
       if (listReponseFinal.length > 0) {
         reponse1 = listReponseFinal[0].name;
         reponse2 = listReponseFinal[1].name;
       }
-
-      //On crée la nouvelle liste selon la condition
-      objet = solutionsSet(listSolutions, idQuestion);
-
-      //On ajoute les valeurs dans les variables
-      text = objet.text;
-      titel = objet.titel;
     }
 
     //Design de la page
@@ -263,12 +253,7 @@ class _optionOneState extends State<optionOne> {
                                   .height * 0.40,
                               child: Column(
                                 children: <Widget>[
-                                  Container(
-                                    color: Colors.white30,
-                                    // don't forget about height
-                                    height: 200,
-                                    child: draggable(context),
-                                  )
+
                                 ],
                               )
                           ),
@@ -292,149 +277,9 @@ class _optionOneState extends State<optionOne> {
     return a;
   }
 
-//Méthode qui génère le design du drag and drop
-  Widget draggable(BuildContext context) {
-    if (drag == true) {
-      return Stack(
-        children: <Widget>[
-          DragBox(Offset(50.0, 20.0), reponse1, Colors.white30),
-          DragBox(Offset(50.0, 100.0), reponse2, Colors.white30),
-          Positioned(
-            right: 50.0,
-            bottom: 50.0,
-            child: DragTarget(
-                onAccept: (String data) {
-                  value = data;
-                  if (value == reponseCorrect) {
-                    solutionFinal = solution1;
-                    pointPositif = pointPositif +2;
-                  } else {
-                    solutionFinal = solution2;
-                    pointNegatif = pointNegatif -1;
-                  }
 
-                  //Génère un dialog box qui informe l'utilisateur si la réponse est correct ou pas
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Dialog(
-                          backgroundColor: Colors.white30,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(20.0)
-                          ),
-                          child: Container(
-                            height: 300,
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(solutionFinal,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 19.0,
-                                        decoration: TextDecoration.underline,
-                                      )),
-                                  Text(''),
-                                  Text(
-                                      text,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14.0,
-                                      )
-                                  ),
-                                  Text(''),
-                                  SizedBox(
-                                    width: 320.0,
-                                    child: NiceButton(
-                                      background: Colors.blue.withOpacity(0.5),
-                                      elevation: 10.0,
-                                      radius: 52.0,
-                                      text: "Suivant",
-                                      onPressed: () {
-                                        if (nbrPage < 6) {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    optionOne(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
-                                                        widget.idQuiz, level),
-                                              ));
-                                        } else {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    QuizEnd(nomQuiz,score, pointPositif,pointNegatif, nbrPage),
-                                              ));
-                                        }
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      });
-                },
-                builder: (BuildContext context,
-                    List<dynamic> accepted,
-                    List<dynamic> rejected,) {
-                  return Container(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width * 0.3,
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * 0.15,
-                    decoration: BoxDecoration(
-                      color: Colors.white30,
-                    ),
-                    child: Center(
-                      child: Text(value),
-                    ),
-                  );
-                }
-            ),
-          )
-        ],
-      );
-    }
-  }
 
-  //Méthode qui récupère les informations sur la bonne solution
-  Solution solutionsSet(List<Solution> list, String idQuestion) {
-    Solution fake = new Solution('', '', '', '', '');
 
-    for (var i in listSolutions) {
 
-      if (i.idQuestion == idQuestion) {
-        fake = new Solution(i.key, i.id, i.idQuestion, i.text, i.titel);
-      }
-    }
-    return fake;
-  }
 
-  //Méthode qui va générer la liste des réponses
-  List<ReponseQuestion> reponseSet(List<ReponseQuestion> list,
-      String idQuestion) {
-    List<ReponseQuestion> setReponse = List();
-
-    for (var i in list) {
-      if (i.idQuestion == idQuestion) {
-        ReponseQuestion a = new ReponseQuestion(
-            i.key, i.answer, i.id, i.idQuestion, i.image, i.name);
-        setReponse.add(a);
-        if (a.answer == '1') {
-          reponseCorrect = a.name;
-        }
-      }
-    }
-    return setReponse;
-  }
 }

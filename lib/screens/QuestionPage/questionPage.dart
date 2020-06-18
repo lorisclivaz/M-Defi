@@ -6,6 +6,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/screens/LogicQuestion/optionOne.dart';
+import 'package:mdefi/screens/LogicQuestion/optionTwo.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:nice_button/NiceButton.dart';
 
@@ -216,7 +217,7 @@ class _QuestionPage extends State<QuestionPage> {
                                 level = '2';
                               }
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => optionOne(nomquiz,score, pointPositif,pointNegatif, nbrPage, widget.idQuiz, level),
+                          builder: (context) => optionTwo(nomquiz,score, pointPositif,pointNegatif, nbrPage, widget.idQuiz, level),
                         ));
                       },
                     )
