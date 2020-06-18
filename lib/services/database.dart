@@ -111,12 +111,12 @@ class Database {
   Future<String> insertQuestion() async{
 
     var question = <String, dynamic>{
-      'Id':'1569',
-      'Name' : "Vrai ou faux : l'instruction sur l'image ci-dessous permet de définir une variable fcode de type sy-ucomm en créant une autre variable que ok_code pour éviter d'utiliser directement fcode.",
+      'Id':'866',
+      'Name' : "Les 4 couches d'intégration de SAP NetWeaver sont composées de l'intégration des personnes (People Integration), l'intégration des informations (Information Integration), l'intégration des processus (Process Integration), mais quelle est la dernière ?",
       'Image': '',
       'Level':'2',
       'IdQuiz':'158',
-      'PageType':'1'
+      'PageType':'2'
 
     };
 
@@ -132,11 +132,11 @@ class Database {
   Future<String> insertResponse() async{
 
     var response = <String, dynamic>{
-      'Id':'4609',
-      'Name' : 'Vrai',
+      'Id':'2625',
+      'Name' : 'Présentation, Application, Processus',
       'Image': '',
       'Answer':'0',
-      'IdQuestion':'1569',
+      'IdQuestion':'864',
 
     };
 

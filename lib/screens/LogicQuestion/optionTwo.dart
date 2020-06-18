@@ -12,6 +12,7 @@ import 'package:mdefi/models/solutions.dart';
 import 'package:mdefi/screens/quiz/quizEnd.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:mdefi/utils/Draggable/dragBox.dart';
+import 'package:mdefi/utils/dropDown/dropDown.dart';
 import 'package:nice_button/NiceButton.dart';
 
 /*
@@ -32,6 +33,7 @@ class optionTwo extends StatefulWidget {
   final int pointNegatif;
   final String nomQuiz;
 
+
   //Constructeur
   const optionTwo(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage, this.idQuiz, this.level);
 
@@ -43,8 +45,7 @@ class _optionTwoState extends State<optionTwo> {
 
   //Listes où il y aura les données dedans
   List<Question> list = List();
-  List<ReponseQuestion> listReponse = List();
-  List<ReponseQuestion> listReponseFinal = List();
+
   List<Solution> listSolutions = List();
 
   //Variables de la base de données
@@ -92,63 +93,72 @@ class _optionTwoState extends State<optionTwo> {
   //Variable loading
   bool loading = false;
 
+  //Variable dropDown list
+  List<ReponseQuestion> reponse = List();
+  List<ReponseQuestion> reponseFinal = List();
+  dropDown valueAnswer;
+  String test = '';
+
   //Méthode d'initialisation des données
   void initState() {
     super.initState();
     loading = true;
     nomQuiz = widget.nomQuiz;
 
-    //Récupération des questions
-    fb.once().then((DataSnapshot snap) {
-      var data = snap.value;
-      list.clear();
 
-      data.forEach((key, value) {
-        Question questions = new Question(
-            key,
-            value['Id'],
-            value['IdQuiz'],
-            value['Image'],
-            value['Level'],
-            value['Name'],
-            value['PageType']);
-        if (questions.idQuiz == widget.idQuiz && questions.pageType == '2' &&
-            questions.level == widget.level) {
-          list.add(questions);
-        }
-      });
-      setState(() {
+        //Récupération des questions
+        fb.once().then((DataSnapshot snap) {
+          var data = snap.value;
+          list.clear();
 
-      });
-    });
+          data.forEach((key, value) {
+            Question questions = new Question(
+                key,
+                value['Id'],
+                value['IdQuiz'],
+                value['Image'],
+                value['Level'],
+                value['Name'],
+                value['PageType']);
+            if (questions.idQuiz == widget.idQuiz && questions.pageType == '2' &&
+                questions.level == widget.level) {
+              list.add(questions);
+            }
+          });
+          setState(() {
 
-    //Récupération des réponses
-    fb2.once().then((DataSnapshot snap) {
-      var data = snap.value;
-      listReponse.clear();
-      data.forEach((key, value) {
-        ReponseQuestion reponses = new ReponseQuestion(
-            key, value['Answer'], value['Id'], value['IdQuestion'],
-            value['Image'], value['Name']);
-        listReponse.add(reponses);
-      });
-      setState(() {
-        loading = false;
-      });
-    });
+          });
+        });
 
-    //Récupération des solutions
-    fb3.once().then((DataSnapshot snap) {
-      var data = snap.value;
-      listSolutions.clear();
-      data.forEach((key, value) {
-        Solution solutions = new Solution(
-            key, value['Id'], value['IdQuestion'], value['Text'],
-            value['Titel']);
-        listSolutions.add(solutions);
-      });
-      setState(() {});
-    });
+        //Récupération des réponses
+        fb2.once().then((DataSnapshot snap) {
+          var data = snap.value;
+          reponse.clear();
+          data.forEach((key, value) {
+            ReponseQuestion reponses = new ReponseQuestion(
+                key, value['Answer'], value['Id'], value['IdQuestion'],
+                value['Image'], value['Name']);
+            reponse.add(reponses);
+          });
+          setState(() {
+            loading = false;
+          });
+        });
+
+        //Récupération des solutions
+        fb3.once().then((DataSnapshot snap) {
+          var data = snap.value;
+          listSolutions.clear();
+          data.forEach((key, value) {
+            Solution solutions = new Solution(
+                key, value['Id'], value['IdQuestion'], value['Text'],
+                value['Titel']);
+            listSolutions.add(solutions);
+          });
+          setState(() {});
+        });
+
+
   }
 
   //Design de la page
@@ -164,12 +174,12 @@ class _optionTwoState extends State<optionTwo> {
       level = widget.level;
       drag = true;
       idQuestion = list[a].id;
+      reponseFinal = setReponseFinale(reponse, idQuestion);
+      valueAnswer = new dropDown(reponseFinal);
 
-      //Si la liste contient des données, on ajoute les valeurs dans les variables
-      if (listReponseFinal.length > 0) {
-        reponse1 = listReponseFinal[0].name;
-        reponse2 = listReponseFinal[1].name;
-      }
+
+
+
     }
 
     //Design de la page
@@ -205,7 +215,7 @@ class _optionTwoState extends State<optionTwo> {
                         .height * 0.9,
                     child: Card(
                       color: Colors.blue.withOpacity(0.2),
-                      elevation: 10.0,
+                      elevation: 8.0,
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(16.0),
                       ),
@@ -247,16 +257,22 @@ class _optionTwoState extends State<optionTwo> {
                           ),
 
                           Container(
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height * 0.40,
-                              child: Column(
-                                children: <Widget>[
-
-                                ],
-                              )
+                              child: valueAnswer
                           ),
+                          Text(''),
+                          Text(''),
+                          Text(''),
+                          NiceButton(
+                            elevation: 10.0,
+                            radius: 52.0,
+                            width: MediaQuery.of(context).size.width*0.80,
+                            text: 'Confirmer la réponse',
+                            background: Colors.white70,
+                            fontSize: 20,
+                            onPressed:(){
+                              print(valueAnswer.getAnswer());
+                            },
+                          )
                         ],
                       ),
                     ),
@@ -278,6 +294,25 @@ class _optionTwoState extends State<optionTwo> {
   }
 
 
+  //Methode qui permet de récupérer les choix de réponse par rapport à la question
+  List<ReponseQuestion> setReponseFinale(List<ReponseQuestion> reponse, String idQuestion)
+  {
+    List<ReponseQuestion> setReponse = List();
+
+
+    for (var i in reponse) {
+      if (i.idQuestion == idQuestion) {
+        ReponseQuestion a = new ReponseQuestion(
+            i.key, i.answer, i.id, i.idQuestion, i.image, i.name);
+        setReponse.add(a);
+        if (a.answer == '1') {
+          reponseCorrect = a.name;
+        }
+      }
+    }
+
+    return setReponse;
+  }
 
 
 
