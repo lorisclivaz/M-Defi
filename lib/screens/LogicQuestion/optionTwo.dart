@@ -11,7 +11,7 @@ import 'package:mdefi/models/reponse.dart';
 import 'package:mdefi/models/solutions.dart';
 import 'package:mdefi/screens/LogicQuestion/optionOne.dart';
 import 'package:mdefi/screens/quiz/endQuiz.dart';
-import 'package:mdefi/screens/quiz/quizEnd.dart';
+import 'package:mdefi/services/database.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:mdefi/utils/Draggable/dragBox.dart';
 import 'package:mdefi/utils/dropDown/dropDown.dart';
@@ -55,6 +55,7 @@ class _optionTwoState extends State<optionTwo> {
   final fb = FirebaseDatabase.instance.reference().child("question");
   final fb2 = FirebaseDatabase.instance.reference().child("response");
   final fb3 = FirebaseDatabase.instance.reference().child("solutions");
+  Database db = new Database();
 
 
   //Variables valeur aléatoire
@@ -102,24 +103,21 @@ class _optionTwoState extends State<optionTwo> {
   dropDown valueAnswer;
   String test = '';
 
-  @override
-  void dispose() {
-    super.dispose();
-    print("Remove dispose");
-  }
 
+
+
+
+  @override
   //Méthode d'initialisation des données
   void initState() {
     super.initState();
     loading = true;
     nomQuiz = widget.nomQuiz;
 
-
         //Récupération des questions
         fb.once().then((DataSnapshot snap) {
           var data = snap.value;
           list.clear();
-
           data.forEach((key, value) {
             Question questions = new Question(
                 key,
@@ -178,6 +176,13 @@ class _optionTwoState extends State<optionTwo> {
             });
           }
         });
+  }
+
+  @protected
+  @mustCallSuper
+  void dispose() {
+    super.dispose();
+    print("Remove dispose option two !!!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
   }
@@ -357,37 +362,54 @@ class _optionTwoState extends State<optionTwo> {
                                                   text: "Suivant",
                                                   onPressed: () {
                                                     if (nbrPage < 6) {
-
-                                                      if(choixQuiz < 3)
-                                                        {
-
-                                                          choixQuiz++;
-                                                          Navigator.of(context).push(
-                                                              MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    optionTwo(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
-                                                                        widget.idQuiz, level,choixQuiz),
-                                                              ));
-                                                          dispose();
-                                                        }else{
-
-                                                        Navigator.of(context).push(
+                                                      if (choixQuiz < 3) {
+                                                        choixQuiz++;
+                                                        Navigator.of(context)
+                                                            .push(
                                                             MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  optionOne(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
-                                                                      widget.idQuiz, level,choixQuiz),
+                                                              builder: (
+                                                                  context) =>
+                                                                  optionTwo(
+                                                                      nomQuiz,
+                                                                      score,
+                                                                      pointPositif,
+                                                                      pointNegatif,
+                                                                      nbrPage,
+                                                                      widget
+                                                                          .idQuiz,
+                                                                      level,
+                                                                      choixQuiz),
                                                             ));
-                                                        dispose();
+
+
+                                                      } else {
+                                                        Navigator.of(context)
+                                                            .push(
+                                                            MaterialPageRoute(
+                                                              builder: (
+                                                                  context) =>
+                                                                  optionOne(
+                                                                      nomQuiz,
+                                                                      score,
+                                                                      pointPositif,
+                                                                      pointNegatif,
+                                                                      nbrPage,
+                                                                      widget
+                                                                          .idQuiz,
+                                                                      level,
+                                                                      choixQuiz),
+                                                            ));
                                                       }
 
+                                                  } else {
 
-                                                    } else {
-                                                      dispose();
-                                                      Navigator.of(context).push(
+
+                                                      Navigator.of(context).pushReplacement(
                                                           MaterialPageRoute(
                                                             builder: (context) =>
                                                                 endQuiz(nomQuiz,score, pointPositif,pointNegatif, nbrPage),
                                                           ));
+                                                      dispose();
                                                     }
                                                   },
                                                 ),

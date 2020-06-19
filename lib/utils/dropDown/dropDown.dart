@@ -33,7 +33,7 @@ class dropDown extends StatefulWidget {
 class _dropDownState extends State<dropDown> {
 
   List<ReponseQuestion> reponse;
-  ReponseQuestion selected ;
+  var selected  = null;
 
 
   static String answer = '';
@@ -60,23 +60,9 @@ class _dropDownState extends State<dropDown> {
 
             children: <Widget>[
               DropdownButton<ReponseQuestion>(
-
-                      items: reponse.map<DropdownMenuItem<ReponseQuestion>>((ReponseQuestion value) {
-                    return DropdownMenuItem<ReponseQuestion>(
-                    value: getValue(value),
-                    child: new SizedBox(
-                        width: 250.0,
-                        child: new Text(value.name),
-                    ),
-                    );
-                    }).toList(),
-
                   focusColor: Colors.white30,
-
-
-                value: selected,
-
-
+                  value: null,
+                  isDense: true,
                   icon: Icon(Icons.arrow_drop_down),
                   iconSize: 42,
                   underline: SizedBox(),
@@ -86,12 +72,17 @@ class _dropDownState extends State<dropDown> {
                       setState(() {
                         selected = newValue;
                         answer = newValue.answer;
-
-                        print(selected);
-                        getSelected(selected);
                       });
                     }
-                  },
+                  },items: reponse.map<DropdownMenuItem<ReponseQuestion>>((ReponseQuestion value) {
+                return DropdownMenuItem<ReponseQuestion>(
+                  value: value,
+                  child: new SizedBox(
+                    width: 250.0,
+                    child: new Text(value.name),
+                  ),
+                );
+              }).toList(),
 
               )
             ],
@@ -111,17 +102,7 @@ class _dropDownState extends State<dropDown> {
     return selected;
 
   }
-  ReponseQuestion getValue(ReponseQuestion value)
-  {
-    if(value != null)
-    {
-      return value;
-    }else{
-      value = new ReponseQuestion('', '', '', '', '', 'Choisissez une réponse');
-    }
-    return value;
 
-  }
   
   static String getAnswer(){
     return answer;

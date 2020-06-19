@@ -11,7 +11,6 @@ import 'package:mdefi/models/reponse.dart';
 import 'package:mdefi/models/solutions.dart';
 import 'package:mdefi/screens/LogicQuestion/optionTwo.dart';
 import 'package:mdefi/screens/quiz/endQuiz.dart';
-import 'package:mdefi/screens/quiz/quizEnd.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:mdefi/utils/Draggable/dragBox.dart';
 import 'package:nice_button/NiceButton.dart';
@@ -100,11 +99,14 @@ class _optionOneState extends State<optionOne> {
 
 
 
-  @override
+  @protected
+  @mustCallSuper
   void dispose() {
     super.dispose();
-    print("Remove dispose");
+    print("Remove dispose !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   }
+
+
 
   //Méthode d'initialisation des données
   void initState() {
@@ -381,10 +383,8 @@ class _optionOneState extends State<optionOne> {
                                       text: "Suivant",
                                       onPressed: () {
                                         if (nbrPage < 6) {
-
                                           if(choixQuiz <= 2)
                                             {
-                                              dispose();
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                     builder: (context) =>
@@ -393,19 +393,13 @@ class _optionOneState extends State<optionOne> {
                                                   ));
                                               choixQuiz++;
                                             }else{
-
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      optionTwo(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
-                                                          widget.idQuiz, level,choixQuiz),
-                                                ));
+                                            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                              builder: (context) =>optionTwo(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
+                                                  widget.idQuiz, level,choixQuiz),
+                                            ));
                                             dispose();
                                           }
-
                                         } else {
-
-                                          dispose();
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                 builder: (context) =>

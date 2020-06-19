@@ -55,10 +55,12 @@ class _QuestionPage extends State<QuestionPage> {
   //Variable de la selection de la drop down list
   var selected = null;
 
-  //dispose
-  @override
+
+  @protected
+  @mustCallSuper
   void dispose() {
     super.dispose();
+    print("Remove dispose question page");
   }
 
   //Méthode d'initialisation
@@ -223,10 +225,10 @@ class _QuestionPage extends State<QuestionPage> {
                               {
                                 level = '2';
                               }
-                        Navigator.of(context).push(MaterialPageRoute(
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => optionTwo(nomquiz,score, pointPositif,pointNegatif, nbrPage, widget.idQuiz, level,choixQuiz),
                         ));
-                        dispose();
+
                       },
                     )
                   )

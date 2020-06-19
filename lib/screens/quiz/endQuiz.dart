@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mdefi/screens/LogicQuestion/optionOne.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:nice_button/NiceButton.dart';
 
@@ -18,6 +19,7 @@ class endQuiz extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
 
     score = pointPositif + pointNegatif;
 

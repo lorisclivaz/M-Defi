@@ -4,6 +4,9 @@
  */
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:mdefi/models/questions.dart';
+import 'package:mdefi/models/reponse.dart';
+import 'package:mdefi/models/solutions.dart';
 
 /*
  * Classe qui va gérer les requêtes à la base de données
@@ -13,6 +16,12 @@ import 'package:firebase_database/firebase_database.dart';
  */
 
 class Database {
+
+  final getQuestion = FirebaseDatabase.instance.reference().child("question");
+  List<Question> listQuestion = List();
+
+  final getSolutions = FirebaseDatabase.instance.reference().child("solutions");
+  List<Solution> listSolutions = List();
 
   //Méthode permettant de créer l'utilisateur dans la base de données
    Future<String> createUser(String nom, String prenom, String filiere, String ecole, String annee, String email, String uid) async {
@@ -165,5 +174,46 @@ class Database {
 
 
     reference.set(response);
+  }
+
+  Future<List<Question>> getQuestionFromDB() async
+  {
+    //Récupération des questions
+    getQuestion.once().then((DataSnapshot snap) {
+      var data = snap.value;
+      listQuestion.clear();
+      data.forEach((key, value) {
+        Question questions = new Question(
+            key,
+            value['Id'],
+            value['IdQuiz'],
+            value['Image'],
+            value['Level'],
+            value['Name'],
+            value['PageType']);
+
+        listQuestion.add(questions);
+
+      });
+    });
+    return listQuestion;
+  }
+
+  Future<List<Solution>> getSolutionsFromDB() async
+  {
+    //Récupération des questions
+    getSolutions.once().then((DataSnapshot snap) {
+      var data = snap.value;
+      listSolutions.clear();
+      data.forEach((key, value) {
+        Solution solution = new Solution(
+            key, value['Id'], value['IdQuestion'], value['Text'],
+            value['Titel']);
+
+        listSolutions.add(solution);
+
+      });
+    });
+    return listSolutions;
   }
 }
