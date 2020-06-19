@@ -81,14 +81,16 @@ class _dropDownState extends State<dropDown> {
                   iconSize: 42,
                   underline: SizedBox(),
                   onChanged: (ReponseQuestion newValue) {
-                    setState(() {
-                      selected = newValue;
-                      answer = newValue.answer;
+                    if(mounted)
+                    {
+                      setState(() {
+                        selected = newValue;
+                        answer = newValue.answer;
 
-                      print(selected);
-                      getSelected(selected);
-
-                    });
+                        print(selected);
+                        getSelected(selected);
+                      });
+                    }
                   },
 
               )

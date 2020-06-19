@@ -39,6 +39,13 @@ class _listQuizState extends State<QuizList> {
   //Variable du loading
   bool loading = false;
 
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("Remove dispose");
+  }
+
   //Methode dînitialisation qui au moment du loading de la page, les données se mettent dans la liste
   @override
   void initState(){
@@ -56,9 +63,13 @@ class _listQuizState extends State<QuizList> {
             list.add(quizs);
           }
       });
-      setState(() {
-        loading = false;
-      });
+      if(mounted)
+        {
+          setState(() {
+            loading = false;
+          });
+        }
+
     });
   }
 
@@ -109,6 +120,7 @@ class _listQuizState extends State<QuizList> {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => QuestionPage(list[index].id, list[index].name),
         ));
+        dispose();
       },
       child: new Card(
         elevation: 10.0,

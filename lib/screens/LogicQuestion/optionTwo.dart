@@ -10,6 +10,7 @@ import 'package:mdefi/models/questions.dart';
 import 'package:mdefi/models/reponse.dart';
 import 'package:mdefi/models/solutions.dart';
 import 'package:mdefi/screens/LogicQuestion/optionOne.dart';
+import 'package:mdefi/screens/quiz/endQuiz.dart';
 import 'package:mdefi/screens/quiz/quizEnd.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:mdefi/utils/Draggable/dragBox.dart';
@@ -101,6 +102,12 @@ class _optionTwoState extends State<optionTwo> {
   dropDown valueAnswer;
   String test = '';
 
+  @override
+  void dispose() {
+    super.dispose();
+    print("Remove dispose");
+  }
+
   //Méthode d'initialisation des données
   void initState() {
     super.initState();
@@ -127,9 +134,12 @@ class _optionTwoState extends State<optionTwo> {
               list.add(questions);
             }
           });
-          setState(() {
+          if(mounted)
+          {
+            setState(() {
 
-          });
+            });
+          }
         });
 
         //Récupération des réponses
@@ -142,9 +152,13 @@ class _optionTwoState extends State<optionTwo> {
                 value['Image'], value['Name']);
             reponse.add(reponses);
           });
-          setState(() {
-            loading = false;
-          });
+          if(mounted)
+          {
+            setState(() {
+
+              loading = false;
+            });
+          }
         });
 
         //Récupération des solutions
@@ -157,7 +171,12 @@ class _optionTwoState extends State<optionTwo> {
                 value['Titel']);
             listSolutions.add(solutions);
           });
-          setState(() {});
+          if(mounted)
+          {
+            setState(() {
+
+            });
+          }
         });
 
 
@@ -341,6 +360,7 @@ class _optionTwoState extends State<optionTwo> {
 
                                                       if(choixQuiz < 3)
                                                         {
+
                                                           choixQuiz++;
                                                           Navigator.of(context).push(
                                                               MaterialPageRoute(
@@ -348,21 +368,25 @@ class _optionTwoState extends State<optionTwo> {
                                                                     optionTwo(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
                                                                         widget.idQuiz, level,choixQuiz),
                                                               ));
+                                                          dispose();
                                                         }else{
+
                                                         Navigator.of(context).push(
                                                             MaterialPageRoute(
                                                               builder: (context) =>
                                                                   optionOne(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
                                                                       widget.idQuiz, level,choixQuiz),
                                                             ));
+                                                        dispose();
                                                       }
 
 
                                                     } else {
+                                                      dispose();
                                                       Navigator.of(context).push(
                                                           MaterialPageRoute(
                                                             builder: (context) =>
-                                                                QuizEnd(nomQuiz,score, pointPositif,pointNegatif, nbrPage),
+                                                                endQuiz(nomQuiz,score, pointPositif,pointNegatif, nbrPage),
                                                           ));
                                                     }
                                                   },

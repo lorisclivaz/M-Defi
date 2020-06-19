@@ -55,6 +55,12 @@ class _QuestionPage extends State<QuestionPage> {
   //Variable de la selection de la drop down list
   var selected = null;
 
+  //dispose
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   //Méthode d'initialisation
   @override
   void initState(){
@@ -220,6 +226,7 @@ class _QuestionPage extends State<QuestionPage> {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => optionTwo(nomquiz,score, pointPositif,pointNegatif, nbrPage, widget.idQuiz, level,choixQuiz),
                         ));
+                        dispose();
                       },
                     )
                   )

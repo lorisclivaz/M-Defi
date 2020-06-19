@@ -10,6 +10,7 @@ import 'package:mdefi/models/questions.dart';
 import 'package:mdefi/models/reponse.dart';
 import 'package:mdefi/models/solutions.dart';
 import 'package:mdefi/screens/LogicQuestion/optionTwo.dart';
+import 'package:mdefi/screens/quiz/endQuiz.dart';
 import 'package:mdefi/screens/quiz/quizEnd.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:mdefi/utils/Draggable/dragBox.dart';
@@ -97,6 +98,14 @@ class _optionOneState extends State<optionOne> {
   //Variable loading
   bool loading = false;
 
+
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("Remove dispose");
+  }
+
   //Méthode d'initialisation des données
   void initState() {
     super.initState();
@@ -122,9 +131,13 @@ class _optionOneState extends State<optionOne> {
           list.add(questions);
         }
       });
-      setState(() {
+      if(mounted)
+        {
+          setState(() {
 
-      });
+          });
+        }
+
     });
 
     //Récupération des réponses
@@ -137,9 +150,12 @@ class _optionOneState extends State<optionOne> {
             value['Image'], value['Name']);
         listReponse.add(reponses);
       });
-      setState(() {
-        loading = false;
-      });
+      if(mounted)
+      {
+        setState(() {
+          loading = false;
+        });
+      }
     });
 
     //Récupération des solutions
@@ -152,7 +168,12 @@ class _optionOneState extends State<optionOne> {
             value['Titel']);
         listSolutions.add(solutions);
       });
-      setState(() {});
+      if(mounted)
+      {
+        setState(() {
+
+        });
+      }
     });
   }
 
@@ -363,6 +384,7 @@ class _optionOneState extends State<optionOne> {
 
                                           if(choixQuiz <= 2)
                                             {
+                                              dispose();
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                     builder: (context) =>
@@ -371,19 +393,23 @@ class _optionOneState extends State<optionOne> {
                                                   ));
                                               choixQuiz++;
                                             }else{
+
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       optionTwo(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
                                                           widget.idQuiz, level,choixQuiz),
                                                 ));
+                                            dispose();
                                           }
 
                                         } else {
+
+                                          dispose();
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    QuizEnd(nomQuiz,score, pointPositif,pointNegatif, nbrPage),
+                                                    endQuiz(nomQuiz,score, pointPositif,pointNegatif, nbrPage),
                                               ));
                                         }
                                       },
@@ -453,4 +479,6 @@ class _optionOneState extends State<optionOne> {
     }
     return setReponse;
   }
+
+
 }

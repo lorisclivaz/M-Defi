@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:mdefi/models/userInfoSupp.dart';
 import 'package:mdefi/screens/Themes/langueList.dart';
 import 'package:mdefi/screens/Themes/themesList.dart';
+import 'package:mdefi/screens/authenticate/sign_in.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/services/database.dart';
@@ -73,6 +74,7 @@ class HomeApp extends StatelessWidget {
                 label: Text('logout'),
                 onPressed: () async{
                   await _auth.signOut();
+
                 },
               ),
             ],
