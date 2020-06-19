@@ -4,6 +4,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:mdefi/screens/LogicQuestion/optionTwo.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:nice_button/NiceButton.dart';
@@ -44,6 +45,11 @@ class _QuizEndState extends State<QuizEnd> {
   String nomQuiz = '';
   String petitePhrase = '';
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
   //Méthode de récupération des valeurs finales du quiz
   @override
   void initState() {
@@ -155,6 +161,16 @@ class _QuizEndState extends State<QuizEnd> {
                         )
                     ),
                   ),
+
+                  Text(''),
+                  NiceButton(
+                    elevation: 10.0,
+                    radius: 52.0,
+                    width: MediaQuery.of(context).size.width*0.80,
+                    text: "$petitePhrase",
+                    background: Colors.white30,
+                    fontSize: 20,
+                  ),
                   Text(''),
                   NiceButton(
                     elevation: 10.0,
@@ -165,20 +181,12 @@ class _QuizEndState extends State<QuizEnd> {
                     fontSize: 20,
                     onPressed:(){
 
+
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => HomeApp(),
                       ));
                     },
                   ),
-                  Text(''),
-                  NiceButton(
-                    elevation: 10.0,
-                    radius: 52.0,
-                    width: MediaQuery.of(context).size.width*0.80,
-                    text: "$petitePhrase",
-                    background: Colors.white30,
-                    fontSize: 20,
-                  )
                 ],
               ),
             ),

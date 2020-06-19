@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:mdefi/models/questions.dart';
 import 'package:mdefi/models/reponse.dart';
 import 'package:mdefi/models/solutions.dart';
+import 'package:mdefi/screens/LogicQuestion/optionOne.dart';
 import 'package:mdefi/screens/quiz/quizEnd.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:mdefi/utils/Draggable/dragBox.dart';
@@ -32,10 +33,11 @@ class optionTwo extends StatefulWidget {
   final int pointPositif;
   final int pointNegatif;
   final String nomQuiz;
+  final int choixQuiz;
 
 
   //Constructeur
-  const optionTwo(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage, this.idQuiz, this.level);
+  const optionTwo(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage, this.idQuiz, this.level,this.choixQuiz);
 
   @override
   _optionTwoState createState() => _optionTwoState();
@@ -85,10 +87,10 @@ class _optionTwoState extends State<optionTwo> {
 
   //Variable quiz
   String nomQuiz = '';
+  int choixQuiz = 0;
+  String text = '';
 
-  //Draggable
-  String value = 'Drag here';
-  bool drag = false;
+
 
   //Variable loading
   bool loading = false;
@@ -172,15 +174,28 @@ class _optionTwoState extends State<optionTwo> {
       name = list[a].name;
       nbrPage = widget.nbrPage + 1;
       level = widget.level;
-      drag = true;
       idQuestion = list[a].id;
-      reponseFinal = setReponseFinale(reponse, idQuestion);
-      valueAnswer = new dropDown(reponseFinal);
-
-
-
-
+      choixQuiz = widget.choixQuiz;
     }
+
+    if(reponse.length > 0)
+      {
+        reponseFinal = setReponseFinale(reponse, idQuestion);
+      }
+
+    if(reponseFinal.length > 0)
+    {
+      valueAnswer = new dropDown(reponseFinal);
+    }
+
+    if(listSolutions.length > 0)
+      {
+        //On crée la nouvelle liste selon la condition
+        objet = solutionsSet(listSolutions, idQuestion);
+
+        //On ajoute les valeurs dans les variables
+        text = objet.text;
+      }
 
     //Design de la page
     return loading ? Loading() : MaterialApp(
@@ -271,6 +286,94 @@ class _optionTwoState extends State<optionTwo> {
                             fontSize: 20,
                             onPressed:(){
                               print(valueAnswer.getAnswer());
+                              if(valueAnswer.getAnswer() == '1')
+                              {
+                              solutionFinal='Réponse correct';
+                              pointPositif = pointPositif+2;
+                              }else
+                              {
+                              solutionFinal = 'Réponse incorrect';
+                              pointNegatif = pointNegatif -1;
+                              }
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                      backgroundColor: Colors.white30,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(20.0)
+                                      ),
+                                      child: Container(
+                                        height: 300,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(solutionFinal,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 19.0,
+                                                    decoration: TextDecoration.underline,
+                                                  )),
+                                              Text(''),
+                                              Text(
+                                                  text,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 14.0,
+                                                  )
+                                              ),
+                                              Text(''),
+                                              SizedBox(
+                                                width: 320.0,
+                                                child: NiceButton(
+                                                  background: Colors.blue.withOpacity(0.5),
+                                                  elevation: 10.0,
+                                                  radius: 52.0,
+                                                  text: "Suivant",
+                                                  onPressed: () {
+                                                    if (nbrPage < 6) {
+
+                                                      if(choixQuiz < 3)
+                                                        {
+                                                          choixQuiz++;
+                                                          Navigator.of(context).push(
+                                                              MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    optionTwo(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
+                                                                        widget.idQuiz, level,choixQuiz),
+                                                              ));
+                                                        }else{
+                                                        Navigator.of(context).push(
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  optionOne(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
+                                                                      widget.idQuiz, level,choixQuiz),
+                                                            ));
+                                                      }
+
+
+                                                    } else {
+                                                      Navigator.of(context).push(
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                QuizEnd(nomQuiz,score, pointPositif,pointNegatif, nbrPage),
+                                                          ));
+                                                    }
+                                                  },
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  });
                             },
                           )
                         ],
@@ -299,7 +402,10 @@ class _optionTwoState extends State<optionTwo> {
   {
     List<ReponseQuestion> setReponse = List();
 
-
+if(reponse == null)
+  {
+    setReponse.add(new ReponseQuestion('', '', '', '', '', '' ));
+  }
     for (var i in reponse) {
       if (i.idQuestion == idQuestion) {
         ReponseQuestion a = new ReponseQuestion(
@@ -315,6 +421,17 @@ class _optionTwoState extends State<optionTwo> {
   }
 
 
+  //Méthode qui récupère les informations sur la bonne solution
+  Solution solutionsSet(List<Solution> list, String idQuestion) {
+    Solution fake = new Solution('', '', '', '', '');
 
+    for (var i in listSolutions) {
+
+      if (i.idQuestion == idQuestion) {
+        fake = new Solution(i.key, i.id, i.idQuestion, i.text, i.titel);
+      }
+    }
+    return fake;
+  }
 
 }

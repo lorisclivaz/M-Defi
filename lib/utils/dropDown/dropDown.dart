@@ -1,6 +1,17 @@
-import 'package:flutter/gestures.dart';
+/*
+ * Author : Loris Clivaz
+ * Date creation : 18 juin 2020
+ */
+
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/reponse.dart';
+
+/*
+ * Classe qui va gérer la dropDown list pour l'optionTwo classe
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 
 class dropDown extends StatefulWidget {
 
@@ -22,7 +33,7 @@ class dropDown extends StatefulWidget {
 class _dropDownState extends State<dropDown> {
 
   List<ReponseQuestion> reponse;
-  ReponseQuestion selected = null;
+  ReponseQuestion selected ;
 
 
   static String answer = '';
@@ -49,15 +60,16 @@ class _dropDownState extends State<dropDown> {
 
             children: <Widget>[
               DropdownButton<ReponseQuestion>(
-          items: reponse.map<DropdownMenuItem<ReponseQuestion>>((ReponseQuestion value) {
-        return DropdownMenuItem<ReponseQuestion>(
-        value: value,
-        child: new SizedBox(
-            width: 250.0,
-            child: new Text(value.name),
-        ),
-        );
-        }).toList(),
+
+                      items: reponse.map<DropdownMenuItem<ReponseQuestion>>((ReponseQuestion value) {
+                    return DropdownMenuItem<ReponseQuestion>(
+                    value: getValue(value),
+                    child: new SizedBox(
+                        width: 250.0,
+                        child: new Text(value.name),
+                    ),
+                    );
+                    }).toList(),
 
                   focusColor: Colors.white30,
 
@@ -73,6 +85,8 @@ class _dropDownState extends State<dropDown> {
                       selected = newValue;
                       answer = newValue.answer;
 
+                      print(selected);
+                      getSelected(selected);
 
                     });
                   },
@@ -84,6 +98,29 @@ class _dropDownState extends State<dropDown> {
     );
   }
 
+  ReponseQuestion getSelected(ReponseQuestion selected)
+  {
+    if(selected != null)
+      {
+        return selected;
+      }else{
+      selected = null;
+    }
+    return selected;
+
+  }
+  ReponseQuestion getValue(ReponseQuestion value)
+  {
+    if(value != null)
+    {
+      return value;
+    }else{
+      value = new ReponseQuestion('', '', '', '', '', 'Choisissez une réponse');
+    }
+    return value;
+
+  }
+  
   static String getAnswer(){
     return answer;
   }

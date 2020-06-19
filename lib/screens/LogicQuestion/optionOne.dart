@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:mdefi/models/questions.dart';
 import 'package:mdefi/models/reponse.dart';
 import 'package:mdefi/models/solutions.dart';
+import 'package:mdefi/screens/LogicQuestion/optionTwo.dart';
 import 'package:mdefi/screens/quiz/quizEnd.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:mdefi/utils/Draggable/dragBox.dart';
@@ -31,9 +32,10 @@ class optionOne extends StatefulWidget {
   final int pointPositif;
   final int pointNegatif;
   final String nomQuiz;
+  final int choixQuiz;
 
   //Constructeur
-  const optionOne(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage, this.idQuiz, this.level);
+  const optionOne(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage, this.idQuiz, this.level,this.choixQuiz);
 
   @override
   _optionOneState createState() => _optionOneState();
@@ -86,6 +88,7 @@ class _optionOneState extends State<optionOne> {
 
   //Variable quiz
   String nomQuiz = '';
+  int choixQuiz = 0;
 
   //Draggable
   String value = 'Drag here';
@@ -167,7 +170,7 @@ class _optionOneState extends State<optionOne> {
       drag = true;
       idQuestion = list[a].id;
       listReponseFinal = reponseSet(listReponse, idQuestion);
-
+      choixQuiz = widget.choixQuiz;
       //Si la liste contient des données, on ajoute les valeurs dans les variables
       if (listReponseFinal.length > 0) {
         reponse1 = listReponseFinal[0].name;
@@ -357,12 +360,25 @@ class _optionOneState extends State<optionOne> {
                                       text: "Suivant",
                                       onPressed: () {
                                         if (nbrPage < 6) {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    optionOne(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
-                                                        widget.idQuiz, level),
-                                              ));
+
+                                          if(choixQuiz <= 2)
+                                            {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        optionOne(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
+                                                            widget.idQuiz, level,choixQuiz),
+                                                  ));
+                                              choixQuiz++;
+                                            }else{
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      optionTwo(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
+                                                          widget.idQuiz, level,choixQuiz),
+                                                ));
+                                          }
+
                                         } else {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(

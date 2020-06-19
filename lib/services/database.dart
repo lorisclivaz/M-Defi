@@ -111,10 +111,10 @@ class Database {
   Future<String> insertQuestion() async{
 
     var question = <String, dynamic>{
-      'Id':'866',
-      'Name' : "Les 4 couches d'intégration de SAP NetWeaver sont composées de l'intégration des personnes (People Integration), l'intégration des informations (Information Integration), l'intégration des processus (Process Integration), mais quelle est la dernière ?",
+      'Id':'888',
+      'Name' : "Que permet la création d'Includes ?",
       'Image': '',
-      'Level':'2',
+      'Level':'0',
       'IdQuiz':'158',
       'PageType':'2'
 
@@ -132,11 +132,11 @@ class Database {
   Future<String> insertResponse() async{
 
     var response = <String, dynamic>{
-      'Id':'2625',
-      'Name' : 'Présentation, Application, Processus',
+      'Id':'2705',
+      'Name' : "Lancer des codes de transaction",
       'Image': '',
       'Answer':'0',
-      'IdQuestion':'864',
+      'IdQuestion':'888',
 
     };
 
@@ -152,10 +152,10 @@ class Database {
   Future<String> insertSolutions() async{
 
     var response = <String, dynamic>{
-      'Id':'1242',
-      'Titel' : 'fcode',
-      'Text': "Faux : cette instruction permet de définir une variable fcode de type sy-ucomm en créant une autre variable que ok_code pour éviter d'utiliser directement ok_code, et non pas fcode vu que c'est celle-ci qu'on va utiliser.",
-      'IdQuestion':'1569',
+      'Id':'539',
+      'Titel' : "SAP NetWeaver",
+      'Text': "Les 4 couches d'intégration de SAP NetWeaver sont composées de l'intégration des personnes (People Integration), l'intégration des informations (Information Integration), l'intégration des processus (Process Integration) et plateforme applicative (Application Platform).",
+      'IdQuestion':'866',
 
     };
 

@@ -47,6 +47,7 @@ class _QuestionPage extends State<QuestionPage> {
   //Variable nombre de question du quiz
   int nbrPage = 0;
   String nomquiz = '';
+  int choixQuiz = 0;
 
   //Variable liste des difficultés du quiz
   List<String> difficulte = ['Facile','Moyen','Difficile'];
@@ -217,7 +218,7 @@ class _QuestionPage extends State<QuestionPage> {
                                 level = '2';
                               }
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => optionTwo(nomquiz,score, pointPositif,pointNegatif, nbrPage, widget.idQuiz, level),
+                          builder: (context) => optionTwo(nomquiz,score, pointPositif,pointNegatif, nbrPage, widget.idQuiz, level,choixQuiz),
                         ));
                       },
                     )
@@ -229,4 +230,6 @@ class _QuestionPage extends State<QuestionPage> {
         )
     );
   }
+
+
 }
