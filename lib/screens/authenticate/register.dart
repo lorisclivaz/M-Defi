@@ -5,6 +5,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mdefi/services/auth.dart';
+import 'package:mdefi/services/database.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:nice_button/nice_button.dart';
 
@@ -30,6 +31,8 @@ class _RegisterState extends State<Register> {
 
   //Variable d'authentification
   final AuthService _auth = AuthService();
+
+  Database db = new Database();
 
   //Variable de controle de saisie
   final _formKey = GlobalKey<FormState>();
@@ -137,6 +140,7 @@ class _RegisterState extends State<Register> {
 
                         dynamic result = await _auth.registerWithEmailAndpassword(
                             email, password);
+
 
                         if (result == null) {
                           setState(() {

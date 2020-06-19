@@ -36,6 +36,7 @@ class HomeApp extends StatelessWidget {
   static String uid ;
   static UserInfoSupp user;
 
+
   //Design de la page
   @override
   Widget build(BuildContext context) {

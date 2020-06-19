@@ -104,7 +104,12 @@ class _optionTwoState extends State<optionTwo> {
   String test = '';
 
 
-
+  @protected
+  @mustCallSuper
+  void deactivate() {
+    _optionTwoState().deactivate();
+    super.deactivate();
+  }
 
 
   @override
@@ -178,14 +183,8 @@ class _optionTwoState extends State<optionTwo> {
         });
   }
 
-  @protected
-  @mustCallSuper
-  void dispose() {
-    super.dispose();
-    print("Remove dispose option two !!!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
-  }
 
   //Design de la page
   @override
@@ -365,7 +364,7 @@ class _optionTwoState extends State<optionTwo> {
                                                       if (choixQuiz < 3) {
                                                         choixQuiz++;
                                                         Navigator.of(context)
-                                                            .push(
+                                                            .pushReplacement(
                                                             MaterialPageRoute(
                                                               builder: (
                                                                   context) =>
@@ -381,10 +380,11 @@ class _optionTwoState extends State<optionTwo> {
                                                                       choixQuiz),
                                                             ));
 
+                                                        dispose();
 
                                                       } else {
                                                         Navigator.of(context)
-                                                            .push(
+                                                            .pushReplacement(
                                                             MaterialPageRoute(
                                                               builder: (
                                                                   context) =>

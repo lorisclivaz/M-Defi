@@ -3,8 +3,11 @@
  * Date creation : 07 juin 2020
  */
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:mdefi/models/userInfoSupp.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
+import 'package:mdefi/services/database.dart';
 import 'package:mdefi/utils/userInformation/informations.dart';
 
 /*
@@ -16,10 +19,16 @@ import 'package:mdefi/utils/userInformation/informations.dart';
 
 class MainDrawer extends StatelessWidget {
 
+  Database db = new Database();
+  final fb = FirebaseDatabase.instance.reference().child("users");
+  List<UserInfoSupp> users = List();
+
 
   //Design de la page
   @override
   Widget build(BuildContext context) {
+    userExist();
+
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -66,6 +75,10 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
+              if(users.isEmpty)
+                {
+                  db.createUser('', '', '', '', '', HomeApp.email, HomeApp.uid);
+                }
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => Information(),
               ));
@@ -84,5 +97,29 @@ class MainDrawer extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void userExist(){
+    //Récupération des questions
+    fb.once().then((DataSnapshot snap) {
+      var data = snap.value;
+      users.clear();
+
+      data.forEach((key, value) {
+        UserInfoSupp user = new UserInfoSupp(
+            key,
+            value['Uid'],
+            value['Email'],
+            value['Annee'],
+            value['Ecole'],
+            value['Filiere'],
+            value['Nom'],
+          value['Prenom']);
+        if (HomeApp.uid == user.uid) {
+          users.add(user);
+        }
+      });
+
+    });
   }
 }

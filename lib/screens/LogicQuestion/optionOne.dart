@@ -101,11 +101,10 @@ class _optionOneState extends State<optionOne> {
 
   @protected
   @mustCallSuper
-  void dispose() {
-    super.dispose();
-    print("Remove dispose !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  void deactivate() {
+    _optionOneState().deactivate();
+    super.deactivate();
   }
-
 
 
   //Méthode d'initialisation des données
@@ -385,7 +384,7 @@ class _optionOneState extends State<optionOne> {
                                         if (nbrPage < 6) {
                                           if(choixQuiz <= 2)
                                             {
-                                              Navigator.of(context).push(
+                                              Navigator.of(context).pushReplacement(
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         optionOne(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
@@ -400,7 +399,7 @@ class _optionOneState extends State<optionOne> {
                                             dispose();
                                           }
                                         } else {
-                                          Navigator.of(context).push(
+                                          Navigator.of(context).pushReplacement(
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     endQuiz(nomQuiz,score, pointPositif,pointNegatif, nbrPage),
