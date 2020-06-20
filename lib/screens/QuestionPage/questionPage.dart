@@ -60,7 +60,7 @@ class _QuestionPage extends State<QuestionPage> {
   @mustCallSuper
   void dispose() {
     super.dispose();
-    print("Remove dispose question page");
+    print("Dispose Question page");
   }
 
   //Méthode d'initialisation
@@ -225,9 +225,11 @@ class _QuestionPage extends State<QuestionPage> {
                               {
                                 level = '2';
                               }
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+
+                        Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => optionTwo(nomquiz,score, pointPositif,pointNegatif, nbrPage, widget.idQuiz, level,choixQuiz),
                         ));
+
 
                       },
                     )

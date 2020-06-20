@@ -44,7 +44,7 @@ class _listQuizState extends State<QuizList> {
   @mustCallSuper
   void dispose() {
     super.dispose();
-    print("Remove dispose!!!!!!!!!!!!!!!!!!!!!");
+    print("Dispose listQuiz");
   }
 
   //Methode dînitialisation qui au moment du loading de la page, les données se mettent dans la liste
@@ -118,7 +118,7 @@ class _listQuizState extends State<QuizList> {
       onTap: (){
         print(list[index].id);
         print(list[index].name);
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
+        Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => QuestionPage(list[index].id, list[index].name),
         ));
 

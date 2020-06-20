@@ -35,7 +35,12 @@ class _ThemesListState extends State<ThemesList> {
   //Variable loading page
   bool loading = false;
 
-
+@override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("Dispose themes list");
+  }
   //Methode dînitialisation qui au moment du loading de la page, les données se mettent dans la liste
   @override
   void initState(){

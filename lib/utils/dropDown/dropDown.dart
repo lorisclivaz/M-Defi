@@ -33,11 +33,17 @@ class dropDown extends StatefulWidget {
 class _dropDownState extends State<dropDown> {
 
   List<ReponseQuestion> reponse;
-  var selected  = null;
+  ReponseQuestion selected  = null;
 
 
   static String answer = '';
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("Dispose dropdown state");
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -46,7 +52,7 @@ class _dropDownState extends State<dropDown> {
     return Container(
 
         padding:
-        EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+        EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*0.02, vertical: MediaQuery.of(context).size.width*0.03),
         decoration: BoxDecoration(
             color: Colors.white30,
             borderRadius: BorderRadius.circular(10)),
@@ -61,10 +67,10 @@ class _dropDownState extends State<dropDown> {
             children: <Widget>[
               DropdownButton<ReponseQuestion>(
                   focusColor: Colors.white30,
-                  value: null,
+                  value: selected,
                   isDense: true,
                   icon: Icon(Icons.arrow_drop_down),
-                  iconSize: 42,
+                  iconSize: 40,
                   underline: SizedBox(),
                   onChanged: (ReponseQuestion newValue) {
                     if(mounted)

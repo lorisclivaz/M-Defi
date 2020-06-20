@@ -4,6 +4,8 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:mdefi/screens/authenticate/sign_in.dart';
+import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:mdefi/services/database.dart';
 import 'package:mdefi/shared/loading.dart';
@@ -43,6 +45,13 @@ class _RegisterState extends State<Register> {
   //Variable de la page du loading
   bool loading = false;
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("Dispose register");
+  }
+
   //Design de la page
   @override
   Widget build(BuildContext context) {
@@ -63,7 +72,12 @@ class _RegisterState extends State<Register> {
                 icon: Icon(Icons.person),
                 label: Text('Connexion'),
                 onPressed: () {
-                  widget.toggleView();
+                  //widget.toggleView();
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SignIn(),
+                      ));
                 })
           ],
         ),
@@ -133,14 +147,23 @@ class _RegisterState extends State<Register> {
                     text: "Enregistrer",
                     background: Colors.blue,
                     onPressed: () async {
+                      setState(() {
+                        loading = true;
+                      });
                       if(_formKey.currentState.validate()) {
-                        setState(() {
-                          loading = true;
-                        });
+
 
                         dynamic result = await _auth.registerWithEmailAndpassword(
                             email, password);
 
+                        if(result != null)
+                        {
+                          Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    HomeApp(),
+                              ));
+                        }
 
                         if (result == null) {
                           setState(() {

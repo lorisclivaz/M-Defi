@@ -21,6 +21,12 @@ class About extends StatefulWidget {
 
 class _AboutListState extends State<About> {
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("Dispose about page");
+  }
   //Design de la page
   @override
   Widget build(BuildContext context) {
@@ -50,9 +56,10 @@ class _AboutListState extends State<About> {
                       child: NiceButton(
                           elevation: 10.0,
                           radius: 52.0,
-                          width: MediaQuery.of(context).size.width*0.80,
-                          text: "Bienvenue sur M-Learning",
-                          background: Colors.blue.withOpacity(0.2)
+                          width: MediaQuery.of(context).size.width*0.70,
+                          background: Colors.blue.withOpacity(0.2),
+                        fontSize: 25,
+                        text: 'M-Learning',
                       )
                   ),
                   Padding(

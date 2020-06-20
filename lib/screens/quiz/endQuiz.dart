@@ -5,6 +5,7 @@ import 'package:nice_button/NiceButton.dart';
 
 class endQuiz extends StatelessWidget {
 
+
   //Variable du score et du nombre de pages
   int score;
   int pointPositif;
@@ -15,22 +16,11 @@ class endQuiz extends StatelessWidget {
 
 
   //Constructeur
-  endQuiz(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage);
+  endQuiz(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage,this.petitePhrase);
+
 
   @override
   Widget build(BuildContext context) {
-
-
-    score = pointPositif + pointNegatif;
-
-    if(score > 6)
-    {
-      petitePhrase = 'Bonne performance !!!!';
-    }else
-    {
-      petitePhrase = 'Mauvaise performance !!!!';
-    }
-
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Container(
@@ -133,10 +123,8 @@ class endQuiz extends StatelessWidget {
                     onPressed:(){
 
 
-
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => HomeApp(),
-                      ));
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                          HomeApp()), (Route<dynamic> route) => false);
                     },
                   ),
                 ],

@@ -76,7 +76,9 @@ class HomeApp extends StatelessWidget {
                 onPressed: () async{
                   await _auth.signOut();
 
-                },
+                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                      SignIn()), (Route<dynamic> route) => false);
+                                  },
               ),
             ],
           ),

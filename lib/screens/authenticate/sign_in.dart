@@ -6,6 +6,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mdefi/screens/authenticate/ForgotScreen.dart';
+import 'package:mdefi/screens/authenticate/register.dart';
+import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:nice_button/nice_button.dart';
@@ -42,6 +44,12 @@ class _SignInState extends State<SignIn> {
   //Variable de la page du loading
   bool loading = false;
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("Dispose signin");
+  }
 
   //Design de la page
   @override
@@ -63,7 +71,13 @@ class _SignInState extends State<SignIn> {
     icon: Icon(Icons.person),
     label: Text('Enregistrement'),
     onPressed: () {
-    widget.toggleView();
+    //widget.toggleView();
+    Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) =>
+              Register(),
+        ));
+
     },
     )
     ],
@@ -135,12 +149,23 @@ class _SignInState extends State<SignIn> {
             text: "Connexion",
             background: Colors.blue,
             onPressed: () async {
-
+              setState(() {
+                loading = true;
+              });
             if(_formKey.currentState.validate()) {
 
-            setState (() => loading = true);
             dynamic result = await _auth.signInWithEmailAndpassword(email, password);
-            print(email + password);
+
+            if(result != null)
+              {
+
+                Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          HomeApp(),
+                    ));
+              }
+
             if (result == null) {
 
             setState(() {
@@ -163,6 +188,7 @@ class _SignInState extends State<SignIn> {
                 radius: 52.0,
                 text: "Mot de passe oublié",
                 background: Colors.white30,
+                fontSize: 19,
                 onPressed: ()  {
 
                   Navigator.of(context).push(MaterialPageRoute(

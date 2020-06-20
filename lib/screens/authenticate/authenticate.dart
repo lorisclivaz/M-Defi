@@ -30,6 +30,13 @@ class _AuthenticateState extends State<Authenticate> {
     setState(() => showSingIn = !showSingIn);
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("Dispose authenticate");
+  }
+
   //Condition si vrai ou pas on affiche la page
   @override
   Widget build(BuildContext context) {

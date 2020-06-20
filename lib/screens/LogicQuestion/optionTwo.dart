@@ -91,6 +91,7 @@ class _optionTwoState extends State<optionTwo> {
   String nomQuiz = '';
   int choixQuiz = 0;
   String text = '';
+  String petitePhrase;
 
 
 
@@ -106,9 +107,11 @@ class _optionTwoState extends State<optionTwo> {
 
   @protected
   @mustCallSuper
-  void deactivate() {
-    _optionTwoState().deactivate();
-    super.deactivate();
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("Dispose option two");
+
   }
 
 
@@ -116,6 +119,7 @@ class _optionTwoState extends State<optionTwo> {
   //Méthode d'initialisation des données
   void initState() {
     super.initState();
+
     loading = true;
     nomQuiz = widget.nomQuiz;
 
@@ -189,37 +193,40 @@ class _optionTwoState extends State<optionTwo> {
   //Design de la page
   @override
   Widget build(BuildContext context) {
-    //Condition quand la liste est rempli on set la variable aléatoire ainsi que le nom de la question
-    if (list.length > 0) {
-      pointPositif = widget.pointPositif;
-      pointNegatif = widget.pointNegatif;
-      a = randomValue(list);
-      name = list[a].name;
-      nbrPage = widget.nbrPage + 1;
-      level = widget.level;
-      idQuestion = list[a].id;
-      choixQuiz = widget.choixQuiz;
-    }
-
-    if(reponse.length > 0)
+    if(mounted)
       {
-        reponseFinal = setReponseFinale(reponse, idQuestion);
+        //Condition quand la liste est rempli on set la variable aléatoire ainsi que le nom de la question
+        if (list.length > 0) {
+          pointPositif = widget.pointPositif;
+          pointNegatif = widget.pointNegatif;
+          a = randomValue(list);
+          name = list[a].name;
+          nbrPage = widget.nbrPage + 1;
+          level = widget.level;
+          idQuestion = list[a].id;
+          choixQuiz = widget.choixQuiz;
+        }
+
+        if(reponse.length > 0)
+        {
+          reponseFinal = setReponseFinale(reponse, idQuestion);
+        }
+
+        if(reponseFinal.length > 0)
+        {
+          valueAnswer = new dropDown(reponseFinal);
+        }
+
+        if(listSolutions.length > 0)
+        {
+          //On crée la nouvelle liste selon la condition
+          objet = solutionsSet(listSolutions, idQuestion);
+
+          //On ajoute les valeurs dans les variables
+          text = objet.text;
+        }
+
       }
-
-    if(reponseFinal.length > 0)
-    {
-      valueAnswer = new dropDown(reponseFinal);
-    }
-
-    if(listSolutions.length > 0)
-      {
-        //On crée la nouvelle liste selon la condition
-        objet = solutionsSet(listSolutions, idQuestion);
-
-        //On ajoute les valeurs dans les variables
-        text = objet.text;
-      }
-
     //Design de la page
     return loading ? Loading() : MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -364,7 +371,7 @@ class _optionTwoState extends State<optionTwo> {
                                                       if (choixQuiz < 3) {
                                                         choixQuiz++;
                                                         Navigator.of(context)
-                                                            .pushReplacement(
+                                                            .push(
                                                             MaterialPageRoute(
                                                               builder: (
                                                                   context) =>
@@ -380,11 +387,10 @@ class _optionTwoState extends State<optionTwo> {
                                                                       choixQuiz),
                                                             ));
 
-                                                        dispose();
 
                                                       } else {
                                                         Navigator.of(context)
-                                                            .pushReplacement(
+                                                            .push(
                                                             MaterialPageRoute(
                                                               builder: (
                                                                   context) =>
@@ -403,13 +409,19 @@ class _optionTwoState extends State<optionTwo> {
 
                                                   } else {
 
-
-                                                      Navigator.of(context).pushReplacement(
+                                                      score = pointPositif + pointNegatif;
+                                                      if(score > 6)
+                                                      {
+                                                        petitePhrase = 'Bonne performance !!!!';
+                                                      }else
+                                                      {
+                                                        petitePhrase = 'Mauvaise performance !!!!';
+                                                      }
+                                                      Navigator.of(context).push(
                                                           MaterialPageRoute(
                                                             builder: (context) =>
-                                                                endQuiz(nomQuiz,score, pointPositif,pointNegatif, nbrPage),
+                                                                endQuiz(nomQuiz,score, pointPositif,pointNegatif, nbrPage,petitePhrase),
                                                           ));
-                                                      dispose();
                                                     }
                                                   },
                                                 ),

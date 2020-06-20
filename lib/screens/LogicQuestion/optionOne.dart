@@ -101,9 +101,11 @@ class _optionOneState extends State<optionOne> {
 
   @protected
   @mustCallSuper
-  void deactivate() {
-    _optionOneState().deactivate();
-    super.deactivate();
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    print("Dispose option one");
   }
 
 
@@ -182,30 +184,34 @@ class _optionOneState extends State<optionOne> {
   @override
   Widget build(BuildContext context) {
     //Condition quand la liste est rempli on set la variable aléatoire ainsi que le nom de la question
-    if (list.length > 0) {
-      pointPositif = widget.pointPositif;
-      pointNegatif = widget.pointNegatif;
-      a = randomValue(list);
-      name = list[a].name;
-      nbrPage = widget.nbrPage + 1;
-      level = widget.level;
-      drag = true;
-      idQuestion = list[a].id;
-      listReponseFinal = reponseSet(listReponse, idQuestion);
-      choixQuiz = widget.choixQuiz;
-      //Si la liste contient des données, on ajoute les valeurs dans les variables
-      if (listReponseFinal.length > 0) {
-        reponse1 = listReponseFinal[0].name;
-        reponse2 = listReponseFinal[1].name;
+    if(mounted)
+    {
+      if (list.length > 0) {
+        pointPositif = widget.pointPositif;
+        pointNegatif = widget.pointNegatif;
+        a = randomValue(list);
+        name = list[a].name;
+        nbrPage = widget.nbrPage + 1;
+        level = widget.level;
+        drag = true;
+        idQuestion = list[a].id;
+        listReponseFinal = reponseSet(listReponse, idQuestion);
+        choixQuiz = widget.choixQuiz;
+        //Si la liste contient des données, on ajoute les valeurs dans les variables
+        if (listReponseFinal.length > 0) {
+          reponse1 = listReponseFinal[0].name;
+          reponse2 = listReponseFinal[1].name;
+        }
+
+        //On crée la nouvelle liste selon la condition
+        objet = solutionsSet(listSolutions, idQuestion);
+
+        //On ajoute les valeurs dans les variables
+        text = objet.text;
+        titel = objet.titel;
       }
-
-      //On crée la nouvelle liste selon la condition
-      objet = solutionsSet(listSolutions, idQuestion);
-
-      //On ajoute les valeurs dans les variables
-      text = objet.text;
-      titel = objet.titel;
     }
+
 
     //Design de la page
     return loading ? Loading() : MaterialApp(
@@ -384,7 +390,7 @@ class _optionOneState extends State<optionOne> {
                                         if (nbrPage < 6) {
                                           if(choixQuiz <= 2)
                                             {
-                                              Navigator.of(context).pushReplacement(
+                                              Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         optionOne(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
@@ -392,18 +398,11 @@ class _optionOneState extends State<optionOne> {
                                                   ));
                                               choixQuiz++;
                                             }else{
-                                            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                            Navigator.of(context).push(MaterialPageRoute(
                                               builder: (context) =>optionTwo(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
                                                   widget.idQuiz, level,choixQuiz),
                                             ));
-                                            dispose();
                                           }
-                                        } else {
-                                          Navigator.of(context).pushReplacement(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    endQuiz(nomQuiz,score, pointPositif,pointNegatif, nbrPage),
-                                              ));
                                         }
                                       },
                                     ),

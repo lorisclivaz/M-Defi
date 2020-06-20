@@ -39,6 +39,13 @@ class _DragBoxState extends State<DragBox> {
     position = widget.initPos;
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("Dispose draggable state");
+  }
+
   //Design du drag and drop
   @override
   Widget build(BuildContext context) {

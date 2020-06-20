@@ -48,6 +48,12 @@ class _InformationState extends State<Information> {
   TextEditingController filiere = new TextEditingController();
   TextEditingController annee = new TextEditingController();
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("Dispose profile state");
+  }
 
   //Méthode de chargement des données
   @override
@@ -254,7 +260,7 @@ class _InformationState extends State<Information> {
                     }
                     updateUser.updateUser(dataFields.key, nom.text, prenom.text, ecole.text, filiere.text, annee.text);
 
-                    Navigator.of(context).push(MaterialPageRoute(
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => HomeApp(),
                     ));
 
