@@ -5,7 +5,6 @@
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mdefi/models/questions.dart';
-import 'package:mdefi/models/reponse.dart';
 import 'package:mdefi/models/solutions.dart';
 
 /*
@@ -176,6 +175,7 @@ class Database {
     reference.set(response);
   }
 
+  //Méthode permettant de récupérer les questions de la db
   Future<List<Question>> getQuestionFromDB() async
   {
     //Récupération des questions
@@ -199,6 +199,7 @@ class Database {
     return listQuestion;
   }
 
+  //Methode permettant de récupérer les solutions de la db
   Future<List<Solution>> getSolutionsFromDB() async
   {
     //Récupération des questions

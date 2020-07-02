@@ -44,6 +44,7 @@ class _SignInState extends State<SignIn> {
   //Variable de la page du loading
   bool loading = false;
 
+  //Méthode permettant de supprimer le state en cours
   @override
   void dispose() {
     // TODO: implement dispose
@@ -77,7 +78,6 @@ class _SignInState extends State<SignIn> {
           builder: (context) =>
               Register(),
         ));
-
     },
     )
     ],
@@ -96,8 +96,7 @@ class _SignInState extends State<SignIn> {
                     image:DecorationImage(
                        image:
                         AssetImage('assets/logo.jpg')
-                    )
-                      ,
+                    ),
                     borderRadius: new BorderRadius.circular(36.0),
                   ),
                 ),
@@ -119,7 +118,6 @@ class _SignInState extends State<SignIn> {
             validator: (val) => val.isEmpty ? 'Entrer un email' : null,
             onChanged: (val){
             setState (()=> email = val);
-
             },
             ),
             SizedBox(height: 20.0),
@@ -158,7 +156,6 @@ class _SignInState extends State<SignIn> {
 
             if(result != null)
               {
-
                 Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) =>
@@ -167,7 +164,6 @@ class _SignInState extends State<SignIn> {
               }
 
             if (result == null) {
-
             setState(() {
             loading = false;
             error = 'Email ou mot de passe incorrect';
@@ -190,7 +186,6 @@ class _SignInState extends State<SignIn> {
                 background: Colors.white30,
                 fontSize: 19,
                 onPressed: ()  {
-
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => ForgotScreen(),
                   ));

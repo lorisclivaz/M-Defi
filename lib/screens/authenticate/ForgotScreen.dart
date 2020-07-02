@@ -32,6 +32,14 @@ class _ForgotScreenState extends State<ForgotScreen> {
   //Variable de récupération de la saisie de l'utilisateur
   final myController = TextEditingController();
 
+  //Méthode permettant de supprimer le state
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("Dispose forgot screen");
+  }
+
   //Design de la page
   @override
   Widget build(BuildContext context) {
@@ -96,6 +104,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => HomeApp(),
                       ));
+                      dispose();
                     }else{
                     print('not valid mail');
                   }

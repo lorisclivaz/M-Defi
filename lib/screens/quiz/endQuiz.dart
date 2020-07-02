@@ -1,7 +1,18 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 09 juin 2020
+ */
+
 import 'package:flutter/material.dart';
-import 'package:mdefi/screens/LogicQuestion/optionOne.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:nice_button/NiceButton.dart';
+
+/*
+ * Classe qui va afficher le résultat du quiz
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 
 class endQuiz extends StatelessWidget {
 
@@ -14,11 +25,11 @@ class endQuiz extends StatelessWidget {
   String nomQuiz;
   String petitePhrase = '';
 
-
   //Constructeur
   endQuiz(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage,this.petitePhrase);
 
 
+  //Design de la page
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -121,8 +132,6 @@ class endQuiz extends StatelessWidget {
                     background: Colors.white70,
                     fontSize: 20,
                     onPressed:(){
-
-
                       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                           HomeApp()), (Route<dynamic> route) => false);
                     },

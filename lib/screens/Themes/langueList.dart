@@ -34,12 +34,14 @@ class _LanguesListState extends State<LanguesList> {
   //Variable loading
   bool loading = false;
 
+  //Méthode permettant de supprimer le state en cours
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     print("Dispose langues list");
   }
+
   //Methode dînitialisation qui au moment du loading de la page, les données se mettent dans la liste
   @override
   void initState(){

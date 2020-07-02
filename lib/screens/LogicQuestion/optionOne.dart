@@ -78,7 +78,6 @@ class _optionOneState extends State<optionOne> {
   String reponse2 = '';
 
   //Variable show solution
-  bool _isVisible = false;
   String solution1 = 'Réponse Correcte';
   String solution2 = 'Réponse incorrecte';
   String solutionFinal = '';
@@ -98,7 +97,7 @@ class _optionOneState extends State<optionOne> {
   bool loading = false;
 
 
-
+  //Methode permettant de supprimer le state en cours
   @protected
   @mustCallSuper
   void dispose() {

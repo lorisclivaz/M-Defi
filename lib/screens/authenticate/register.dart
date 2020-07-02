@@ -45,6 +45,7 @@ class _RegisterState extends State<Register> {
   //Variable de la page du loading
   bool loading = false;
 
+  //Methode permettant de supprimer le state en cours
   @override
   void dispose() {
     // TODO: implement dispose
@@ -151,7 +152,6 @@ class _RegisterState extends State<Register> {
                         loading = true;
                       });
                       if(_formKey.currentState.validate()) {
-
 
                         dynamic result = await _auth.registerWithEmailAndpassword(
                             email, password);

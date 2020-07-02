@@ -30,6 +30,7 @@ class _AuthenticateState extends State<Authenticate> {
     setState(() => showSingIn = !showSingIn);
   }
 
+  //Méthode permettant de supprimer le state en cours
   @override
   void dispose() {
     // TODO: implement dispose

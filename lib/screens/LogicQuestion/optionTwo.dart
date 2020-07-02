@@ -13,7 +13,6 @@ import 'package:mdefi/screens/LogicQuestion/optionOne.dart';
 import 'package:mdefi/screens/quiz/endQuiz.dart';
 import 'package:mdefi/services/database.dart';
 import 'package:mdefi/shared/loading.dart';
-import 'package:mdefi/utils/Draggable/dragBox.dart';
 import 'package:mdefi/utils/dropDown/dropDown.dart';
 import 'package:nice_button/NiceButton.dart';
 
@@ -105,6 +104,7 @@ class _optionTwoState extends State<optionTwo> {
   String test = '';
 
 
+  //Méthode permettant de supprimer le state en cours
   @protected
   @mustCallSuper
   void dispose() {
@@ -113,7 +113,6 @@ class _optionTwoState extends State<optionTwo> {
     print("Dispose option two");
 
   }
-
 
   @override
   //Méthode d'initialisation des données
@@ -186,8 +185,6 @@ class _optionTwoState extends State<optionTwo> {
           }
         });
   }
-
-
 
 
   //Design de la page
@@ -288,7 +285,6 @@ class _optionTwoState extends State<optionTwo> {
                                       decoration: TextDecoration.underline,
                                     )
                                 ),
-
                                 new Text(
                                     name,
                                     style: TextStyle(
@@ -300,7 +296,6 @@ class _optionTwoState extends State<optionTwo> {
                               ],
                             ),
                           ),
-
                           Container(
                               child: valueAnswer
                           ),
@@ -386,8 +381,6 @@ class _optionTwoState extends State<optionTwo> {
                                                                       level,
                                                                       choixQuiz),
                                                             ));
-
-
                                                       } else {
                                                         Navigator.of(context)
                                                             .push(
@@ -406,9 +399,7 @@ class _optionTwoState extends State<optionTwo> {
                                                                       choixQuiz),
                                                             ));
                                                       }
-
                                                   } else {
-
                                                       score = pointPositif + pointNegatif;
                                                       if(score > 6)
                                                       {
