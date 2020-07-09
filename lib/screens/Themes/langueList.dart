@@ -6,6 +6,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/themes.dart';
+import 'package:mdefi/screens/QuestionPage/langueQuestionPage.dart';
 import 'package:mdefi/shared/loading.dart';
 
 /*
@@ -33,6 +34,9 @@ class _LanguesListState extends State<LanguesList> {
 
   //Variable loading
   bool loading = false;
+
+  //Variable du quiz
+  String langue;
 
   //Méthode permettant de supprimer le state en cours
   @override
@@ -106,7 +110,18 @@ class _LanguesListState extends State<LanguesList> {
     print(list[index].imageUrl);
     return GestureDetector(
       onTap: (){
-        print('langue');
+
+
+        if(list[index].name == 'Anglais')
+          {
+            langue = '0';
+          }
+
+
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => langueQuestionPage(langue),
+        ));
+        dispose();
       },
       child: new Card(
         color: Colors.blue.withOpacity(0.2),

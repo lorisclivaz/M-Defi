@@ -217,4 +217,46 @@ class Database {
     });
     return listSolutions;
   }
+
+  //Méthode permettant d'insérer une réponse dans la base de données
+  Future<String> insertQuestionLangue() async{
+
+    var response = <String, dynamic>{
+      'Id':'2',
+      'langue':'0',
+      'Name1' : "Health tip of the day! Eat a",
+      'Name2': 'scone everyday!',
+      'RuleId':'15',
+      'Level':'1',
+      'Indice':'This is a fruit',
+      'PageType':'1'
+
+    };
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("question_langues").push();
+
+
+    reference.set(response);
+  }
+
+  //Méthode permettant d'insérer une réponse dans la base de données
+  Future<String> insertResponseLangue() async{
+
+    var response = <String, dynamic>{
+      'Id':'5860',
+      'questionId':'1',
+      'Answer' : "courant",
+      'IsGoodAnswer':'0'
+
+    };
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("response_langues").push();
+
+
+    reference.set(response);
+  }
 }

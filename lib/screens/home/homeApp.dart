@@ -106,9 +106,9 @@ class HomeApp extends StatelessWidget {
                           width: MediaQuery.of(context).size.width*0.30,
                           height: MediaQuery.of(context).size.height*0.23,
                           child: GestureDetector(
-                            onTap: ()=> Navigator.of(context).push(MaterialPageRoute(
+                            onTap: ()=> database.insertQuestionLangue() /*Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => ThemesList(),
-                            )),
+                            ))*/,
                             child: Card(
                               color: Colors.blue.withOpacity(0.1),
                               borderOnForeground: true,

@@ -104,6 +104,7 @@ class _optionTwoState extends State<optionTwo> {
   String test = '';
 
 
+
   //Méthode permettant de supprimer le state en cours
   @protected
   @mustCallSuper
