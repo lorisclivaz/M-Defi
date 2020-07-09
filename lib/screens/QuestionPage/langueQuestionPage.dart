@@ -19,11 +19,11 @@ import 'package:nice_button/NiceButton.dart';
 class langueQuestionPage extends StatefulWidget {
 
   //Variables quiz
-  final String idQuiz;
+  final String langue;
 
 
   //Constructeur
-  const langueQuestionPage(this.idQuiz);
+  const langueQuestionPage(this.langue);
 
 
   @override
@@ -35,6 +35,7 @@ class _langueQuestionPage extends State<langueQuestionPage> {
 
   //Variable paramètre des questions
   String level = '';
+  String langue = '';
 
   //Variable question correct +2 incorrect -1
   int score = 0;
@@ -65,7 +66,8 @@ class _langueQuestionPage extends State<langueQuestionPage> {
   @override
   void initState(){
     super.initState();
-    idQuiz = widget.idQuiz;
+    langue = widget.langue;
+    print("La langue = "+ widget.langue);
 
   }
 
@@ -226,7 +228,7 @@ class _langueQuestionPage extends State<langueQuestionPage> {
                           }
 
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => optionLangueOne(level,nbrPage, score, pointPositif, pointNegatif, idQuiz, choixQuiz),
+                            builder: (context) => optionLangueOne(level,nbrPage, score, pointPositif, pointNegatif, langue, choixQuiz),
                           ));
                         },
                       )

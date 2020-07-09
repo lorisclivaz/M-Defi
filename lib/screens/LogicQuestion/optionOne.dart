@@ -343,75 +343,23 @@ class _optionOneState extends State<optionOne> {
                     pointNegatif = pointNegatif -1;
                   }
 
-                  //Génère un dialog box qui informe l'utilisateur si la réponse est correct ou pas
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Dialog(
-                          backgroundColor: Colors.white30,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(20.0)
-                          ),
-                          child: Container(
-                            height: 300,
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(solutionFinal,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 19.0,
-                                        decoration: TextDecoration.underline,
-                                      )),
-                                  Text(''),
-                                  Text(
-                                      text,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14.0,
-                                      )
-                                  ),
-                                  Text(''),
-                                  SizedBox(
-                                    width: 320.0,
-                                    child: NiceButton(
-                                      background: Colors.blue.withOpacity(0.5),
-                                      elevation: 10.0,
-                                      radius: 52.0,
-                                      text: "Suivant",
-                                      onPressed: () {
-                                        if (nbrPage < 6) {
-                                          if(choixQuiz <= 2)
-                                            {
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        optionOne(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
-                                                            widget.idQuiz, level,choixQuiz),
-                                                  ));
-                                              choixQuiz++;
-                                            }else{
-                                            Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) =>optionTwo(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
-                                                  widget.idQuiz, level,choixQuiz),
-                                            ));
-                                          }
-                                        }
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      });
+                  if (nbrPage < 6) {
+                    if(choixQuiz <= 2)
+                    {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                optionOne(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
+                                    widget.idQuiz, level,choixQuiz),
+                          ));
+                      choixQuiz++;
+                    }else{
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>optionTwo(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
+                            widget.idQuiz, level,choixQuiz),
+                      ));
+                    }
+                  }
                 },
                 builder: (BuildContext context,
                     List<dynamic> accepted,

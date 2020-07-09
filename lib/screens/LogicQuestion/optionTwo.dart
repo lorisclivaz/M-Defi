@@ -321,109 +321,58 @@ class _optionTwoState extends State<optionTwo> {
                               solutionFinal = 'Réponse incorrect';
                               pointNegatif = pointNegatif -1;
                               }
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return Dialog(
-                                      backgroundColor: Colors.white30,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(20.0)
-                                      ),
-                                      child: Container(
-                                        height: 300,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(12.0),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(solutionFinal,
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 19.0,
-                                                    decoration: TextDecoration.underline,
-                                                  )),
-                                              Text(''),
-                                              Text(
-                                                  text,
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 14.0,
-                                                  )
-                                              ),
-                                              Text(''),
-                                              SizedBox(
-                                                width: 320.0,
-                                                child: NiceButton(
-                                                  background: Colors.blue.withOpacity(0.5),
-                                                  elevation: 10.0,
-                                                  radius: 52.0,
-                                                  text: "Suivant",
-                                                  onPressed: () {
-                                                    if (nbrPage < 6) {
-                                                      if (choixQuiz < 3) {
-                                                        choixQuiz++;
-                                                        Navigator.of(context)
-                                                            .push(
-                                                            MaterialPageRoute(
-                                                              builder: (
-                                                                  context) =>
-                                                                  optionTwo(
-                                                                      nomQuiz,
-                                                                      score,
-                                                                      pointPositif,
-                                                                      pointNegatif,
-                                                                      nbrPage,
-                                                                      widget
-                                                                          .idQuiz,
-                                                                      level,
-                                                                      choixQuiz),
-                                                            ));
-                                                      } else {
-                                                        Navigator.of(context)
-                                                            .push(
-                                                            MaterialPageRoute(
-                                                              builder: (
-                                                                  context) =>
-                                                                  optionOne(
-                                                                      nomQuiz,
-                                                                      score,
-                                                                      pointPositif,
-                                                                      pointNegatif,
-                                                                      nbrPage,
-                                                                      widget
-                                                                          .idQuiz,
-                                                                      level,
-                                                                      choixQuiz),
-                                                            ));
-                                                      }
-                                                  } else {
-                                                      score = pointPositif + pointNegatif;
-                                                      if(score > 6)
-                                                      {
-                                                        petitePhrase = 'Bonne performance !!!!';
-                                                      }else
-                                                      {
-                                                        petitePhrase = 'Mauvaise performance !!!!';
-                                                      }
-                                                      Navigator.of(context).push(
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                endQuiz(nomQuiz,score, pointPositif,pointNegatif, nbrPage,petitePhrase),
-                                                          ));
-                                                    }
-                                                  },
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  });
+                              if (nbrPage < 6) {
+                                if (choixQuiz < 3) {
+                                  choixQuiz++;
+                                  Navigator.of(context)
+                                      .push(
+                                      MaterialPageRoute(
+                                        builder: (
+                                            context) =>
+                                            optionTwo(
+                                                nomQuiz,
+                                                score,
+                                                pointPositif,
+                                                pointNegatif,
+                                                nbrPage,
+                                                widget
+                                                    .idQuiz,
+                                                level,
+                                                choixQuiz),
+                                      ));
+                                } else {
+                                  Navigator.of(context)
+                                      .push(
+                                      MaterialPageRoute(
+                                        builder: (
+                                            context) =>
+                                            optionOne(
+                                                nomQuiz,
+                                                score,
+                                                pointPositif,
+                                                pointNegatif,
+                                                nbrPage,
+                                                widget
+                                                    .idQuiz,
+                                                level,
+                                                choixQuiz),
+                                      ));
+                                }
+                              } else {
+                                score = pointPositif + pointNegatif;
+                                if(score > 6)
+                                {
+                                  petitePhrase = 'Bonne performance !!!!';
+                                }else
+                                {
+                                  petitePhrase = 'Mauvaise performance !!!!';
+                                }
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          endQuiz(nomQuiz,score, pointPositif,pointNegatif, nbrPage,petitePhrase),
+                                    ));
+                              }
                             },
                           )
                         ],

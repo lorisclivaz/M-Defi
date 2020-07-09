@@ -37,7 +37,7 @@ class QuestionLangue {
     this.name2 = snapshot.value["Name2"];
     this.pageType = snapshot.value["PageType"];
     this.RuleId = snapshot.value["RuleId"];
-    this.Langue = snapshot.value["Langue"];
+    this.Langue = snapshot.value["langue"];
 
   }
 }

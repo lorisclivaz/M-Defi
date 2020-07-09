@@ -115,7 +115,20 @@ class _LanguesListState extends State<LanguesList> {
         if(list[index].name == 'Anglais')
           {
             langue = '0';
+            print("la langue : "+ langue);
           }
+        if(list[index].name == 'Français')
+        {
+
+          langue = '1';
+
+        }
+        if(list[index].name == 'Allemand')
+        {
+
+          langue = '2';
+
+        }
 
 
         Navigator.of(context).push(MaterialPageRoute(

@@ -52,11 +52,8 @@ class _dropDownLangueState extends State<dropDownLangue> {
     reponse = widget.list;
 
     return Container(
-        width: MediaQuery.of(context).size.width*0.8,
-        height: MediaQuery.of(context).size.height*0.06,
-
-
-
+        width: MediaQuery.of(context).size.width*0.66,
+        height: MediaQuery.of(context).size.height*0.05,
         decoration: BoxDecoration(
             color: Colors.white30,
             borderRadius: BorderRadius.circular(10)),
@@ -70,11 +67,12 @@ class _dropDownLangueState extends State<dropDownLangue> {
 
             children: <Widget>[
               DropdownButton<ReponseLangue>(
+
                 focusColor: Colors.white30,
                 value: selected,
                 isDense: true,
                 icon: Icon(Icons.arrow_drop_down),
-                iconSize: 40,
+                iconSize: 20,
                 underline: SizedBox(),
                 onChanged: (ReponseLangue newValue) {
                   if(mounted)

@@ -59,8 +59,8 @@ class HomeApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/BackGroundImage.jpg"),fit: BoxFit.cover)),
+            image: DecorationImage(
+                image: AssetImage("assets/BackGroundImage.jpg"),fit: BoxFit.cover)),
         child: Scaffold(
           drawer: MainDrawer(),
           backgroundColor: Colors.transparent,
@@ -77,7 +77,7 @@ class HomeApp extends StatelessWidget {
 
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                       SignIn()), (Route<dynamic> route) => false);
-                                  },
+                },
               ),
             ],
           ),
@@ -86,15 +86,15 @@ class HomeApp extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 36.0),
-                  child: NiceButton(
-                      elevation: 10.0,
-                      radius: 52.0,
-                      width: MediaQuery.of(context).size.width*0.80,
-                      text: "Hes-so M-Learning",
-                      background: Colors.blue.withOpacity(0.2)
-                  )
-                  ),
+                    padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 36.0),
+                    child: NiceButton(
+                        elevation: 10.0,
+                        radius: 52.0,
+                        width: MediaQuery.of(context).size.width*0.80,
+                        text: "Hes-so M-Learning",
+                        background: Colors.blue.withOpacity(0.2)
+                    )
+                ),
                 Padding(
                   padding: EdgeInsets.all(18.0),
                   child: Center(
@@ -106,9 +106,9 @@ class HomeApp extends StatelessWidget {
                           width: MediaQuery.of(context).size.width*0.30,
                           height: MediaQuery.of(context).size.height*0.23,
                           child: GestureDetector(
-                            onTap: ()=> database.insertQuestionLangue() /*Navigator.of(context).push(MaterialPageRoute(
+                            onTap: ()=>Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => ThemesList(),
-                            ))*/,
+                            )),
                             child: Card(
                               color: Colors.blue.withOpacity(0.1),
                               borderOnForeground: true,
@@ -132,7 +132,7 @@ class HomeApp extends StatelessWidget {
                                     Text(
                                       "Quiz thèmes ",
                                       style: TextStyle(
-                                          color: Colors.white,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ],

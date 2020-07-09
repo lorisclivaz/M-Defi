@@ -222,13 +222,13 @@ class Database {
   Future<String> insertQuestionLangue() async{
 
     var response = <String, dynamic>{
-      'Id':'2',
+      'Id':'6',
       'langue':'0',
-      'Name1' : "Health tip of the day! Eat a",
-      'Name2': 'scone everyday!',
-      'RuleId':'15',
+      'Name1' : "Lucky Luke is a",
+      'Name2': 'lonesome cowboy!',
+      'RuleId':'50',
       'Level':'1',
-      'Indice':'This is a fruit',
+      'Indice':'not rich',
       'PageType':'1'
 
     };
@@ -245,10 +245,10 @@ class Database {
   Future<String> insertResponseLangue() async{
 
     var response = <String, dynamic>{
-      'Id':'5860',
-      'questionId':'1',
-      'Answer' : "courant",
-      'IsGoodAnswer':'0'
+      'Id':'5639',
+      'questionId':'6',
+      'Answer' : "poor",
+      'IsGoodAnswer':'1'
 
     };
 

@@ -3,6 +3,7 @@
  * Date creation : 08 juillet 2020
  */
 
+import 'dart:async';
 import 'dart:math';
 
 import 'package:firebase_database/firebase_database.dart';
@@ -30,10 +31,10 @@ class optionLangueOne extends StatefulWidget {
   final int score;
   final int pointPositif;
   final int pointNegatif;
-  final String idQuiz;
+  final String langue;
   final int choixQuiz;
 
-  const optionLangueOne(this.level, this.nbrPage, this.score, this.pointPositif, this.pointNegatif, this.idQuiz, this.choixQuiz);
+  const optionLangueOne(this.level, this.nbrPage, this.score, this.pointPositif, this.pointNegatif, this.langue, this.choixQuiz);
 
 
 
@@ -65,7 +66,7 @@ class _optionLangueOneState extends State<optionLangueOne> {
   //Variable questions
   String name1;
   String name2;
-  String idQuiz;
+  String langue;
   int nbrPage = 0;
   int score = 0;
   int pointPositif = 0;
@@ -83,13 +84,15 @@ class _optionLangueOneState extends State<optionLangueOne> {
   //DropDown list
   dropDownLangue valueAnswer;
 
+
+
+
   //Methode permettant de supprimer le state en cours
   @protected
   @mustCallSuper
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-
     print("Dispose option one langue");
   }
 
@@ -98,7 +101,8 @@ class _optionLangueOneState extends State<optionLangueOne> {
     // TODO: implement initState
     super.initState();
     loading = true;
-    idQuiz = widget.idQuiz;
+    langue = widget.langue;
+    print("La derniere langue = à :"+ widget.langue);
 
 
 //Récupération des questions
@@ -116,11 +120,15 @@ class _optionLangueOneState extends State<optionLangueOne> {
             value['Name2'],
             value['PageType'],
             value['RuleId'],
-            value['Langue'],);
+            value['langue'],);
         print('Level : '+widget.level);
-        print('langue:' +idQuiz);
+        print('langue:' +widget.langue);
 
+        if(questions.level == widget.level && questions.Langue == widget.langue )
+          {
             list.add(questions);
+
+          }
 
 
 
@@ -236,6 +244,8 @@ class _optionLangueOneState extends State<optionLangueOne> {
                                     )
                                 ),
 
+                                new Text(''),
+
                                 new Container(
                                   child: Wrap(
                                     children: <Widget>[
@@ -287,7 +297,7 @@ class _optionLangueOneState extends State<optionLangueOne> {
                                         MaterialPageRoute(
                                           builder: (
                                               context) =>
-                                              optionLangueOne(level,nbrPage, score, pointPositif, pointNegatif, idQuiz, choixQuiz),
+                                              optionLangueOne(level,nbrPage, score, pointPositif, pointNegatif, langue, choixQuiz),
                                         ));
                                   } else {
                                     //faire la classe option deux
@@ -309,6 +319,7 @@ class _optionLangueOneState extends State<optionLangueOne> {
                                 }
                               },
                             ),
+
 
                               ],
 

@@ -46,22 +46,22 @@ class MainDrawer extends StatelessWidget {
                       top: 30,
                     ),
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'assets/logo.jpg'
-                        ),
-                        fit: BoxFit.fill
-                      )
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: AssetImage(
+                                'assets/logo.jpg'
+                            ),
+                            fit: BoxFit.fill
+                        )
                     ),
                   ),
-              Text(
-                HomeApp.email,
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.white,
-              ),
-              ),
+                  Text(
+                    HomeApp.email,
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -76,9 +76,9 @@ class MainDrawer extends StatelessWidget {
             ),
             onTap: () {
               if(users.isEmpty)
-                {
-                  db.createUser('', '', '', '', '', HomeApp.email, HomeApp.uid);
-                }
+              {
+                db.createUser('', '', '', '', '', HomeApp.email, HomeApp.uid);
+              }
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => Information(),
               ));
@@ -114,7 +114,7 @@ class MainDrawer extends StatelessWidget {
             value['Ecole'],
             value['Filiere'],
             value['Nom'],
-          value['Prenom']);
+            value['Prenom']);
         if (HomeApp.uid == user.uid) {
           users.add(user);
         }
