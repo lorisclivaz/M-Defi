@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:mdefi/models/userInfoSupp.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/services/database.dart';
+import 'package:mdefi/utils/CustomBottomMenu/CustomBottomBar.dart';
 import 'package:mdefi/utils/userInformation/informations.dart';
 
 /*
@@ -94,6 +95,20 @@ class MainDrawer extends StatelessWidget {
             ),
             onTap: null,
           ),
+          ListTile(
+            leading: Icon(Icons.add_shopping_cart),
+            title: Text(
+              "Bon d'achat",
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => CustomBottomBar(),
+              ));
+            },
+          )
         ],
       ),
     );

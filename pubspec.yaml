@@ -30,6 +30,8 @@ dependencies:
   firebase_database: ^3.1.5
   nice_button: ^0.1.7
   flutter_form_builder: ^3.10.1
+  curved_navigation_bar: ^0.3.3
+  flutter_local_notifications: ^1.4.4+2
 
 dev_dependencies:
   flutter_test:

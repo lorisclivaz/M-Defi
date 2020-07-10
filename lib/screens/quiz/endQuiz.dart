@@ -24,6 +24,7 @@ class endQuiz extends StatelessWidget {
   int nbrPage;
   String nomQuiz;
   String petitePhrase = '';
+  int coinQuiz = 0;
 
   //Constructeur
   endQuiz(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage,this.petitePhrase);
@@ -32,6 +33,12 @@ class endQuiz extends StatelessWidget {
   //Design de la page
   @override
   Widget build(BuildContext context) {
+
+    if(score > 0)
+      {
+        coinQuiz = score * 3;
+      }
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Container(
@@ -119,7 +126,7 @@ class endQuiz extends StatelessWidget {
                     elevation: 10.0,
                     radius: 52.0,
                     width: MediaQuery.of(context).size.width*0.80,
-                    text: "$petitePhrase",
+                    text: "Vous avez gagné $coinQuiz coinquiz",
                     background: Colors.white30,
                     fontSize: 20,
                   ),
