@@ -54,7 +54,10 @@ class _optionTwoState extends State<optionTwo> {
   final fb = FirebaseDatabase.instance.reference().child("question");
   final fb2 = FirebaseDatabase.instance.reference().child("response");
   final fb3 = FirebaseDatabase.instance.reference().child("solutions");
+
   Database db = new Database();
+  String reponseCorrection = null;
+  int userAnswer;
 
 
   //Variables valeur aléatoire
@@ -316,10 +319,12 @@ class _optionTwoState extends State<optionTwo> {
                               {
                               solutionFinal='Réponse correct';
                               pointPositif = pointPositif+2;
+                              userAnswer = 0;
                               }else
                               {
                               solutionFinal = 'Réponse incorrect';
                               pointNegatif = pointNegatif -1;
+                              userAnswer = 1;
                               }
                               if (nbrPage < 6) {
                                 if (choixQuiz < 3) {
@@ -340,6 +345,7 @@ class _optionTwoState extends State<optionTwo> {
                                                 level,
                                                 choixQuiz),
                                       ));
+                                  db.insertCorrectionQuestion(nomQuiz, nbrPage, name, reponseCorrection, userAnswer);
                                 } else {
                                   Navigator.of(context)
                                       .push(
@@ -356,7 +362,10 @@ class _optionTwoState extends State<optionTwo> {
                                                     .idQuiz,
                                                 level,
                                                 choixQuiz),
+
                                       ));
+                                  db.insertCorrectionQuestion(nomQuiz, nbrPage, name, reponseCorrection, userAnswer);
+
                                 }
                               } else {
                                 score = pointPositif + pointNegatif;
@@ -372,6 +381,8 @@ class _optionTwoState extends State<optionTwo> {
                                       builder: (context) =>
                                           endQuiz(nomQuiz,score, pointPositif,pointNegatif, nbrPage,petitePhrase),
                                     ));
+                                db.insertCorrectionQuestion(nomQuiz, nbrPage, name, reponseCorrection, userAnswer);
+
                               }
                             },
                           )
@@ -412,6 +423,7 @@ if(reponse == null)
         setReponse.add(a);
         if (a.answer == '1') {
           reponseCorrect = a.name;
+          reponseCorrection = a.name;
         }
       }
     }

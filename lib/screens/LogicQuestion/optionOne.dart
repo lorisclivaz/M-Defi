@@ -11,6 +11,7 @@ import 'package:mdefi/models/reponse.dart';
 import 'package:mdefi/models/solutions.dart';
 import 'package:mdefi/screens/LogicQuestion/optionTwo.dart';
 import 'package:mdefi/screens/quiz/endQuiz.dart';
+import 'package:mdefi/services/database.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:mdefi/utils/Draggable/dragBox.dart';
 import 'package:nice_button/NiceButton.dart';
@@ -55,6 +56,8 @@ class _optionOneState extends State<optionOne> {
   final fb2 = FirebaseDatabase.instance.reference().child("response");
   final fb3 = FirebaseDatabase.instance.reference().child("solutions");
 
+  Database db = new Database();
+  int userAnswer ;
 
   //Variables valeur aléatoire
   Random rnd = new Random();
@@ -338,9 +341,11 @@ class _optionOneState extends State<optionOne> {
                   if (value == reponseCorrect) {
                     solutionFinal = solution1;
                     pointPositif = pointPositif +2;
+                    userAnswer = 0;
                   } else {
                     solutionFinal = solution2;
                     pointNegatif = pointNegatif -1;
+                    userAnswer = 1;
                   }
 
                   if (nbrPage < 6) {
@@ -353,11 +358,15 @@ class _optionOneState extends State<optionOne> {
                                     widget.idQuiz, level,choixQuiz),
                           ));
                       choixQuiz++;
+                      db.insertCorrectionQuestion(nomQuiz, nbrPage, name, reponseCorrect, userAnswer);
+
                     }else{
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>optionTwo(nomQuiz,score, pointPositif, pointNegatif, nbrPage,
                             widget.idQuiz, level,choixQuiz),
                       ));
+                      db.insertCorrectionQuestion(nomQuiz, nbrPage, name, reponseCorrect, userAnswer);
+
                     }
                   }
                 },

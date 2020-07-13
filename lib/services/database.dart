@@ -260,5 +260,37 @@ class Database {
     reference.set(response);
   }
 
+  //Méthode permettant d'insérer une correction dans la base de données
+  Future<String> insertCorrectionQuestion(String nomQuiz, int nombrePage, String question, String reponse, int userAnswer) async{
+
+    var response = <String, dynamic>{
+      'NomQuiz':nomQuiz,
+      'NombrePage':nombrePage,
+      'Question' : question,
+      'Reponse':reponse,
+      'ReponseUser': userAnswer
+
+    };
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("CorrectionQuiz").push();
+
+
+    reference.set(response);
+  }
+
+  //Méthode permettant d'insérer une correction dans la base de données
+  Future<String> DeleteCorrectionQuiz() async{
+
+
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("CorrectionQuiz");
+
+
+    reference.remove();
+  }
 
 }

@@ -5,6 +5,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
+import 'package:mdefi/screens/quiz/CorrectionQuiz.dart';
+import 'package:mdefi/services/database.dart';
 import 'package:nice_button/NiceButton.dart';
 
 /*
@@ -25,6 +27,9 @@ class endQuiz extends StatelessWidget {
   String nomQuiz;
   String petitePhrase = '';
   int coinQuiz = 0;
+
+  //Variable pour la base de données
+  Database db = new Database();
 
   //Constructeur
   endQuiz(this.nomQuiz,this.score, this.pointPositif, this.pointNegatif, this.nbrPage,this.petitePhrase);
@@ -141,8 +146,24 @@ class endQuiz extends StatelessWidget {
                     onPressed:(){
                       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                           HomeApp()), (Route<dynamic> route) => false);
+
+                      db.DeleteCorrectionQuiz();
                     },
                   ),
+                  NiceButton(
+                    elevation: 10.0,
+                    radius: 52.0,
+                    width: MediaQuery.of(context).size.width*0.80,
+                    text: "Correction",
+                    background: Colors.white70,
+                    fontSize: 20,
+                    onPressed:(){
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                          CorrectionQuiz()), (Route<dynamic> route) => false);
+
+                      db.DeleteCorrectionQuiz();
+                    },
+                  )
                 ],
               ),
             ),
