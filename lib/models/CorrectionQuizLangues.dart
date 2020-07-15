@@ -1,32 +1,30 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-class CorrectionQuizModel
+class CorrectionQuizLanguesModel
 {
   //Variable langue
   String key;
-  String nomQuiz;
   int nombrePage;
-  String question;
+  String name1;
+  String name2;
   String reponse;
-  int reponseUser;
+  String reponseUser;
 
 
   //Constructeur
-  CorrectionQuizModel(this.key, this.nomQuiz, this.nombrePage, this.question, this.reponse, this.reponseUser);
+  CorrectionQuizLanguesModel(this.key,  this.name1, this.name2,this.nombrePage, this.reponse, this.reponseUser);
 
 
   //Constructeur pour la base de données
-  CorrectionQuizModel.fromSnapshot(DataSnapshot snapshot)
+  CorrectionQuizLanguesModel.fromSnapshot(DataSnapshot snapshot)
   {
-    this.nomQuiz = snapshot.value["NomQuiz"];
+    this.name1 = snapshot.value["Name1"];
+    this.name2 = snapshot.value["Name2"];
     this.nombrePage = snapshot.value["NombrePage"];
-    this.question = snapshot.value["Question"];
     this.reponse = snapshot.value["Reponse"];
     this.reponseUser = snapshot.value["ReponseUser"];
 
+
   }
-
-
 }
-

@@ -68,9 +68,11 @@ class _dropDownLangueState extends State<dropDownLangue> {
             children: <Widget>[
               DropdownButton<ReponseLangue>(
 
+
                 focusColor: Colors.white30,
                 value: selected,
-                isDense: true,
+                isDense: false,
+                isExpanded: false,
                 icon: Icon(Icons.arrow_drop_down),
                 iconSize: 20,
                 underline: SizedBox(),

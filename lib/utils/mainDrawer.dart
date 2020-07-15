@@ -70,7 +70,7 @@ class MainDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.person),
             title: Text(
-              'Mon profil',
+              'Inscription',
               style: TextStyle(
                 fontSize: 18,
               ),

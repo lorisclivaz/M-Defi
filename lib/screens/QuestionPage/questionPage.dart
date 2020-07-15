@@ -85,6 +85,7 @@ class _QuestionPage extends State<QuestionPage> {
                 color: Colors.black,
                 onPressed:() => Navigator.of(context).pop() ,
               ),
+              centerTitle: true,
               title: Text("Configuration du quiz"),
               backgroundColor: Colors.blueGrey[400],
               elevation: 0.0,

@@ -10,7 +10,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/questionLangue.dart';
 import 'package:mdefi/models/reponseLangues.dart';
+import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/screens/quiz/endQuiz.dart';
+import 'package:mdefi/services/database.dart';
 import 'package:mdefi/shared/loading.dart';
 import 'package:mdefi/utils/dropDown/dropDown.dart';
 import 'package:mdefi/utils/dropDown/dropDownLangue.dart';
@@ -48,6 +50,8 @@ class _optionLangueOneState extends State<optionLangueOne> {
   final fb = FirebaseDatabase.instance.reference().child("question_langues");
   final fb2 = FirebaseDatabase.instance.reference().child("response_langues");
 
+  Database db = new Database();
+
 
   //Les listes
   List<QuestionLangue> list = List();
@@ -83,6 +87,10 @@ class _optionLangueOneState extends State<optionLangueOne> {
 
   //DropDown list
   dropDownLangue valueAnswer;
+
+  //Variables correction quiz
+  String reponseUser;
+  String reponseCorrect;
 
 
 
@@ -199,7 +207,9 @@ class _optionLangueOneState extends State<optionLangueOne> {
               actions: <Widget>[
                 new IconButton(
                   icon: new Icon(Icons.close),
-                  onPressed: () => print("annulation du quiz"),
+                  onPressed: () =>  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                      HomeApp()), (Route<dynamic> route) => false)
+                  ,
                 ),
               ],
               leading: new Container(),
@@ -213,6 +223,10 @@ class _optionLangueOneState extends State<optionLangueOne> {
                         .of(context)
                         .size
                         .height * 0.9,
+                    width:MediaQuery
+                        .of(context)
+                        .size
+                        .width,
                     child: Card(
                       color: Colors.blue.withOpacity(0.2),
                       elevation: 10.0,
@@ -250,14 +264,18 @@ class _optionLangueOneState extends State<optionLangueOne> {
                                   child: Wrap(
                                     children: <Widget>[
                                       Text(
-                                          name1,
+                                          name1+" ",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18.0
                                           )
                                       ),
-                                      valueAnswer,
+                                      SizedBox(
+                                        width: MediaQuery.of(context).size.width*0.66,
+                                          height:  MediaQuery.of(context).size.height*0.04,
+                                          child: valueAnswer
+                                      ),
                                       Text(
                                           name2,
                                           style: TextStyle(
@@ -283,8 +301,10 @@ class _optionLangueOneState extends State<optionLangueOne> {
                               onPressed: (){
                                 if(valueAnswer.getAnswer() == '1')
                                   {
+                                    reponseUser = '0';
                                     pointPositif = pointPositif+2;
                                   }else{
+                                  reponseUser = '1';
                                   pointNegatif = pointNegatif -1;
 
                                 }
@@ -316,7 +336,9 @@ class _optionLangueOneState extends State<optionLangueOne> {
                                         builder: (context) =>
                                             endQuiz(nomQuiz,score, pointPositif,pointNegatif, nbrPage,petitePhrase),
                                       ));
-                                }
+
+    }
+                                db.insertCorrectionQuestionLangues(nbrPage, name1, name2, reponseCorrect, reponseUser)  ;
                               },
                             ),
 
@@ -354,6 +376,11 @@ class _optionLangueOneState extends State<optionLangueOne> {
       if (i.questionId == idQuestion) {
         ReponseLangue a = new ReponseLangue(
             i.key, i.answer, i.id, i.isGoodAnswer, i.questionId);
+
+        if(a.isGoodAnswer == '1')
+          {
+            reponseCorrect = a.answer;
+          }
         setReponse.add(a);
       }
     }

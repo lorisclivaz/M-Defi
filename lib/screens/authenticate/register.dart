@@ -35,6 +35,7 @@ class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
 
   Database db = new Database();
+  int coinQuiz = 0, score = 0, pointNegatif = 0, pointPositif = 0;
 
   //Variable de controle de saisie
   final _formKey = GlobalKey<FormState>();
@@ -163,6 +164,9 @@ class _RegisterState extends State<Register> {
                                 builder: (context) =>
                                     HomeApp(),
                               ));
+
+                          db.insertClassementUsersThemes(email, coinQuiz, score, pointNegatif, pointPositif);
+                          db.insertClassementUsersLangues(email, coinQuiz, score, pointNegatif, pointPositif);
                         }
 
                         if (result == null) {

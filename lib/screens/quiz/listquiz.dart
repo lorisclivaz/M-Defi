@@ -86,6 +86,7 @@ class _listQuizState extends State<QuizList> {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
+              centerTitle: true,
               leading: BackButton(
                 color: Colors.black,
                 onPressed:() => Navigator.of(context).pop() ,

@@ -3,8 +3,10 @@
  * Date creation : 04 juin 2020
  */
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mdefi/screens/authenticate/ForgotScreen.dart';
 import 'package:mdefi/screens/authenticate/register.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
@@ -34,6 +36,7 @@ class _SignInState extends State<SignIn> {
 
   //Variable d'authentification
   final AuthService _auth = AuthService();
+
 
   //Variable de controle de saisie
   final _formKey = GlobalKey<FormState>();
@@ -172,7 +175,7 @@ class _SignInState extends State<SignIn> {
             }
             },
             ),
-            SizedBox(height: 12.0),
+              SizedBox(height: 12.0),
             Text(
             error,
             style: TextStyle(color: Colors.red, fontSize: 14.0),

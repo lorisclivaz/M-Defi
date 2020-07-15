@@ -79,6 +79,7 @@ class _ThemesListState extends State<ThemesList> {
                    color: Colors.black,
                    onPressed:() => Navigator.of(context).pop() ,
                  ),
+                centerTitle: true,
                 title: Text("Themes"),
                   backgroundColor: Colors.blueGrey[400],
                    elevation: 0.0,

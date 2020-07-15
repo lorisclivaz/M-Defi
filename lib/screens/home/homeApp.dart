@@ -6,9 +6,11 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mdefi/models/userInfoSupp.dart';
+import 'package:mdefi/screens/Profil/Profil.dart';
 import 'package:mdefi/screens/Themes/langueList.dart';
 import 'package:mdefi/screens/Themes/themesList.dart';
 import 'package:mdefi/screens/authenticate/sign_in.dart';
+import 'package:mdefi/screens/classement/classement.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/services/database.dart';
@@ -66,6 +68,7 @@ class HomeApp extends StatelessWidget {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: Text("Home"),
+            centerTitle: true,
             backgroundColor: Colors.blueGrey[400],
             elevation: 0.0,
             actions: <Widget>[
@@ -184,7 +187,9 @@ class HomeApp extends StatelessWidget {
                           width: MediaQuery.of(context).size.width*0.30,
                           height: MediaQuery.of(context).size.height*0.23,
                           child: GestureDetector(
-                            onTap: ()=> print("Salut"),
+                            onTap: ()=> Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Classement(),
+                            )),
                             child: Card(
                               color: Colors.blue.withOpacity(0.1),
                               borderOnForeground: true,
@@ -195,7 +200,7 @@ class HomeApp extends StatelessWidget {
                                     Image.asset('assets/Calendrier.png', width: 64.0,),
                                     Text(''),
                                     Text(
-                                      'Agenda',
+                                      'Classement',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
@@ -206,7 +211,7 @@ class HomeApp extends StatelessWidget {
                                       height: 5.0,
                                     ),
                                     Text(
-                                      "Rappel",
+                                      "Top joueur",
                                       style: TextStyle(
                                         color: Colors.white,
                                       ),
@@ -222,7 +227,7 @@ class HomeApp extends StatelessWidget {
                           height: MediaQuery.of(context).size.height*0.23,
                           child: GestureDetector(
                             onTap: ()=> Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => About(),
+                              builder: (context) => Profil(),
                             )),
                             child: Card(
                               color: Colors.blue.withOpacity(0.1),
@@ -234,7 +239,7 @@ class HomeApp extends StatelessWidget {
                                     Image.asset('assets/Information.png', width: 64.0,),
                                     Text(''),
                                     Text(
-                                      'A propos',
+                                      'Profil',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,

@@ -1,23 +1,23 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:mdefi/models/CorrectionQuiz.dart';
+import 'package:mdefi/models/CorrectionQuizLangues.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/services/database.dart';
 
-class CorrectionQuiz extends StatefulWidget {
-
+class EndCorrectionQuizLangues extends StatefulWidget {
 
   @override
-  _CorrectionQuizState createState() => _CorrectionQuizState();
+  _EndCorrectionQuizLanguesState createState() => _EndCorrectionQuizLanguesState();
+
 }
 
-class _CorrectionQuizState extends State<CorrectionQuiz> {
+class _EndCorrectionQuizLanguesState extends State<EndCorrectionQuizLangues> {
 
   //Référence base  de données
-  final fb = FirebaseDatabase.instance.reference().child("CorrectionQuiz");
+  final fb = FirebaseDatabase.instance.reference().child("CorrectionQuizLangues");
 
   //Listes où il y aura les données dedans
-  List<CorrectionQuizModel> list = List();
+  List<CorrectionQuizLanguesModel> list = List();
 
   //Variable pour la base de données
   Database db = new Database();
@@ -38,11 +38,11 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
       var data = snap.value;
       list.clear();
       data.forEach((key, value) {
-        CorrectionQuizModel correctionQuizModel = new CorrectionQuizModel(
+        CorrectionQuizLanguesModel correctionQuizModel = new CorrectionQuizLanguesModel(
             key,
-            value['NomQuiz'],
+            value['Name1'],
+            value['Name2'],
             value['NombrePage'],
-            value['Question'],
             value['Reponse'],
             value['ReponseUser']);
 
@@ -60,18 +60,14 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
 
   }
 
-
-
   @override
   Widget build(BuildContext context) {
 
-
     //Trier la liste du plus petit au plus grand
     if(list.length > 0)
-      {
-        list.sort((a,b) => a.nombrePage.compareTo(b.nombrePage));
-      }
-
+    {
+      list.sort((a,b) => a.nombrePage.compareTo(b.nombrePage));
+    }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -91,7 +87,7 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                       HomeApp()), (Route<dynamic> route) => false);
 
-                  db.DeleteCorrectionQuiz();
+                  db.DeleteCorrectionQuizLangues();
                 },
               ),
             ],
@@ -102,7 +98,7 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
           ),
           body: new ListView.builder(
             itemCount: list.length,
-
+            shrinkWrap: true,
             itemBuilder: (context,index){
 
               return new SizedBox(
@@ -113,6 +109,7 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
                     padding: const EdgeInsets.all(16.0),
                     child: Container(
                       child: FittedBox(
+                        fit: BoxFit.contain,
                         child: Material(
                           color: Colors.white38,
                           elevation: 14.0,
@@ -131,25 +128,25 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
                                         child: Text(
                                           "Question "+list[index].nombrePage.toString(),
                                           style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 8.0,
-                                            fontWeight: FontWeight.bold,
-                                            decoration: TextDecoration.underline
+                                              color: Colors.black,
+                                              fontSize: 8.0,
+                                              fontWeight: FontWeight.bold,
+                                              decoration: TextDecoration.underline
                                           ),
                                         ),
                                       ),
-                                     SizedBox(
-                                       height: 20,
-                                       width: MediaQuery.of(context).size.width*0.15,
-                                       child:  Text(
-                                         list[index].question,
-                                         style: TextStyle(
-                                             color: Colors.black,
-                                             fontSize: 2.5,
-                                             fontWeight: FontWeight.bold,
-                                         ),
-                                       ),
-                                     ),
+                                      SizedBox(
+                                        height: 20,
+                                        width: MediaQuery.of(context).size.width*0.15,
+                                        child:  Text(
+                                          list[index].name1+'....'+list[index].name2,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 3,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
                                       SizedBox(height: 5,),
                                       SizedBox(
                                         height: 12,
@@ -164,9 +161,9 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 2,
-                                        width: MediaQuery.of(context).size.width*0.10,
-                                        child: icons(context,index)
+                                          height: 2,
+                                          width: MediaQuery.of(context).size.width*0.10,
+                                          child: icons(context,index)
 
                                       ),
 
@@ -192,31 +189,24 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
 
 
     );
+
   }
+  Widget icons (BuildContext context,int index)
+  {
 
-Widget icons (BuildContext context,int index)
-{
-
-  Widget child;
-  if(list[index].reponseUser.toString() == '0')
+    Widget child;
+    if(list[index].reponseUser.toString() == '0')
     {
       print("salut");
       child = Icon(Icons.beenhere, size: 10);
 
     }else
-      {
-        print("salut 2");
-        child = Icon(Icons.cancel, size: 10);
+    {
+      print("salut 2");
+      child = Icon(Icons.cancel, size: 10);
 
-      }
+    }
 
-  return child;
+    return child;
+  }
 }
-
-
-}
-
-//db.DeleteCorrectionQuiz();
-
-//Icons.beenhere
-//Icons.cancel

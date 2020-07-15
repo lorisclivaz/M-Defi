@@ -10,6 +10,7 @@ import 'package:mdefi/models/questions.dart';
 import 'package:mdefi/models/reponse.dart';
 import 'package:mdefi/models/solutions.dart';
 import 'package:mdefi/screens/LogicQuestion/optionOne.dart';
+import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/screens/quiz/endQuiz.dart';
 import 'package:mdefi/services/database.dart';
 import 'package:mdefi/shared/loading.dart';
@@ -239,13 +240,57 @@ class _optionTwoState extends State<optionTwo> {
         child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
+              centerTitle: true,
               backgroundColor: Colors.blueGrey[400],
               elevation: 0.0,
               title: Text('Quiz'),
               actions: <Widget>[
                 new IconButton(
                   icon: new Icon(Icons.close),
-                  onPressed: () => print("annulation du quiz"),
+                  onPressed: (){
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(20.0)), //this right here
+                            child: Container(
+                              height: 200,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextField(
+                                      decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: 'Aucune sauvegarde de quiz'),
+                                    ),
+                                    SizedBox(
+                                      width: 320.0,
+                                      child: RaisedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                              HomeApp()), (Route<dynamic> route) => false);
+
+                                          db.DeleteCorrectionQuiz();
+                                        },
+                                        child: Text(
+                                          "Page d'accueil",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        color: Colors.black45,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        });
+                  },
                 ),
               ],
               leading: new Container(),

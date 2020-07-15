@@ -3,6 +3,8 @@
  * Date creation : 04 juin 2020
  */
 
+
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:mdefi/models/questions.dart';
 import 'package:mdefi/models/solutions.dart';
@@ -292,5 +294,116 @@ class Database {
 
     reference.remove();
   }
+
+  //Méthode permettant d'insérer une correction dans la base de données
+  Future<String> insertCorrectionQuestionLangues(int nombrePage, String name1, String name2, String reponse, String userAnswer) async{
+
+    var response = <String, dynamic>{
+      'NombrePage':nombrePage,
+      'Name1' : name1,
+      'Name2' : name2,
+      'Reponse':reponse,
+      'ReponseUser': userAnswer
+
+    };
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("CorrectionQuizLangues").push();
+
+
+    reference.set(response);
+  }
+
+  //Méthode permettant d'insérer une correction dans la base de données
+  Future<String> DeleteCorrectionQuizLangues() async{
+
+
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("CorrectionQuizLangues");
+
+
+    reference.remove();
+  }
+
+
+  //Méthode permettant d'insérer les données pour le classement des utilisateurs
+  Future<String> insertClassementUsersThemes(String email, int coinQuiz,int score, int pointNegatif, int pointPositif) async{
+
+    var response = <String, dynamic>{
+      'Email':email,
+      'CoinQuiz' : coinQuiz,
+      'Score' : score,
+      'PointNegatif':pointNegatif,
+      'PointPositif': pointPositif
+
+    };
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("ClassementUsersThemes").push();
+
+
+    reference.set(response);
+  }
+
+  //Méthode permettant d'insérer les données pour le classement langues des utilisateurs
+  Future<String> insertClassementUsersLangues(String email, int coinQuiz,int score, int pointNegatif, int pointPositif) async{
+
+    var response = <String, dynamic>{
+      'Email':email,
+      'CoinQuiz' : coinQuiz,
+      'Score' : score,
+      'PointNegatif':pointNegatif,
+      'PointPositif': pointPositif
+
+    };
+
+    DatabaseReference reference = FirebaseDatabase.instance
+        .reference()
+        .child("ClassementUsersLangues").push();
+
+
+    reference.set(response);
+  }
+
+
+  //Méthode permettant de modifier les données de classement
+  void updateClassementThemes(String key,String email, int coinQuiz,int score, int pointNegatif, int pointPositif){
+
+    final DBRef = FirebaseDatabase.instance.reference().child('ClassementUsersThemes');
+
+    DBRef.child(key).update({
+      'Email':email,
+      'CoinQuiz' : coinQuiz,
+      'Score' : score,
+      'PointNegatif':pointNegatif,
+      'PointPositif': pointPositif
+    });
+
+    print("Update successfull");
+
+  }
+
+
+  //Méthode permettant de modifier les données de classement
+  void updateClassementLangues(String key,String email, int coinQuiz,int score, int pointNegatif, int pointPositif){
+
+    final DBRef = FirebaseDatabase.instance.reference().child('ClassementUsersLangues');
+
+    DBRef.child(key).update({
+      'Email':email,
+      'CoinQuiz' : coinQuiz,
+      'Score' : score,
+      'PointNegatif':pointNegatif,
+      'PointPositif': pointPositif
+    });
+
+    print("Update successfull");
+
+  }
+
 
 }

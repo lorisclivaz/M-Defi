@@ -3,9 +3,12 @@
  * Date creation : 09 juin 2020
  */
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:mdefi/models/ClassementModel.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/screens/quiz/CorrectionQuiz.dart';
+import 'package:mdefi/screens/quiz/EndCorrectionQuizLangues.dart';
 import 'package:mdefi/services/database.dart';
 import 'package:nice_button/NiceButton.dart';
 
@@ -17,6 +20,19 @@ import 'package:nice_button/NiceButton.dart';
  */
 
 class endQuiz extends StatelessWidget {
+
+  //Variables de la base de données
+  final fbThemes = FirebaseDatabase.instance.reference().child("ClassementUsersThemes");
+  final fbLangues = FirebaseDatabase.instance.reference().child("ClassementUsersLangues");
+
+  //Variable pour le classement
+  int isExist;
+  int coinQuizUpdate, scoreScoreUpdate, pointNegatifUpdate, pointPositifUpdate;
+
+
+  //Listes où il y aura les données dedans
+  List<ClassementModel> list = List();
+  List<ClassementModel> listLangues = List();
 
 
   //Variable du score et du nombre de pages
@@ -43,6 +59,7 @@ class endQuiz extends StatelessWidget {
       {
         coinQuiz = score * 3;
       }
+
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -127,13 +144,29 @@ class endQuiz extends StatelessWidget {
                   ),
 
                   Text(''),
-                  NiceButton(
+                  Card(
+                    margin: EdgeInsets.all(16.0),
+                    borderOnForeground: true,
                     elevation: 10.0,
-                    radius: 52.0,
-                    width: MediaQuery.of(context).size.width*0.80,
-                    text: "Vous avez gagné $coinQuiz coinquiz",
-                    background: Colors.white30,
-                    fontSize: 20,
+                    color: Colors.black.withOpacity(0.6),
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(16.0),
+                    ),
+                    child: Wrap(
+                      spacing: 60,
+                      children: <Widget>[
+                        Icon(Icons.attach_money, size: 30),
+                        Text(
+                          '$coinQuiz coinquiz',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
+
+                    ),
                   ),
                   Text(''),
                   NiceButton(
@@ -144,12 +177,26 @@ class endQuiz extends StatelessWidget {
                     background: Colors.white70,
                     fontSize: 20,
                     onPressed:(){
+
                       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                           HomeApp()), (Route<dynamic> route) => false);
 
                       db.DeleteCorrectionQuiz();
+
+                      if(nomQuiz == 'Langues')
+                        {
+                          updateInformationClassementLangues();
+
+                        }else
+                          {
+                            updateInformationClassementThemes();
+
+
+                          }
                     },
                   ),
+                  Text(""),
+
                   NiceButton(
                     elevation: 10.0,
                     radius: 52.0,
@@ -158,10 +205,24 @@ class endQuiz extends StatelessWidget {
                     background: Colors.white70,
                     fontSize: 20,
                     onPressed:(){
-                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                          CorrectionQuiz()), (Route<dynamic> route) => false);
+                      //UpdateClassement classement
 
-                      db.DeleteCorrectionQuiz();
+                      if(nomQuiz == 'Langues')
+                        {
+                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                              EndCorrectionQuizLangues()), (Route<dynamic> route) => false);
+
+                          updateInformationClassementLangues();
+
+                        }else
+                          {
+                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                CorrectionQuiz()), (Route<dynamic> route) => false);
+
+                            updateInformationClassementThemes();
+
+                          }
+
                     },
                   )
                 ],
@@ -171,4 +232,78 @@ class endQuiz extends StatelessWidget {
         )
     );
   }
+
+  //Modifier les informations de classement pour les themes
+  void updateInformationClassementThemes() {
+
+    //Récupération du classement langues
+    fbThemes.once().then((DataSnapshot snap) {
+      var data = snap.value;
+      list.clear();
+      data.forEach((key, value) {
+        ClassementModel classement = new ClassementModel(
+            key,
+            value['CoinQuiz'],
+            value['Email'],
+            value['PointNegatif'],
+            value['PointPositif'],
+            value['Score']);
+
+        print("Comparaison email : 1"+HomeApp.email + " email 2 "+classement.email);
+        if(HomeApp.email == classement.email)
+        {
+          isExist = 1;
+          coinQuizUpdate = coinQuiz + classement.coinQuiz;
+          scoreScoreUpdate = score + classement.score;
+          pointNegatifUpdate = pointNegatif + classement.pointNegatif;
+          pointPositifUpdate = pointPositif + classement.pointPositif;
+
+          db.updateClassementThemes(key, HomeApp.email, coinQuizUpdate, scoreScoreUpdate, pointNegatifUpdate, pointPositifUpdate);
+        }
+        list.add(classement);
+
+      });
+
+    });
+
+
+  }
+
+  //Modifier les informations pour les langues
+  void updateInformationClassementLangues() {
+
+    //Récupération du classement langues
+    fbLangues.once().then((DataSnapshot snap) {
+      var data = snap.value;
+      listLangues.clear();
+      data.forEach((key, value) {
+        ClassementModel classement = new ClassementModel(
+            key,
+            value['CoinQuiz'],
+            value['Email'],
+            value['PointNegatif'],
+            value['PointPositif'],
+            value['Score']);
+
+        print("Comparaison email : 1"+HomeApp.email + " email 2 "+classement.email);
+        if(HomeApp.email == classement.email)
+        {
+          isExist = 1;
+          coinQuizUpdate = coinQuiz + classement.coinQuiz;
+          scoreScoreUpdate = score + classement.score;
+          pointNegatifUpdate = pointNegatif + classement.pointNegatif;
+          pointPositifUpdate = pointPositif + classement.pointPositif;
+
+          db.updateClassementLangues(key, HomeApp.email, coinQuizUpdate, scoreScoreUpdate, pointNegatifUpdate, pointPositifUpdate);
+        }
+        list.add(classement);
+
+      });
+
+    });
+
+
+  }
+
 }
+
