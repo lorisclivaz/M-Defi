@@ -4,6 +4,7 @@
  */
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/ClassementModel.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
@@ -83,7 +84,7 @@ class endQuiz extends StatelessWidget {
               ],
               leading: new Container(),
             ),
-            body: SingleChildScrollView(
+            body: Form(
               child: Column(
                 children: <Widget>[
                   Align(
@@ -100,33 +101,54 @@ class endQuiz extends StatelessWidget {
                         )
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 36.0),
-                        child:NiceButton(
-                          elevation: 10.0,
-                          radius: 52.0,
-                          width: MediaQuery.of(context).size.width*0.80,
-                          text: 'Points positif :  $pointPositif',
-                          background: Colors.blue.withOpacity(0.2),
-                          fontSize: 20,
-                        )
+                  SizedBox(
+                    child: Container(
+                      width: 150.0,
+                      height: 150.0,
+                      decoration: new BoxDecoration(
+                        image:DecorationImage(
+                            image:
+                            AssetImage('assets/Recompense.png')
+                        ),
+                        borderRadius: new BorderRadius.circular(36.0),
+                      ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 36.0),
-                        child:NiceButton(
-                          elevation: 10.0,
-                          radius: 52.0,
-                          width: MediaQuery.of(context).size.width*0.80,
-                          text: 'Points négatif :  $pointNegatif',
-                          background: Colors.blue.withOpacity(0.2),
-                          fontSize: 20,
-                        )
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      SizedBox(height: 2,),
+                      Expanded(
+                        child: Container(
+                          color: Colors.white38.withOpacity(0.3),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(pointPositif.toString(), style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22
+                              ),),
+                              Text("Score Positif"),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          color: Colors.white30.withOpacity(0.4),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(pointNegatif.toString(),style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22
+                              ),),
+                              Text("Score Négatif"),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   Align(
                     alignment: Alignment.topLeft,
@@ -143,12 +165,11 @@ class endQuiz extends StatelessWidget {
                     ),
                   ),
 
-                  Text(''),
                   Card(
                     margin: EdgeInsets.all(16.0),
                     borderOnForeground: true,
                     elevation: 10.0,
-                    color: Colors.black.withOpacity(0.6),
+                    color: Colors.black.withOpacity(0.1),
                     shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(16.0),
                     ),
@@ -247,7 +268,8 @@ class endQuiz extends StatelessWidget {
             value['Email'],
             value['PointNegatif'],
             value['PointPositif'],
-            value['Score']);
+            value['Score'],
+            value['NomQuiz']);
 
         print("Comparaison email : 1"+HomeApp.email + " email 2 "+classement.email);
         if(HomeApp.email == classement.email)
@@ -258,7 +280,7 @@ class endQuiz extends StatelessWidget {
           pointNegatifUpdate = pointNegatif + classement.pointNegatif;
           pointPositifUpdate = pointPositif + classement.pointPositif;
 
-          db.updateClassementThemes(key, HomeApp.email, coinQuizUpdate, scoreScoreUpdate, pointNegatifUpdate, pointPositifUpdate);
+          db.updateClassementThemes(key, HomeApp.email, coinQuizUpdate, scoreScoreUpdate, pointNegatifUpdate, pointPositifUpdate,nomQuiz);
         }
         list.add(classement);
 
@@ -283,7 +305,8 @@ class endQuiz extends StatelessWidget {
             value['Email'],
             value['PointNegatif'],
             value['PointPositif'],
-            value['Score']);
+            value['Score'],
+            value['NomQuiz']);
 
         print("Comparaison email : 1"+HomeApp.email + " email 2 "+classement.email);
         if(HomeApp.email == classement.email)
@@ -294,7 +317,7 @@ class endQuiz extends StatelessWidget {
           pointNegatifUpdate = pointNegatif + classement.pointNegatif;
           pointPositifUpdate = pointPositif + classement.pointPositif;
 
-          db.updateClassementLangues(key, HomeApp.email, coinQuizUpdate, scoreScoreUpdate, pointNegatifUpdate, pointPositifUpdate);
+          db.updateClassementLangues(key, HomeApp.email, coinQuizUpdate, scoreScoreUpdate, pointNegatifUpdate, pointPositifUpdate,nomQuiz);
         }
         list.add(classement);
 

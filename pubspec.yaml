@@ -69,6 +69,7 @@ flutter:
     - assets/Anglais.jpg
     - assets/Allemand.jpg
     - assets/lucus.jpg
+    - assets/Recompense.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

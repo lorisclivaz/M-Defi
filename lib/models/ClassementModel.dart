@@ -10,10 +10,11 @@ class ClassementModel
   int score;
   int pointPositif;
   int pointNegatif;
+  String nomQuiz;
 
 
   //Constructeur
-  ClassementModel(this.key, this.coinQuiz, this.email, this.pointNegatif , this.pointPositif,this.score );
+  ClassementModel(this.key, this.coinQuiz, this.email, this.pointNegatif , this.pointPositif,this.score, this.nomQuiz);
 
 
   //Constructeur pour la base de données
@@ -24,6 +25,8 @@ class ClassementModel
     this.pointNegatif = snapshot.value["PointNegatif"];
     this.pointPositif = snapshot.value["PointPositif"];
     this.score = snapshot.value["Score"];
+    this.score = snapshot.value["NomQuiz"];
+
 
   }
 

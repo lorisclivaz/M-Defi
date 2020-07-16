@@ -200,7 +200,7 @@ class HomeApp extends StatelessWidget {
                                     Image.asset('assets/Calendrier.png', width: 64.0,),
                                     Text(''),
                                     Text(
-                                      'Classement',
+                                      'Joueur',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,

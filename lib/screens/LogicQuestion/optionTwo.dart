@@ -421,6 +421,8 @@ class _optionTwoState extends State<optionTwo> {
                                 {
                                   petitePhrase = 'Mauvaise performance !!!!';
                                 }
+                                nomQuiz = 'Thèmes';
+
                                 Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) =>

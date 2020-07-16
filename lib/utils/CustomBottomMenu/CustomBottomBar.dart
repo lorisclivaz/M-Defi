@@ -25,8 +25,8 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   List<ClassementModel> listLangues = List();
 
   //Final user par rapport à toutes les données dans la db
-  ClassementModel dataFieldsThemes = new ClassementModel('', 0, '', 0, 0, 0);
-  ClassementModel dataFieldsLangues = new ClassementModel('', 0, '', 0, 0, 0);
+  ClassementModel dataFieldsThemes = new ClassementModel('', 0, '', 0, 0, 0,'');
+  ClassementModel dataFieldsLangues = new ClassementModel('', 0, '', 0, 0, 0,'');
 
   //CoinQuiz
   static int totalCoinQuiz = 0;
@@ -54,7 +54,9 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
             value['Email'],
             value['PointNegatif'],
             value['PointPositif'],
-            value['Score']);
+            value['Score'],
+            value['NomQuiz']);
+
 
         listThemes.add(classement);
       });
@@ -81,7 +83,8 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
             value['Email'],
             value['PointNegatif'],
             value['PointPositif'],
-            value['Score']);
+            value['Score'],
+            value['NomQuiz']);
 
         listLangues.add(classement);
 
@@ -126,9 +129,25 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
               backgroundColor: Colors.white24,
               buttonBackgroundColor: Colors.blueGrey,
               items: <Widget>[
-                Icon(Icons.fastfood, size: 20, color: Colors.black),
-                Icon(Icons.local_drink, size: 20, color: Colors.black),
-                Icon(Icons.cake, size: 20, color: Colors.black)
+                Column(
+                  children: <Widget>[
+                    Icon(Icons.fastfood, size: 20, color: Colors.black),
+                    Text("Repas")
+
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    Icon(Icons.local_drink, size: 20, color: Colors.black),
+                    Text("Minérale")
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    Icon(Icons.cake, size: 20, color: Colors.black),
+                    Text("Café")
+                  ],
+                )
               ],
             animationDuration: Duration(
               milliseconds: 200

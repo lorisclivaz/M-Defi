@@ -55,9 +55,26 @@ class _ClassementState extends State<Classement> {
         backgroundColor: Colors.white24,
         buttonBackgroundColor: Colors.blueGrey,
         items: <Widget>[
-          Icon(Icons.score, size: 30, color: Colors.black,),
-          Icon(Icons.monetization_on, size: 30, color: Colors.black),
-          Icon(Icons.control_point, size: 30, color: Colors.black)
+          Column(
+            children: <Widget>[
+              Icon(Icons.score, size: 30, color: Colors.black,),
+              Text("Score")
+
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              Icon(Icons.monetization_on, size: 30, color: Colors.black),
+              Text("CoinQuiz")
+
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              Icon(Icons.control_point, size: 30, color: Colors.black),
+              Text("Points +")
+            ],
+          )
         ],
         animationDuration: Duration(
             milliseconds: 200

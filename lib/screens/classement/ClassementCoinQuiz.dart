@@ -62,7 +62,8 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
             value['Email'],
             value['PointNegatif'],
             value['PointPositif'],
-            value['Score']);
+            value['Score'],
+            value['NomQuiz']);
 
         list.add(classement);
 
@@ -86,7 +87,8 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
             value['Email'],
             value['PointNegatif'],
             value['PointPositif'],
-            value['Score']);
+            value['Score'],
+            value['NomQuiz']);
 
         listLangue.add(classement);
 
@@ -109,7 +111,7 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
 
     //Trier la liste du plus petit au plus grand
 
-    listTotal.sort((a,b) => a.coinQuiz.toString().compareTo(b.coinQuiz.toString()));
+    listTotal.sort((b,a) => a.coinQuiz.toString().compareTo(b.coinQuiz.toString()));
 
 
     return MaterialApp(
@@ -162,9 +164,9 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
                                               child: RaisedButton(
 
                                                 child: Text(
-                                                  "Place : "+ number[index].toString(),
+                                                  "Place "+ listTotal[index].nomQuiz+ ":"+ number[index].toString(),
                                                   style: TextStyle(
-                                                      fontSize: 4
+                                                      fontSize: 3
                                                   ),
                                                 ),
                                                 color: Colors.black12,

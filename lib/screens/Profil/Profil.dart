@@ -29,6 +29,7 @@ class _ProfilState extends State<Profil> {
   String email;
   String coinQuiz = '0';
 
+
   //Récupération des infos utilisateurs
   UserInfoSupp user = new UserInfoSupp('','', '', '', '', '',
       '', '');
@@ -41,8 +42,8 @@ class _ProfilState extends State<Profil> {
   List<ClassementModel> listLangues = List();
 
   //Final user par rapport à toutes les données dans la db
-  ClassementModel dataFieldsThemes = new ClassementModel('', 0, '', 0, 0, 0);
-  ClassementModel dataFieldsLangues = new ClassementModel('', 0, '', 0, 0, 0);
+  ClassementModel dataFieldsThemes = new ClassementModel('', 0, '', 0, 0, 0,'');
+  ClassementModel dataFieldsLangues = new ClassementModel('', 0, '', 0, 0, 0,'');
 
 
   Database db = new Database();
@@ -101,7 +102,8 @@ class _ProfilState extends State<Profil> {
             value['Email'],
             value['PointNegatif'],
             value['PointPositif'],
-            value['Score']);
+            value['Score'],
+            value['NomQuiz']);
 
         listThemes.add(classement);
       });
@@ -128,7 +130,8 @@ class _ProfilState extends State<Profil> {
             value['Email'],
             value['PointNegatif'],
             value['PointPositif'],
-            value['Score']);
+            value['Score'],
+            value['NomQuiz']);
 
         listLangues.add(classement);
 
@@ -294,31 +297,37 @@ class _ProfilState extends State<Profil> {
                    // mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      SizedBox(height: 15,),
                       Text("Email",style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.cyan
+                        fontSize: 28,
+                        color: Colors.cyan,
+                        decoration: TextDecoration.underline
                       ),),
                       Text(dataFields.email,style: TextStyle(
-                        fontSize: 28,
-                        color: Colors.black87
+                        fontSize: 22,
+                        color: Colors.white
                       ),),
                       SizedBox(height: 30,),
                       Text("Filière",style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.cyan
+                          fontSize: 28,
+                          color: Colors.cyan,
+                          decoration: TextDecoration.underline
+
                       ),),
                       Text(dataFields.filiere,style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.black87
+                          fontSize: 22,
+                          color: Colors.white
                       ),),
                       SizedBox(height: 30,),
                       Text("CoinQuiz",style: TextStyle(
-                          fontSize: 22,
-                          color: Colors.cyan
+                          fontSize: 28,
+                          color: Colors.cyan,
+                          decoration: TextDecoration.underline
+
                       ),),
                       Text(totalCoinquiz.toString(),style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.black87
+                          fontSize: 22,
+                          color: Colors.white
                       ),),
 
 

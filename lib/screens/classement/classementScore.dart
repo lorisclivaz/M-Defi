@@ -60,7 +60,8 @@ class _ClassementScoreState extends State<ClassementScore> with SingleTickerProv
             value['Email'],
             value['PointNegatif'],
             value['PointPositif'],
-            value['Score']);
+            value['Score'],
+            value['NomQuiz']);
 
         list.add(classement);
 
@@ -84,7 +85,8 @@ class _ClassementScoreState extends State<ClassementScore> with SingleTickerProv
             value['Email'],
             value['PointNegatif'],
             value['PointPositif'],
-            value['Score']);
+            value['Score'],
+            value['NomQuiz']);
 
         listLangue.add(classement);
 
@@ -114,7 +116,7 @@ class _ClassementScoreState extends State<ClassementScore> with SingleTickerProv
 
     //Trier la liste du plus petit au plus grand
 
-      listTotal.sort((a,b) => a.score.toString().compareTo(b.score.toString()));
+      listTotal.sort((b,a) => a.score.toString().compareTo(b.score.toString()));
 
 
       return MaterialApp(
@@ -166,9 +168,9 @@ class _ClassementScoreState extends State<ClassementScore> with SingleTickerProv
                                                 child:  RaisedButton(
 
                                                   child: Text(
-                                                     "Place : "+ number[index].toString(),
+                                                     "Place "+listTotal[index].nomQuiz+" :"+ number[index].toString(),
                                                     style: TextStyle(
-                                                      fontSize: 4
+                                                      fontSize: 3
                                                     ),
                                                   ),
                                                   color: Colors.black12,

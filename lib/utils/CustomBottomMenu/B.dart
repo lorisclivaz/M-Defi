@@ -59,11 +59,12 @@ class B extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    TextField(
-                                      decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          hintText: 'Sauvegarder le code suivant $randomValue ? '),
-                                    ),
+                                  Text(
+                                  'Sauvegarder le code suivant $randomValue ? ',
+                                  style: TextStyle(
+                                      fontSize: 19
+                                  ),
+                                ),
                                     SizedBox(
                                       width: 320.0,
                                       child: RaisedButton(

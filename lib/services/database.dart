@@ -330,14 +330,16 @@ class Database {
 
 
   //Méthode permettant d'insérer les données pour le classement des utilisateurs
-  Future<String> insertClassementUsersThemes(String email, int coinQuiz,int score, int pointNegatif, int pointPositif) async{
+  Future<String> insertClassementUsersThemes(String email, int coinQuiz,int score, int pointNegatif, int pointPositif, String nomQuiz) async{
 
     var response = <String, dynamic>{
       'Email':email,
       'CoinQuiz' : coinQuiz,
       'Score' : score,
       'PointNegatif':pointNegatif,
-      'PointPositif': pointPositif
+      'PointPositif': pointPositif,
+      'NomQuiz': nomQuiz
+
 
     };
 
@@ -350,14 +352,16 @@ class Database {
   }
 
   //Méthode permettant d'insérer les données pour le classement langues des utilisateurs
-  Future<String> insertClassementUsersLangues(String email, int coinQuiz,int score, int pointNegatif, int pointPositif) async{
+  Future<String> insertClassementUsersLangues(String email, int coinQuiz,int score, int pointNegatif, int pointPositif, String nomQuiz) async{
 
     var response = <String, dynamic>{
       'Email':email,
       'CoinQuiz' : coinQuiz,
       'Score' : score,
       'PointNegatif':pointNegatif,
-      'PointPositif': pointPositif
+      'PointPositif': pointPositif,
+      'NomQuiz': nomQuiz
+
 
     };
 
@@ -371,7 +375,7 @@ class Database {
 
 
   //Méthode permettant de modifier les données de classement
-  void updateClassementThemes(String key,String email, int coinQuiz,int score, int pointNegatif, int pointPositif){
+  void updateClassementThemes(String key,String email, int coinQuiz,int score, int pointNegatif, int pointPositif, String nomQuiz){
 
     final DBRef = FirebaseDatabase.instance.reference().child('ClassementUsersThemes');
 
@@ -380,7 +384,9 @@ class Database {
       'CoinQuiz' : coinQuiz,
       'Score' : score,
       'PointNegatif':pointNegatif,
-      'PointPositif': pointPositif
+      'PointPositif': pointPositif,
+      'NomQuiz': nomQuiz
+
     });
 
     print("Update successfull");
@@ -389,7 +395,7 @@ class Database {
 
 
   //Méthode permettant de modifier les données de classement
-  void updateClassementLangues(String key,String email, int coinQuiz,int score, int pointNegatif, int pointPositif){
+  void updateClassementLangues(String key,String email, int coinQuiz,int score, int pointNegatif, int pointPositif, String nomQuiz){
 
     final DBRef = FirebaseDatabase.instance.reference().child('ClassementUsersLangues');
 
@@ -398,7 +404,8 @@ class Database {
       'CoinQuiz' : coinQuiz,
       'Score' : score,
       'PointNegatif':pointNegatif,
-      'PointPositif': pointPositif
+      'PointPositif': pointPositif,
+      'NomQuiz': nomQuiz
     });
 
     print("Update successfull");

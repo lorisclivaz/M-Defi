@@ -207,12 +207,52 @@ class _optionLangueOneState extends State<optionLangueOne> {
               actions: <Widget>[
                 new IconButton(
                   icon: new Icon(Icons.close),
-                  onPressed: () =>  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                      HomeApp()), (Route<dynamic> route) => false)
-                  ,
+                  onPressed: (){
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(20.0)), //this right here
+                            child: Container(
+                              height: 200,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextField(
+                                      decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: 'Aucune sauvegarde de quiz'),
+                                    ),
+                                    SizedBox(
+                                      width: 320.0,
+                                      child: RaisedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                              HomeApp()), (Route<dynamic> route) => false);
+
+                                          db.DeleteCorrectionQuiz();
+                                        },
+                                        child: Text(
+                                          "Page d'accueil",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        color: Colors.black45,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        });
+                  },
                 ),
               ],
-              leading: new Container(),
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -331,6 +371,7 @@ class _optionLangueOneState extends State<optionLangueOne> {
                                   {
                                     petitePhrase = 'Mauvaise performance !!!!';
                                   }
+                                  nomQuiz = 'Langues';
                                   Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (context) =>

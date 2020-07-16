@@ -36,6 +36,7 @@ class _RegisterState extends State<Register> {
 
   Database db = new Database();
   int coinQuiz = 0, score = 0, pointNegatif = 0, pointPositif = 0;
+  String nomQuiz = '';
 
   //Variable de controle de saisie
   final _formKey = GlobalKey<FormState>();
@@ -165,8 +166,8 @@ class _RegisterState extends State<Register> {
                                     HomeApp(),
                               ));
 
-                          db.insertClassementUsersThemes(email, coinQuiz, score, pointNegatif, pointPositif);
-                          db.insertClassementUsersLangues(email, coinQuiz, score, pointNegatif, pointPositif);
+                          db.insertClassementUsersThemes(email, coinQuiz, score, pointNegatif, pointPositif,nomQuiz);
+                          db.insertClassementUsersLangues(email, coinQuiz, score, pointNegatif, pointPositif,nomQuiz);
                         }
 
                         if (result == null) {
