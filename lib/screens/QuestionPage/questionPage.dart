@@ -185,8 +185,8 @@ class _QuestionPage extends State<QuestionPage> {
                               new Text(
                                   '                                                                           '
                                       'Dans ce mode tu devras répondre à six '
-                                      'question, chaque réponse correcte te fait'
-                                      ' gagner deux points et chaque réponse incorrecte'
+                                      'questions, chaque réponse correcte te fait'
+                                      ' gagner deux points et chaque réponse incorrecte '
                                       'te fait perdre un point',
                                   style: TextStyle(
                                       color: Colors.white,

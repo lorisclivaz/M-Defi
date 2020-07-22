@@ -112,7 +112,7 @@ class _ClassementPointState extends State<ClassementPoint> with SingleTickerProv
 
     //Trier la liste du plus petit au plus grand
 
-    listTotal.sort((b,a) => a.pointPositif.toString().compareTo(b.pointPositif.toString()));
+    listTotal.sort((b,a) => a.pointPositif.compareTo(b.pointPositif));
 
 
     return MaterialApp(
@@ -212,7 +212,7 @@ class _ClassementPointState extends State<ClassementPoint> with SingleTickerProv
                                             height: 12,
                                             width: MediaQuery.of(context).size.width*0.10,
                                             child:  Wrap(
-                                              spacing: 10,
+                                              spacing: 9,
                                               children: <Widget>[
                                                 Text(
                                                   "Point + : "+listTotal[index].pointPositif.toString(),

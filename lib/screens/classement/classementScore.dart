@@ -116,7 +116,7 @@ class _ClassementScoreState extends State<ClassementScore> with SingleTickerProv
 
     //Trier la liste du plus petit au plus grand
 
-      listTotal.sort((b,a) => a.score.toString().compareTo(b.score.toString()));
+      listTotal.sort((b,a) => a.score.compareTo(b.score));
 
 
       return MaterialApp(

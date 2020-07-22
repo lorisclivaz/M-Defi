@@ -85,16 +85,7 @@ class MainDrawer extends StatelessWidget {
               ));
             },
           ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text(
-              'Settings',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            onTap: null,
-          ),
+         
           ListTile(
             leading: Icon(Icons.add_shopping_cart),
             title: Text(

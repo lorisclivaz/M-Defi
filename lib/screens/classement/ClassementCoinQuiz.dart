@@ -102,17 +102,20 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
     });
 
 
+
+
   }
+
+
 
   @override
   Widget build(BuildContext context) {
-
     listTotal = [...listLangue,...list];
+
 
     //Trier la liste du plus petit au plus grand
 
-    listTotal.sort((b,a) => a.coinQuiz.toString().compareTo(b.coinQuiz.toString()));
-
+    listTotal.sort((b,a) => a.coinQuiz.compareTo(b.coinQuiz));
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -274,4 +277,6 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
 
     );
   }
+
+
 }
