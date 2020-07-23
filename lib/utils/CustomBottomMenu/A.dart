@@ -1,23 +1,31 @@
-import 'dart:math';
+/*
+ * Author : Loris Clivaz
+ * Date creation : 16 juillet 2020
+ */
 
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:nice_button/NiceButton.dart';
 
+/*
+ * Classe de bon d'achat pour les repas
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 class A extends StatelessWidget {
 
+  //Variables de conditions pour la page
   int randomValue = 0;
   int totalCoinQuiz;
 
+  //Constructeur
   A(this.totalCoinQuiz);
 
+  //Design de la page
   @override
   Widget build(BuildContext context) {
-
-
-
-    print("Total coin :"+totalCoinQuiz.toString());
     randomValue = random(50000, 500000);
     return MaterialApp(
       debugShowCheckedModeBanner: false,

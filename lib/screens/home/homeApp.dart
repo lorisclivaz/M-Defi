@@ -14,7 +14,6 @@ import 'package:mdefi/screens/classement/classement.dart';
 import 'package:mdefi/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/services/database.dart';
-import 'package:mdefi/utils/about/about.dart';
 import 'package:mdefi/utils/mainDrawer.dart';
 import 'package:nice_button/NiceButton.dart';
 

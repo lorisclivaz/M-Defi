@@ -1,3 +1,8 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 16 juillet 2020
+ */
+
 import 'package:firebase_database/firebase_database.dart';
 import "package:flutter/material.dart";
 import 'package:mdefi/models/ClassementModel.dart';
@@ -7,6 +12,12 @@ import 'package:mdefi/services/auth.dart';
 import 'package:mdefi/services/database.dart';
 import 'package:mdefi/utils/userInformation/informations.dart';
 
+/*
+ * Classe de profil utilisateur
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 class Profil extends StatefulWidget {
   @override
   _ProfilState createState() => _ProfilState();
@@ -19,9 +30,11 @@ class _ProfilState extends State<Profil> {
   final fb = FirebaseDatabase.instance.reference().child("users");
   final fbThemes = FirebaseDatabase.instance.reference().child("ClassementUsersThemes");
   final fbLangues = FirebaseDatabase.instance.reference().child("ClassementUsersLangues");
+  Database db = new Database();
+  final fbUser = FirebaseDatabase.instance.reference().child("users");
 
 
-
+  //Variables utilisateur
   String prenom = 'Compléter';
   String nom = 'Compléter';
   String scoreThemes = '0';
@@ -40,16 +53,12 @@ class _ProfilState extends State<Profil> {
   //Récupération des infos de classement
   List<ClassementModel> listThemes = List();
   List<ClassementModel> listLangues = List();
+  List<UserInfoSupp> users = List();
+
 
   //Final user par rapport à toutes les données dans la db
   ClassementModel dataFieldsThemes = new ClassementModel('', 0, '', 0, 0, 0,'');
   ClassementModel dataFieldsLangues = new ClassementModel('', 0, '', 0, 0, 0,'');
-
-
-  Database db = new Database();
-  final fbUser = FirebaseDatabase.instance.reference().child("users");
-  List<UserInfoSupp> users = List();
-
 
 
   //Variable current user
@@ -57,7 +66,6 @@ class _ProfilState extends State<Profil> {
   List<UserInfoSupp> list = List();
 
   //Total coinquiz
-
   int totalCoinquiz;
 
   @override
@@ -148,6 +156,7 @@ class _ProfilState extends State<Profil> {
 
   }
 
+  //Design de la page
   @override
   Widget build(BuildContext context) {
 
@@ -195,10 +204,8 @@ class _ProfilState extends State<Profil> {
               },
             ),
           )
-
         ],
       ),
-
           body: Form(
             child: Column(
               children: <Widget>[
@@ -283,7 +290,6 @@ class _ProfilState extends State<Profil> {
                                     ),
                                   ),
                                 ),
-
                             ],
                           ),
                         )
@@ -291,7 +297,6 @@ class _ProfilState extends State<Profil> {
                     ),
                   ),
                 ),
-
                 Expanded(
                   child: Column(
                    // mainAxisAlignment: MainAxisAlignment.center,
@@ -329,23 +334,18 @@ class _ProfilState extends State<Profil> {
                           fontSize: 22,
                           color: Colors.white
                       ),),
-
-
                     ],
-
                   ),
                 )
-
               ],
-
             ),
           ),
         ),
       ),
-
     );
   }
 
+  //Methode détectant si l'utilisateur existe ou pas
   void userExist(){
     //Récupération des questions
     fbUser.once().then((DataSnapshot snap) {

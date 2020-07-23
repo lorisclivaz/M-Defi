@@ -1,9 +1,20 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 12 juillet 2020
+ */
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+/*
+ * Classe de modèle correction
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 class CorrectionQuizLanguesModel
 {
-  //Variable langue
+  //Variable correction
   String key;
   int nombrePage;
   String name1;

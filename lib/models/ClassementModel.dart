@@ -1,9 +1,21 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 10 juillet 2020
+ */
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+/*
+ * Classe de modèle classement
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
+
 class ClassementModel
 {
-  //Variable langue
+  //Variable classement
   String key;
   String email;
   int coinQuiz;

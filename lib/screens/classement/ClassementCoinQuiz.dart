@@ -1,9 +1,20 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 14 juillet 2020
+ */
+
 import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/ClassementModel.dart';
 
+/*
+ * Classe de classement par coinquiz
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 class ClassementCoinQuiz extends StatefulWidget {
   @override
   _ClassementCoinQuizState createState() => _ClassementCoinQuizState();
@@ -41,6 +52,7 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
   void initState() {
     // TODO: implement initState
 
+    //Lancement de l'animation
     _animationController = AnimationController(
         vsync: this,
         duration: Duration(milliseconds: 1000)
@@ -51,7 +63,7 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
     _animationController.forward();
     super.initState();
 
-    //Récupération des themes
+    //Récupération des différents score themes
     fb.once().then((DataSnapshot snap) {
       var data = snap.value;
       list.clear();
@@ -76,7 +88,7 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
       }
     });
 
-    //Récupération des langues
+    //Récupération des scores langues
     fbLangue.once().then((DataSnapshot snap) {
       var data = snap.value;
       listLangue.clear();
@@ -100,14 +112,9 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
         });
       }
     });
-
-
-
-
   }
 
-
-
+  //design de la page
   @override
   Widget build(BuildContext context) {
     listTotal = [...listLangue,...list];
@@ -234,7 +241,6 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
                                                   ),
                                                 )
                                               ],
-
                                             ),
                                           ),
                                           SizedBox(
@@ -248,10 +254,7 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ) ,
-
-
                                           ),
-
                                         ],
                                       ),
                                     ),
@@ -260,21 +263,16 @@ class _ClassementCoinQuizState extends State<ClassementCoinQuiz> with SingleTick
                               ),
                             ),
                           ),
-
                         ),
                       ),
                     ),
-
                   ),
                 ),
               );
             },
           ),
-
         ),
       ),
-
-
     );
   }
 

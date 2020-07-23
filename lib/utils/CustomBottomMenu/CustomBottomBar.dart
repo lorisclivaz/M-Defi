@@ -1,12 +1,23 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 16 juillet 2020
+ */
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/ClassementModel.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
-
 import 'A.dart';
 import 'B.dart';
 import 'C.dart';
+
+/*
+ * Classe de bar menu sur les bon d'achat
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 
 class CustomBottomBar extends StatefulWidget {
   @override
@@ -14,9 +25,10 @@ class CustomBottomBar extends StatefulWidget {
 }
 
 class _CustomBottomBarState extends State<CustomBottomBar> {
+  //Variables des différentes pages
   var _page = 0;
 
-
+  //Vairable de base de données
   final fbThemes = FirebaseDatabase.instance.reference().child("ClassementUsersThemes");
   final fbLangues = FirebaseDatabase.instance.reference().child("ClassementUsersLangues");
 
@@ -30,7 +42,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
 
   //CoinQuiz
   static int totalCoinQuiz = 0;
-  final pages = [A(totalCoinQuiz),B(),C()];
+  final pages = [A(totalCoinQuiz),B(totalCoinQuiz),C(totalCoinQuiz)];
 
   @override
   void dispose() {

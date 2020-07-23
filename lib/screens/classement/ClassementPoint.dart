@@ -1,8 +1,19 @@
-import 'dart:async';
+/*
+ * Author : Loris Clivaz
+ * Date creation : 14 juillet 2020
+ */
 
+import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/ClassementModel.dart';
+
+/*
+ * Classe de classement par point
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 
 class ClassementPoint extends StatefulWidget {
   @override
@@ -34,6 +45,7 @@ class _ClassementPointState extends State<ClassementPoint> with SingleTickerProv
   @override
   void initState() {
     // TODO: implement initState
+    //lancement de l'animation
     _animationController = AnimationController(
         vsync: this,
         duration: Duration(milliseconds: 1000)
@@ -105,6 +117,7 @@ class _ClassementPointState extends State<ClassementPoint> with SingleTickerProv
     _animationController.dispose();
   }
 
+  //Design de la page
   @override
   Widget build(BuildContext context) {
 

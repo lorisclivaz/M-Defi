@@ -1,10 +1,20 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 13 juillet 2020
+ */
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/screens/classement/ClassementCoinQuiz.dart';
 import 'package:mdefi/screens/classement/ClassementPoint.dart';
 import 'package:mdefi/screens/classement/classementScore.dart';
 
+/*
+ * Classe de classement
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 class Classement extends StatefulWidget {
 
 
@@ -15,10 +25,11 @@ class Classement extends StatefulWidget {
 
 class _ClassementState extends State<Classement> {
 
-  //Page de classement
+  //variable classement screens
   var _page = 0;
   final pages = [ClassementScore(), ClassementCoinQuiz(), ClassementPoint()];
 
+  //Methode permettant de supprimer le state de la page
 @override
   void dispose() {
     // TODO: implement dispose
@@ -28,6 +39,7 @@ class _ClassementState extends State<Classement> {
 
 
 
+  //Design de la page
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

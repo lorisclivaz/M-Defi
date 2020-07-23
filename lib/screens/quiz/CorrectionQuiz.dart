@@ -1,9 +1,20 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 10 juillet 2020
+ */
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/CorrectionQuiz.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/services/database.dart';
 
+/*
+ * Classe de correction
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 class CorrectionQuiz extends StatefulWidget {
 
 
@@ -56,23 +67,17 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
         });
       }
     });
-
-
   }
 
 
-
+  //Design de la page
   @override
   Widget build(BuildContext context) {
-
-
     //Trier la liste du plus petit au plus grand
     if(list.length > 0)
       {
         list.sort((a,b) => a.nombrePage.compareTo(b.nombrePage));
       }
-
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -82,7 +87,6 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-
             actions: <Widget>[
               FlatButton.icon(
                 icon: Icon(Icons.home),
@@ -90,7 +94,6 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                       HomeApp()), (Route<dynamic> route) => false);
-
                   db.DeleteCorrectionQuiz();
                 },
               ),
@@ -102,9 +105,7 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
           ),
           body: new ListView.builder(
             itemCount: list.length,
-
             itemBuilder: (context,index){
-
               return new SizedBox(
                 width: 100.0,
                 height: 300.0,
@@ -167,9 +168,7 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
                                         height: 2,
                                         width: MediaQuery.of(context).size.width*0.10,
                                         child: icons(context,index)
-
                                       ),
-
                                     ],
                                   ),
                                 ),
@@ -178,19 +177,14 @@ class _CorrectionQuizState extends State<CorrectionQuiz> {
                           ),
                         ),
                       ),
-
                     ),
                   ),
                 ),
-
               );
             },
           ),
-
         ),
       ),
-
-
     );
   }
 
@@ -200,23 +194,13 @@ Widget icons (BuildContext context,int index)
   Widget child;
   if(list[index].reponseUser.toString() == '0')
     {
-      print("salut");
       child = Icon(Icons.beenhere, size: 10);
 
     }else
       {
-        print("salut 2");
         child = Icon(Icons.cancel, size: 10);
-
       }
-
   return child;
 }
-
-
 }
 
-//db.DeleteCorrectionQuiz();
-
-//Icons.beenhere
-//Icons.cancel

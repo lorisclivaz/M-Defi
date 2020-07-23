@@ -115,7 +115,6 @@ class _LanguesListState extends State<LanguesList> {
         if(list[index].name == 'Anglais')
           {
             langue = '0';
-            print("la langue : "+ langue);
           }
         if(list[index].name == 'Français')
         {

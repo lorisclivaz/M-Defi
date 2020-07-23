@@ -1,8 +1,20 @@
+/*
+ * Author : Loris Clivaz
+ * Date creation : 10 juillet 2020
+ */
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/CorrectionQuizLangues.dart';
 import 'package:mdefi/screens/home/homeApp.dart';
 import 'package:mdefi/services/database.dart';
+
+/*
+ * Classe de correction pour les langues
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 
 class EndCorrectionQuizLangues extends StatefulWidget {
 
@@ -56,19 +68,17 @@ class _EndCorrectionQuizLanguesState extends State<EndCorrectionQuizLangues> {
         });
       }
     });
-
-
   }
 
+  //Design de la page
   @override
   Widget build(BuildContext context) {
 
-    //Trier la liste du plus petit au plus grand
+    //Trier la liste du plus grand au plus petit
     if(list.length > 0)
     {
       list.sort((a,b) => a.nombrePage.compareTo(b.nombrePage));
     }
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -78,7 +88,6 @@ class _EndCorrectionQuizLanguesState extends State<EndCorrectionQuizLangues> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-
             actions: <Widget>[
               FlatButton.icon(
                 icon: Icon(Icons.home),
@@ -86,7 +95,6 @@ class _EndCorrectionQuizLanguesState extends State<EndCorrectionQuizLangues> {
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                       HomeApp()), (Route<dynamic> route) => false);
-
                   db.DeleteCorrectionQuizLangues();
                 },
               ),
@@ -100,7 +108,6 @@ class _EndCorrectionQuizLanguesState extends State<EndCorrectionQuizLangues> {
             itemCount: list.length,
             shrinkWrap: true,
             itemBuilder: (context,index){
-
               return new SizedBox(
                 width: 100.0,
                 height: 300.0,
@@ -164,9 +171,7 @@ class _EndCorrectionQuizLanguesState extends State<EndCorrectionQuizLangues> {
                                           height: 2,
                                           width: MediaQuery.of(context).size.width*0.10,
                                           child: icons(context,index)
-
                                       ),
-
                                     ],
                                   ),
                                 ),
@@ -175,21 +180,15 @@ class _EndCorrectionQuizLanguesState extends State<EndCorrectionQuizLangues> {
                           ),
                         ),
                       ),
-
                     ),
                   ),
                 ),
-
               );
             },
           ),
-
         ),
       ),
-
-
     );
-
   }
   Widget icons (BuildContext context,int index)
   {
@@ -197,16 +196,13 @@ class _EndCorrectionQuizLanguesState extends State<EndCorrectionQuizLangues> {
     Widget child;
     if(list[index].reponseUser.toString() == '0')
     {
-      print("salut");
       child = Icon(Icons.beenhere, size: 10);
 
     }else
     {
-      print("salut 2");
       child = Icon(Icons.cancel, size: 10);
 
     }
-
     return child;
   }
 }

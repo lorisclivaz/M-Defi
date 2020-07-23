@@ -1,11 +1,20 @@
-import 'dart:async';
+/*
+ * Author : Loris Clivaz
+ * Date creation : 14 juillet 2020
+ */
 
+import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mdefi/models/ClassementModel.dart';
-import 'package:mdefi/screens/home/homeApp.dart';
-import 'package:nice_button/NiceButton.dart';
 
+
+/*
+ * Classe de classement par score
+ * @author Loris_Clivaz
+ *
+ * @link https://github.com/lorisclivaz/M-Defi.git
+ */
 
 class ClassementScore extends StatefulWidget {
   @override
@@ -37,8 +46,7 @@ class _ClassementScoreState extends State<ClassementScore> with SingleTickerProv
   @override
   void initState() {
     // TODO: implement initState
-
-
+    //lancement de l'animation
     _animationController = AnimationController(
         vsync: this,
             duration: Duration(milliseconds: 1000)
@@ -234,7 +242,6 @@ class _ClassementScoreState extends State<ClassementScore> with SingleTickerProv
                                                     ),
                                                   )
                                                 ],
-
                                               ),
                                             ),
                                             SizedBox(
@@ -248,10 +255,7 @@ class _ClassementScoreState extends State<ClassementScore> with SingleTickerProv
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ) ,
-
-
                                             ),
-
                                           ],
                                         ),
                                       ),
@@ -260,21 +264,16 @@ class _ClassementScoreState extends State<ClassementScore> with SingleTickerProv
                                 ),
                               ),
                             ),
-
                           ),
                         ),
                       ),
-
                     ),
                   ),
                 );
               },
             ),
-
           ),
         ),
-
-
       );
   }
 }
